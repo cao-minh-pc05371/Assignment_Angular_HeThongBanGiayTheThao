@@ -38,6 +38,23 @@ export const navItems: NavItem[] = [
     route: '/ui-components/category',
   },
   {
+    displayName: 'Danh Mục',
+    iconName: 'category',
+    route: '/categories',
+    children: [
+      {
+        displayName: 'Danh sách',
+        iconName: 'list',
+        route: '/categories/List-Categories',
+      },
+      {
+        displayName: 'Thêm mới',
+        iconName: 'input',
+        route: '/categories/Add-Categories',
+      },
+    ],
+  },
+  {
     navCap: 'Auth',
   },
   {

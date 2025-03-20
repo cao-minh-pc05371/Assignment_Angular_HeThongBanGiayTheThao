@@ -25,6 +25,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'categories',
+        loadChildren: () =>
+          import('./pages/categories/categories.routes').then(
+            (m) => m.CategoriesRoutes
+          ),
+      },
+      {
         path: 'extra',
         loadChildren: () =>
           import('./pages/extra/extra.routes').then((m) => m.ExtraRoutes),
