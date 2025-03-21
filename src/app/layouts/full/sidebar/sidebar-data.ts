@@ -10,7 +10,7 @@ export const navItems: NavItem[] = [
     route: '/dashboard',
   },
   {
-    navCap: 'Quản lý',
+    navCap: 'Quản lý Sản phẩm',
   },
   {
     displayName: 'Thương Hiệu',
@@ -45,6 +45,39 @@ export const navItems: NavItem[] = [
         route: '/categories/Add-Categories',
       },
     ],
+  },
+  {
+    displayName: 'Sản Phẩm',
+    iconName: 'package',
+    route: '/products',
+    children: [
+      {
+        displayName: 'Danh sách',
+        iconName: 'list',
+        route: '/products/List-products',
+      },
+      {
+        displayName: 'Thêm mới',
+        iconName: 'plus',
+        route: '/products/Add-products',
+      },
+    ],
+  },
+  {
+    navCap: 'Quản lý Thanh toán',
+  },
+  {
+    "displayName": "Thanh toán",
+    "iconName": "credit-card",
+    "route": "/payment"
+  },
+  {
+    navCap: 'Quản lý Đơn hàng',
+  },
+  {
+    "displayName": "Đơn hàng",
+    "iconName": "shopping-cart",
+    "route": "/orders"
   },
   {
     navCap: 'Auth',

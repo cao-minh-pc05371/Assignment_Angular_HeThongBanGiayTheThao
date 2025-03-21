@@ -32,6 +32,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'products',
+        loadChildren: () =>
+          import('./pages/products/products.routes').then(
+            (m) => m.ProductsRoutes
+          ),
+      },
+      {
         path: 'extra',
         loadChildren: () =>
           import('./pages/extra/extra.routes').then((m) => m.ExtraRoutes),

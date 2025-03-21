@@ -1,0 +1,62 @@
+// Biến màu sắc để dễ dàng tùy chỉnh
+$primary-color: #6c5ce7; // Màu tím chủ đạo
+$hover-bg: rgba(0, 0, 0, 0.2);
+$icon-size: 40px;
+$icon-size-mobile: 36px;
+
+.d-flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+/* Thương hiệu */
+.branding {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: $primary-color;
+}
+
+/* Nút đóng (X) */
+.icon-40 {
+  width: $icon-size;
+  height: $icon-size;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background-color: $hover-bg;
+  }
+}
+
+.icon-20 {
+  font-size: 20px;
+  color: #333;
+}
+
+/* Hiển thị tốt hơn trên mobile */
+@media (max-width: 768px) {
+  .branding {
+    font-size: 1.2rem;
+  }
+
+  .icon-40 {
+    width: $icon-size-mobile;
+    height: $icon-size-mobile;
+  }
+
+  .icon-20 {
+    font-size: 18px;
+  }
+}
