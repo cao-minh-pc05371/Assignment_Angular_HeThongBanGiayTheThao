@@ -10,32 +10,24 @@ export const navItems: NavItem[] = [
     route: '/dashboard',
   },
   {
-    navCap: 'Ui Components',
+    navCap: 'Quản lý',
   },
   {
-    displayName: 'Chips',
-    iconName: 'info-circle',
-    route: '/ui-components/chips',
-  },
-  {
-    displayName: 'Lists',
-    iconName: 'list-details',
-    route: '/ui-components/lists',
-  },
-  {
-    displayName: 'Forms',
-    iconName: 'clipboard-text',
-    route: '/ui-components/forms',
-  },
-  {
-    displayName: 'Tables',
-    iconName: 'table',
-    route: '/ui-components/tables',
-  },
-  {
-    displayName: 'Category',
-    iconName: 'folder-open',
-    route: '/ui-components/category',
+    displayName: 'Thương Hiệu',
+    iconName: 'badge',
+    route: '/brands',
+    children: [
+      {
+        displayName: 'Danh sách',
+        iconName: 'list',
+        route: '/brands/List-brands',
+      },
+      {
+        displayName: 'Thêm mới',
+        iconName: 'plus',
+        route: '/brands/Add-brands',
+      },
+    ],
   },
   {
     displayName: 'Danh Mục',
@@ -49,7 +41,7 @@ export const navItems: NavItem[] = [
       },
       {
         displayName: 'Thêm mới',
-        iconName: 'input',
+        iconName: 'plus',
         route: '/categories/Add-Categories',
       },
     ],
