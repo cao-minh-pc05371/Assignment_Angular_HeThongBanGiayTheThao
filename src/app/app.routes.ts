@@ -43,6 +43,21 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./pages/extra/extra.routes').then((m) => m.ExtraRoutes),
       },
+      {
+        path: 'payment',
+        loadChildren: () =>
+          import('./pages/payment/payment.routes').then((m) => m.PaymentRoutes),
+      },
+      {
+        path: 'orders',
+        loadChildren: () =>
+          import('./pages/orders/orders.routes').then((m) => m.OrdersRoutes),
+      },
+      {
+        path: 'account',
+        loadChildren: () =>
+          import('./pages/account/account.routes').then((m) => m.AcountRoutes),
+      },
     ],
   },
   {

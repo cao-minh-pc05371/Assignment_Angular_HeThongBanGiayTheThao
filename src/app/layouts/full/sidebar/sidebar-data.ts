@@ -80,30 +80,53 @@ export const navItems: NavItem[] = [
     "route": "/orders"
   },
   {
-    navCap: 'Auth',
+    navCap: 'Quản lý Tài Khoản',
+  },
+  {
+    "displayName": "Người Dùng",
+    "iconName": "users",
+    "route": "/account",
+    children: [
+      {
+        displayName: 'Danh sách',
+        iconName: 'list',
+        route: '/account/list-users',
+      },
+      {
+        displayName: 'Thêm mới',
+        iconName: 'plus',
+        route: '/account/add-users',
+      },
+    ],
+  },
+  {
+    "displayName": "Quản trị viên",
+    "iconName": "user-shield",
+    "route": "/account",
+    children: [
+      {
+        displayName: 'Danh sách',
+        iconName: 'list',
+        route: '/account/list-admin',
+      },
+      {
+        displayName: 'Thêm mới',
+        iconName: 'plus',
+        route: '/account/add-admin',
+      },
+    ],
+  },
+  {
+    navCap: 'Đăng Nhập | Đăng Ký',
   },
   {
     displayName: 'Login',
     iconName: 'login',
-    route: '/authentication',
-    children: [
-      {
-        displayName: 'Login',
-        iconName: 'point',
-        route: '/authentication/login',
-      },
-    ],
+    route: '/authentication/login',
   },
   {
     displayName: 'Register',
     iconName: 'user-plus',
-    route: '/authentication',
-    children: [
-      {
-        displayName: 'Register',
-        iconName: 'point',
-        route: '/authentication/register',
-      },
-    ],
+    route: '/authentication/register',
   },
 ];
