@@ -1,1 +1,84 @@
-<p>add-products works!</p>
+<mat-card class="cardWithShadow theme-card">
+    <mat-card-header>
+        <mat-card-title class="m-b-0">
+            <h3>Thêm Sản Phẩm</h3>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="b-t-1">
+        <form [formGroup]="productForm" (ngSubmit)="addProduct()" class="product-form">
+
+            <!-- Tên sản phẩm -->   
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Tên Sản Phẩm</mat-label>
+                <input matInput formControlName="name" required>
+                <mat-error *ngIf="productForm.get('name')?.hasError('required') && productForm.get('name')?.touched">
+                    Bắt buộc nhập
+                </mat-error>
+            </mat-form-field>
+
+            <!-- Giá sản phẩm -->
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Giá Sản Phẩm</mat-label>
+                <input matInput formControlName="price" type="number" required>
+                <mat-error *ngIf="productForm.get('price')?.hasError('required') && productForm.get('price')?.touched">
+                    Bắt buộc nhập
+                </mat-error>
+                <mat-error *ngIf="productForm.get('price')?.hasError('min')">
+                    Giá phải từ 1.000 VNĐ trở lên
+                </mat-error>
+            </mat-form-field>
+
+            <!-- Mô tả sản phẩm -->
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Mô Tả Sản Phẩm</mat-label>
+                <textarea matInput formControlName="description" rows="3" required></textarea>
+                <mat-error *ngIf="productForm.get('description')?.hasError('required') && productForm.get('description')?.touched">
+                    Bắt buộc nhập
+                </mat-error>
+            </mat-form-field>
+
+            <!-- Ảnh sản phẩm -->
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>URL Ảnh Sản Phẩm</mat-label>
+                <input matInput formControlName="image" type="url" required>
+                <mat-error *ngIf="productForm.get('image')?.hasError('required') && productForm.get('image')?.touched">
+                    Bắt buộc nhập
+                </mat-error>
+                <mat-error *ngIf="productForm.get('image')?.hasError('pattern')">
+                    URL ảnh không hợp lệ (phải có đuôi .png, .jpg, .jpeg, .gif, .svg)
+                </mat-error>
+            </mat-form-field>
+
+            <!-- Danh mục sản phẩm -->
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Danh Mục</mat-label>
+                <mat-select formControlName="categoryName" required>
+                    <mat-option *ngFor="let category of categories" [value]="category.name">
+                        {{ category.name }}
+                    </mat-option>                    
+                </mat-select>
+                <mat-error *ngIf="productForm.get('categoryName')?.hasError('required')">
+                    Bắt buộc chọn danh mục
+                </mat-error>
+            </mat-form-field>
+
+            <!-- Số lượng tồn kho -->
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Số Lượng Trong Kho</mat-label>
+                <input matInput formControlName="stock" type="number" required>
+                <mat-error *ngIf="productForm.get('stock')?.hasError('required') && productForm.get('stock')?.touched">
+                    Bắt buộc nhập
+                </mat-error>
+                <mat-error *ngIf="productForm.get('stock')?.hasError('min')">
+                    Số lượng tối thiểu là 1
+                </mat-error>
+            </mat-form-field>
+
+            <!-- Nút thêm sản phẩm -->
+            <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid">
+                Thêm Sản Phẩm
+            </button>
+
+        </form>
+    </mat-card-content>
+</mat-card>

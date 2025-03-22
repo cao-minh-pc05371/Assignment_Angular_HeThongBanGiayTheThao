@@ -1,1 +1,21 @@
-<p>categories-add works!</p>
+<mat-card class="cardWithShadow theme-card">
+    <mat-card-header>
+        <mat-card-title class="m-b-0">
+            <h3>Thêm Danh Mục Sản Phẩm</h3>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="b-t-1">
+        <form [formGroup]="categoryForm" (ngSubmit)="addCategory()" class="category-form">
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Tên Danh Mục</mat-label>
+                <input matInput formControlName="name">
+                <mat-error *ngIf="categoryForm.get('name')?.hasError('required')"></mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit" [disabled]="categoryForm.invalid" class="submit-btn">
+                Thêm Danh Mục
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>

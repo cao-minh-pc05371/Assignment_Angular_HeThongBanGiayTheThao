@@ -1,0 +1,13 @@
+.brand-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.submit-btn {
+  align-self: flex-end;
+}

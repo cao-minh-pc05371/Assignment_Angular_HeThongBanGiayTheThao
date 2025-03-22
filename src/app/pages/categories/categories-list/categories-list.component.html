@@ -1,4 +1,23 @@
-<p>categories-list works!</p>
-<p>categories-list works!</p>
-<p>categories-list works!</p>
-<p>categories-list works!</p>
+<mat-card class="cardWithShadow theme-card">
+    <mat-card-header>
+        <mat-card-title class="m-b-0"><h3>Danh Sách Danh Mục</h3></mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="b-t-1">
+        <div class="table-brand">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Tên Danh Mục</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let category of categories; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ category.name }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </mat-card-content>
+</mat-card>

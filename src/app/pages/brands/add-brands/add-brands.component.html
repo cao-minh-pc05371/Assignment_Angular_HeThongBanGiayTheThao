@@ -1,1 +1,27 @@
-<p>add-brands works!</p>
+<mat-card class="cardWithShadow theme-card">
+    <mat-card-header>
+        <mat-card-title class="m-b-0">
+            <h3>Thêm Thương Hiệu</h3>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="b-t-1">
+        <form [formGroup]="brandForm" (ngSubmit)="addBrand()" class="brand-form">
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Tên Thương Hiệu</mat-label>
+                <input matInput formControlName="name">
+                <mat-error *ngIf="brandForm.get('name')?.hasError('required')"></mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Logo</mat-label>
+                <input matInput formControlName="logo">
+                <mat-error *ngIf="brandForm.get('logo')?.hasError('required')"></mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit" [disabled]="brandForm.invalid" class="submit-btn">
+                Thêm
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>
