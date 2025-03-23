@@ -83,38 +83,26 @@ export const navItems: NavItem[] = [
     navCap: 'Quản lý Tài Khoản',
   },
   {
-    "displayName": "Người Dùng",
-    "iconName": "users",
+    "displayName": "Danh sách",
+    "iconName": "list",
     "route": "/account",
     children: [
       {
-        displayName: 'Danh sách',
-        iconName: 'list',
+        displayName: 'Danh sách Người Dùng',
+        iconName: 'users',
         route: '/account/list-users',
       },
       {
-        displayName: 'Thêm mới',
-        iconName: 'plus',
-        route: '/account/add-users',
+        displayName: 'Danh sách Quản trị viên',
+        iconName: 'user-shield',
+        route: '/account/list-admin',
       },
     ],
   },
   {
-    "displayName": "Quản trị viên",
-    "iconName": "user-shield",
-    "route": "/account",
-    children: [
-      {
-        displayName: 'Danh sách',
-        iconName: 'list',
-        route: '/account/list-admin',
-      },
-      {
-        displayName: 'Thêm mới',
-        iconName: 'plus',
-        route: '/account/add-admin',
-      },
-    ],
+    displayName: 'Thêm mới',
+    iconName: 'plus',
+    route: '/account/add',
   },
   {
     navCap: 'Đăng Nhập | Đăng Ký',

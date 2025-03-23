@@ -1,0 +1,47 @@
+.table-brand {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #673ab7;
+  color: white;
+  padding: 12px;
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.status-label {
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    display: inline-block;
+    text-align: center;
+    min-width: 120px;
+}
+
+.status-pending {
+    background-color: #FFA500; /* Cam */
+}
+
+.status-processing {
+    background-color: #007bff; /* Xanh dương */
+}
+
+.status-completed {
+    background-color: #28a745; /* Xanh lá */
+}
+
+.status-cancelled {
+    background-color: #dc3545; /* Đỏ */
+}

@@ -1,1 +1,43 @@
-<p>list-users works!</p>
+<mat-card class="cardWithShadow theme-card">
+    <mat-card-header>
+        <mat-card-title class="m-b-0">
+            <h3>Danh Sách Người Dùng</h3>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="b-t-1">
+        <div class="table-product">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Tên</th>
+                        <th>Thao Tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let account of accounts; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ account.username }}</td>
+                        <td>{{ account.email }}</td>
+                        <td>
+                            {{ account.name }}
+                        </td>
+                        <td>
+                            <button>
+                                <mat-icon>visibility_outlined</mat-icon>
+                            </button>
+                            <button>
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button>
+                                <mat-icon>delete_forever</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </mat-card-content>
+</mat-card>

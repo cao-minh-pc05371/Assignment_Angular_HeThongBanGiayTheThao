@@ -1,0 +1,13 @@
+.user-form {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.submit-btn {
+  align-self: flex-end;
+}
