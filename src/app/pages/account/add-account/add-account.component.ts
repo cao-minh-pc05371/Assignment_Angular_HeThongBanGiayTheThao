@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -6,7 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-add-users',
-  imports: [MatCardModule, MatFormFieldModule, MatSelectModule, FormsModule, ReactiveFormsModule],
+  imports: [MatCardModule, MatFormFieldModule, MatSelectModule, FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './add-account.component.html',
   styleUrls: ['./add-account.component.scss']
 })
