@@ -10,13 +10,17 @@
             <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Tên Thương Hiệu</mat-label>
                 <input matInput formControlName="name">
-                <mat-error *ngIf="brandForm.get('name')?.hasError('required')"></mat-error>
+                <mat-error *ngIf="brandForm.get('name')?.hasError('required')">
+                    Bắt buộc nhập 
+                </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Logo</mat-label>
                 <input matInput formControlName="logo">
-                <mat-error *ngIf="brandForm.get('logo')?.hasError('required')"></mat-error>
+                <mat-error *ngIf="brandForm.get('logo')?.hasError('required')">
+                    Bắt buộc nhập
+                </mat-error>
             </mat-form-field>
 
             <button mat-raised-button color="primary" type="submit" [disabled]="brandForm.invalid" class="submit-btn">

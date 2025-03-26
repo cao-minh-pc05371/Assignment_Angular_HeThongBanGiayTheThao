@@ -1,15 +1,28 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-add-users',
-  imports: [MatCardModule, MatFormFieldModule, MatSelectModule, FormsModule, ReactiveFormsModule, CommonModule],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule
+  ],
   templateUrl: './add-account.component.html',
-  styleUrls: ['./add-account.component.scss']
+  styleUrl: './add-account.component.scss'
 })
 export class AddUsersComponent {
   userForm: FormGroup;
@@ -33,6 +46,8 @@ export class AddUsersComponent {
   addUser() {
     if (this.userForm.valid) {
       console.log('Thông tin tài khoản:', this.userForm.value);
+    } else {
+      console.log('Form chưa hợp lệ');
     }
   }
 }
