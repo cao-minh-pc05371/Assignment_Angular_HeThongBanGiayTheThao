@@ -13,7 +13,11 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./pages/Client/home/home.routes').then((m) => m.HomeRoutes),
       },
-      // các route khác...
+      {
+        path: 'shop',
+        loadChildren: () =>
+          import('./pages/Client/shop/shop.routes').then((m) => m.ShopRoutes),
+      }
     ],
   },
   {
