@@ -7,7 +7,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Dashboard',
     iconName: 'layout-grid-add',
-    route: '/dashboard',
+    route: '',
   },
   {
     navCap: 'Quản lý Sản phẩm',
@@ -15,51 +15,51 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Thương Hiệu',
     iconName: 'badge',
-    route: '/brands',
+    route: '/admin/brands',
     children: [
       {
         displayName: 'Danh sách',
         iconName: 'list',
-        route: '/brands/List-brands',
+        route: '/admin/brands/List-brands',
       },
       {
         displayName: 'Thêm mới',
         iconName: 'plus',
-        route: '/brands/Add-brands',
+        route: '/admin/brands/Add-brands',
       },
     ],
   },
   {
     displayName: 'Danh Mục',
     iconName: 'category',
-    route: '/categories',
+    route: '/admin/categories',
     children: [
       {
         displayName: 'Danh sách',
         iconName: 'list',
-        route: '/categories/List-Categories',
+        route: '/admin/categories/List-Categories',
       },
       {
         displayName: 'Thêm mới',
         iconName: 'plus',
-        route: '/categories/Add-Categories',
+        route: '/admin/categories/Add-Categories',
       },
     ],
   },
   {
     displayName: 'Sản Phẩm',
     iconName: 'package',
-    route: '/products',
+    route: '/admin/products',
     children: [
       {
         displayName: 'Danh sách',
         iconName: 'list',
-        route: '/products/List-products',
+        route: '/admin/products/List-products',
       },
       {
         displayName: 'Thêm mới',
         iconName: 'plus',
-        route: '/products/Add-products',
+        route: '/admin/products/Add-products',
       },
     ],
   },
@@ -69,7 +69,7 @@ export const navItems: NavItem[] = [
   {
     "displayName": "Thanh toán",
     "iconName": "credit-card",
-    "route": "/payment"
+    "route": "/admin/payment"
   },
   {
     navCap: 'Quản lý Đơn hàng',
@@ -77,7 +77,7 @@ export const navItems: NavItem[] = [
   {
     "displayName": "Đơn hàng",
     "iconName": "shopping-cart",
-    "route": "/orders"
+    "route": "/admin/orders"
   },
   {
     navCap: 'Quản lý Tài Khoản',
@@ -85,24 +85,24 @@ export const navItems: NavItem[] = [
   {
     "displayName": "Danh sách",
     "iconName": "list",
-    "route": "/account",
+    "route": "/admin/account",
     children: [
       {
         displayName: 'Danh sách Người Dùng',
         iconName: 'users',
-        route: '/account/list-users',
+        route: '/admin/account/list-users',
       },
       {
         displayName: 'Danh sách Quản trị viên',
         iconName: 'user-shield',
-        route: '/account/list-admin',
+        route: '/admin/account/list-admin',
       },
     ],
   },
   {
     displayName: 'Thêm mới',
     iconName: 'plus',
-    route: '/account/add',
+    route: '/admin/account/add',
   },
   {
     navCap: 'Đăng Nhập | Đăng Ký',
@@ -110,11 +110,11 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Login',
     iconName: 'login',
-    route: '/authentication/login',
+    route: '/admin/authentication/login',
   },
   {
     displayName: 'Register',
     iconName: 'user-plus',
-    route: '/authentication/register',
+    route: '/admin/authentication/register',
   },
 ];
