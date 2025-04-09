@@ -1,133 +1,80 @@
-// Define colors for easier maintenance
-$primary-color: #f97316; // cam
-$secondary-color: #000; // đen
-$white: #fff;
-$grey-light: #f3f4f6;
-
-// Header styling
-header {
-  background-color: $secondary-color; // Đen
-  color: $white;
-  padding: 1.5rem 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.header {
+  background-color: #000;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
   position: sticky;
   top: 0;
   z-index: 100;
 
-  .container {
-    max-width: 1200px;
+  &__container {
+    max-width: 1280px;
     margin: 0 auto;
+    padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 1rem;
   }
 
-  // Logo and brand name styling
-  .brand {
+  &__logo {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 10px;
 
     img {
-      width: 40px;
-      height: 40px;
-      object-fit: contain;
+      width: 64px; // 👈 tăng kích thước logo
+      height: 64px;
     }
 
     h1 {
-      font-size: 1.75rem;
-      font-weight: 700;
-      color: $primary-color;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #ff6600;
       letter-spacing: 1px;
-      text-transform: uppercase;
     }
   }
 
-  // Navigation styling for desktop
-  nav {
+  &__nav {
     display: flex;
-    gap: 2rem;
+    gap: 24px;
 
     a {
-      color: $white;
-      font-size: 1rem;
+      text-decoration: none; // ❌ bỏ gạch chân
+      color: white;
       font-weight: 500;
-      position: relative;
+      transition: color 0.2s ease;
+
+      &.active-link,
+      &:hover {
+        color: #ff6600;
+      }
+    }
+  }
+
+  &__auth {
+    display: flex;
+    gap: 20px;
+
+    .header__link {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: white;
       text-decoration: none;
-      transition: color 0.3s ease;
+      font-size: 0.9rem;
+      transition: color 0.2s;
 
-      &.active-link {
-        color: $primary-color;
+      i {
+        font-size: 1rem;
       }
 
-      &:hover,
-      &.active-link {
-        color: $primary-color;
+      &:hover {
+        color: #ff6600;
+        cursor: pointer;
       }
 
-      // Underline effect on hover/active link
-      &::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: -5px;
-        width: 0%;
-        height: 2px;
-        background-color: $primary-color;
-        transition: width 0.3s ease;
-      }
-
-      &:hover::after,
-      &.active-link::after {
-        width: 100%;
+      &.logout:hover {
+        color: #ff3300;
       }
     }
   }
-
-  // Mobile navigation styling (hidden on larger screens)
-  .mobile-menu {
-    display: none;
-    color: $primary-color;
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
-
-  // Responsive styling for mobile (on smaller screens)
-  @media (max-width: 768px) {
-    .container {
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    nav {
-      display: none;
-      width: 100%;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    nav a {
-      font-size: 1.25rem;
-    }
-
-    .mobile-menu {
-      display: block;
-    }
-
-    // When the menu is active, show the navigation links
-    &.menu-active {
-      nav {
-        display: flex;
-      }
-    }
-  }
-}
-
-// Styles for the active mobile menu
-.mobile-menu.open {
-  transform: rotate(90deg);
-  transition: transform 0.3s ease;
 }

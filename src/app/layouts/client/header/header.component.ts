@@ -10,5 +10,12 @@ import { RouterModule } from '@angular/router';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
+  }
 
+  logout() {
+    localStorage.removeItem('token');
+    window.location.href = '/'; // hoặc dùng Router.navigate
+  }
 }
