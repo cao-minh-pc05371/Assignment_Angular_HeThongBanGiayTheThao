@@ -12,7 +12,7 @@ import { MaterialModule } from 'src/app/material.module';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [BrandingComponent, TablerIconsModule, MaterialModule],
+  imports: [TablerIconsModule, MaterialModule],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })

@@ -1,24 +1,36 @@
 <mat-card class="cardWithShadow theme-card">
     <mat-card-header>
-        <mat-card-title class="m-b-0"><h3>Danh Sách Thương Hiệu</h3></mat-card-title>
+        <mat-card-title class="m-b-0">
+            <h3>Danh Sách Thương Hiệu</h3>
+        </mat-card-title>
     </mat-card-header>
+
     <mat-card-content class="b-t-1">
         <div class="table-brand">
-            <table>
+            <table class="brand-table">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Logo</th>
                         <th>Tên Thương Hiệu</th>
+                        <th class="text-center">Thao tác</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let brand of brands; let i = index">
                         <td>{{ i + 1 }}</td>
                         <td>
-                            <img [src]="brand.logo" alt="{{ brand.name }}" class="brand-logo">
+                            <img [src]="brand.logo" alt="{{ brand.name }}" class="brand-logo" />
                         </td>
                         <td>{{ brand.name }}</td>
+                        <td class="text-center">
+                            <button mat-icon-button class="btn-edit" matTooltip="Chỉnh sửa">
+                                <mat-icon>edit_square</mat-icon>
+                            </button>
+                            <button mat-icon-button class="btn-delete" matTooltip="Xoá thương hiệu">
+                                <mat-icon>delete_forever</mat-icon>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

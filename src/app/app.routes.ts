@@ -82,7 +82,7 @@ export const routes: Routes = [
     component: BlankComponent,
     children: [
       {
-        path: 'authentication',
+        path: '',
         loadChildren: () =>
           import('./pages/Admin/authentication/authentication.routes').then(
             (m) => m.AuthenticationRoutes
