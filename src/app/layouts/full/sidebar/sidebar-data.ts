@@ -5,9 +5,9 @@ export const navItems: NavItem[] = [
     navCap: 'Home',
   },
   {
-    displayName: 'Dashboard',
+    displayName: 'Thống Kê',
     iconName: 'layout-grid-add',
-    route: '',
+    route: '/admin',
   },
   {
     navCap: 'Quản lý Sản phẩm',

@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { MaterialModule } from 'src/app/material.module';
+import { BrandingComponent } from "../sidebar/branding.component";
 
 @Component({
     selector: 'app-topstrip',

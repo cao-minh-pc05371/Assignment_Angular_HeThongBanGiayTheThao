@@ -4,26 +4,36 @@
             <h3>Thêm Thương Hiệu</h3>
         </mat-card-title>
     </mat-card-header>
+
     <mat-card-content class="b-t-1">
         <form [formGroup]="brandForm" (ngSubmit)="addBrand()" class="brand-form">
 
-            <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Tên Thương Hiệu</mat-label>
-                <input matInput formControlName="name">
-                <mat-error *ngIf="brandForm.get('name')?.hasError('required')">
-                    Bắt buộc nhập 
-                </mat-error>
-            </mat-form-field>
+            <!-- Tên thương hiệu -->
+            <div class="mb-3">
+                <label class="form-label">Tên Thương Hiệu</label>
+                <input type="text" class="form-control" formControlName="name"
+                    placeholder="Vui lòng nhập tên thương hiệu"
+                    [ngClass]="{ 'is-invalid': name?.invalid && (name?.touched || name?.dirty) }" />
+                <div *ngIf="name?.invalid && (name?.touched || name?.dirty)" class="text-danger mt-1">
+                    Tên thương hiệu là bắt buộc
+                </div>
+            </div>
 
-            <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Logo</mat-label>
-                <input matInput formControlName="logo">
-                <mat-error *ngIf="brandForm.get('logo')?.hasError('required')">
-                    Bắt buộc nhập
-                </mat-error>
-            </mat-form-field>
+            <!-- Logo -->
+            <div class="mb-3">
+                <label class="form-label">Logo</label>
+                <input type="file" class="form-control" (change)="onFileSelected($event)"
+                    [ngClass]="{ 'is-invalid': logo?.invalid && (logo?.touched || logo?.dirty) }" accept="image/*" />
 
-            <button mat-raised-button color="primary" type="submit" [disabled]="brandForm.invalid" class="submit-btn">
+                <!-- ✅ Nếu không chọn file -->
+                <div *ngIf="logo?.hasError('required') && (logo?.touched || logo?.dirty)" class="text-danger mt-1">
+                    Vui lòng chọn file ảnh
+                </div>
+                <!-- ✅ Xem trước ảnh -->
+                <img *ngIf="previewUrl" [src]="previewUrl" class="logo-preview mt-2" />
+            </div>
+
+            <button type="submit" class="btn btn-warning text-white fw-bold" [disabled]="brandForm.invalid">
                 Thêm
             </button>
         </form>

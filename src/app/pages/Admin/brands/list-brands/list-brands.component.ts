@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCard, MatCardContent, MatCardTitle, MatCardHeader } from '@angular/material/card';
 import { IBrands } from 'src/app/interface/brands.interface';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-list-brands',
   standalone: true,
-  imports: [MatCard, MatCardContent, MatCardTitle, MatCardHeader, CommonModule],
+  imports: [MatCard, MatCardContent, MatCardTitle, MatCardHeader, CommonModule, MatIcon],
   templateUrl: './list-brands.component.html',
-  styleUrl: './list-brands.component.scss'
+  styleUrls: ['./list-brands.component.scss'],
 })
 export class ListBrandsComponent {
   title = 'Danh sách thương hiệu';

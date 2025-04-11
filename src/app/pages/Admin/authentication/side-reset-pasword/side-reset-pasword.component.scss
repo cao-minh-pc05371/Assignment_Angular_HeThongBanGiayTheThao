@@ -1,0 +1,45 @@
+.auth-layout {
+  height: 100vh;
+  background-color: #f6f6f6;
+  padding: 2rem;
+}
+
+.bg-orange {
+  background-color: #ff6600 !important;
+}
+
+.text-orange {
+  color: #ff6600 !important;
+}
+
+.border-orange {
+  border: 2px solid #ff6600 !important;
+}
+
+.mat-form-field {
+  background-color: #fff;
+}
+
+form {
+  margin-top: 1.5rem;
+}
+
+button.mat-flat-button {
+  padding: 12px 0;
+  font-size: 1rem;
+}
+
+.text-center{
+  margin-top: 15px;
+}
+
+::ng-deep .snackbar-success {
+  background-color: #4caf50; /* Màu xanh lá kiểu success */
+  color: #fff;
+  font-weight: 500;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
+  font-size: 15px;
+  text-align: center;
+}
