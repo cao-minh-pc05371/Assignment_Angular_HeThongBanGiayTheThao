@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from 'src/app/material.module';
-import { AuthService } from 'src/app/services/apis/user.service';
+import { AuthService } from 'src/app/services/apis/user_auth.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 
