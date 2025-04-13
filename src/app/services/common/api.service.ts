@@ -93,7 +93,7 @@ export class ApiService {
     return new HttpHeaders(
       {
         'Content-Type': 'application/json',
-        'Authorization': this.getToken() ?? '',
+        'Authorization': 'Bearer ' + this.getToken(),
       },
     );
   }

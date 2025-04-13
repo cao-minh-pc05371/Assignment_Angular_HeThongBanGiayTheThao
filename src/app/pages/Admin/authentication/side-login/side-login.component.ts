@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from 'src/app/material.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from 'src/app/services/apis/user.service';
+import { AuthService } from 'src/app/services/apis/user_auth.service';
 import { ILoginResponse } from 'src/app/interface/auth.interface';
 import { CommonModule } from '@angular/common';
 

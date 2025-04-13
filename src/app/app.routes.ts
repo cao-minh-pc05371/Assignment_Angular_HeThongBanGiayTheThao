@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
 import { ClientComponent } from './layouts/client/client.component';
+import { AuthAdminGuard } from './auth-admin.guard';
 
 export const routes: Routes = [
   {
@@ -22,6 +23,7 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
+    canActivateChild: [AuthAdminGuard],
     component: FullComponent,
     children: [
       {
