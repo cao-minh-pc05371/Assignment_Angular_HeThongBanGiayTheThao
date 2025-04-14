@@ -1,1 +1,38 @@
-<p>edit-brands works!</p>
+<mat-card class="cardWithShadow theme-card">
+    <mat-card-header>
+        <mat-card-title class="m-b-0">
+            <h3>Cập Nhật Thương Hiệu</h3>
+        </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="b-t-1">
+        <form [formGroup]="brandForm" (ngSubmit)="onSubmit()" class="category-form">
+
+            <!-- Tên thương hiệu -->
+            <div class="mb-3">
+                <label class="form-label">Tên Thương Hiệu</label>
+                <input type="text" class="form-control" formControlName="name"
+                    placeholder="Vui lòng nhập tên thương hiệu"
+                    [ngClass]="{ 'is-invalid': name?.invalid && (name?.touched || name?.dirty) }" />
+                <div *ngIf="name?.invalid && (name?.touched || name?.dirty)" class="text-danger mt-1">
+                    Tên thương hiệu là bắt buộc
+                </div>
+            </div>
+
+            <!-- Logo -->
+            <div class="mb-3">
+                <label class="form-label">Logo</label>
+                <input type="file" class="form-control" (change)="onFileSelected($event)"
+                    [ngClass]="{ 'is-invalid': logo?.invalid && (logo?.touched || logo?.dirty) }" accept="image/*" />
+                <div *ngIf="logo?.hasError('required') && (logo?.touched || logo?.dirty)" class="text-danger mt-1">
+                    Vui lòng chọn file ảnh
+                </div>
+                <img *ngIf="previewUrl" [src]="previewUrl" class="logo-preview mt-2" />
+            </div>
+
+            <button type="submit" class="btn btn-warning text-white fw-bold" [disabled]="brandForm.invalid">
+                Thêm
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>

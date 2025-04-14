@@ -3,12 +3,10 @@ import { CommonModule } from '@angular/common';
 import { MatCard, MatCardContent, MatCardTitle, MatCardHeader } from '@angular/material/card';
 import { IBrands } from 'src/app/interface/brands.interface';
 import { MatIcon } from '@angular/material/icon';
-import { AlertShowcaseComponent } from "../../../../common/alert.component";
 import { BrandService } from 'src/app/services/apis/brands.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteComponent } from '../delete/delete.component';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-list-brands',
@@ -35,7 +33,7 @@ export class ListBrandsComponent {
         const rawBrands = res?.data ?? res;
         this.brands = rawBrands.map((brand: any) => ({
           ...brand,
-          logo: `${environment.apiUrl}${brand.logo}` // gắn đầy đủ URL ảnh
+          logo: `${brand.logo}`
         }));
         console.log('Brands:', this.brands);
       },
@@ -62,7 +60,7 @@ export class ListBrandsComponent {
 
   openEditDialog(id: number, name: string) {
     // Điều hướng tới trang sửa, ví dụ: /edit/5
-    this.route.navigate(['/edit', id]);
+    this.route.navigate(['/admin/brands/Edit-brands', id]);
   }
 
   addCategory() {

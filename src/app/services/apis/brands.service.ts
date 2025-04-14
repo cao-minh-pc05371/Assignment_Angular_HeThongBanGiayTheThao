@@ -25,7 +25,7 @@ export class BrandService extends ApiService {
         return this.get<{ data: IBrands }>(`${API_ENDPOINT.brand.base}/${id}`).pipe(map(res => res.data));
     }
 
-    addBrand(formData: FormData): Observable<IBrands> {
+    addBrand(formData: IBrands): Observable<IBrands> {
         return this.post(`${API_ENDPOINT.brand.base}${API_ENDPOINT.brand.add}`, formData);
     }
 
