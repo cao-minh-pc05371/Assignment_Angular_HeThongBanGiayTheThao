@@ -15,10 +15,21 @@ export const routes: Routes = [
           import('./pages/Client/home/home.routes').then((m) => m.HomeRoutes),
       },
       {
+        path: 'cart',
+        loadChildren: () =>
+          import('./pages/Client/cart/cart.routes').then((m) => m.CartRoutes),
+      },
+      {
         path: 'shop',
         loadChildren: () =>
           import('./pages/Client/shop/shop.routes').then((m) => m.ShopRoutes),
-      }
+      },
+      {
+        path: 'shop/:id',
+        loadChildren: () =>
+          import('./pages/Client/shop/product-detail/product-detail.routes').then((m) => m.ProductDetailRoutes),
+        },
+
     ],
   },
   {
