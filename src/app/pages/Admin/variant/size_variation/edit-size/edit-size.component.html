@@ -1,1 +1,26 @@
-<p>edit-size works!</p>
+<mat-card class="cardWithShadow theme-card">
+    <mat-card-header>
+        <mat-card-title class="m-b-0">
+            <h3>Cập Nhật Kích Cỡ</h3>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="b-t-1">
+        <form class="size-form" [formGroup]="sizeForm" (ngSubmit)="editSize()">
+
+            <div class="mb-3">
+                <label class="form-label">Kích cỡ</label>
+                <input type="text" class="form-control" formControlName="size_label" [value]="size.size_label" />
+                <span
+                    *ngIf="sizeForm.get('size_label')?.invalid && (sizeForm.get('size_label')?.touched || sizeForm.get('size_label')?.dirty)"
+                    class="text-danger">
+                    Vui lòng kích cỡ
+                </span>
+            </div>
+
+            <button mat-raised-button color="primary" type="submit" class="submit-btn"
+                [disabled]="sizeForm.invalid">
+                Cập Nhật Danh Mục
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>

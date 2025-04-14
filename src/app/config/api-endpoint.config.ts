@@ -33,5 +33,15 @@ export const API_ENDPOINT = {
     base: API_BASE_URL + '/product',
     list: '/list',
     add: '/add'
+  },
+  size: {
+    base: API_BASE_URL + '/size',
+    list: '/list',
+    add: '/add'
+  },
+  color: {
+    base: API_BASE_URL + '/color',
+    list: '/list',
+    add: '/add'
   }
 };

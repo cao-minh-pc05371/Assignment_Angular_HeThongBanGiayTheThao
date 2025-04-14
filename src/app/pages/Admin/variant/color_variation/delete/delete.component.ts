@@ -30,8 +30,7 @@ export interface DialogData {
     MatDialogContent,
     MatDialogActions,
   ],
-  templateUrl: './delete.component.html',
-  styleUrl: './delete.component.scss'
+  templateUrl: './delete.component.html'
 })
 export class DeleteComponent {
   readonly dialogRef = inject(MatDialogRef<DeleteComponent>);
