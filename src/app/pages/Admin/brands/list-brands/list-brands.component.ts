@@ -1,8 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCard, MatCardContent, MatCardTitle, MatCardHeader } from '@angular/material/card';
 import { IBrands } from 'src/app/interface/brands.interface';
 import { MatIcon } from '@angular/material/icon';
+import { AlertShowcaseComponent } from "../../../../common/alert.component";
+import { BrandService } from 'src/app/services/apis/brands.service';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteComponent } from '../delete/delete.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-list-brands',
@@ -13,10 +19,54 @@ import { MatIcon } from '@angular/material/icon';
 })
 export class ListBrandsComponent {
   title = 'Danh sách thương hiệu';
-  brands: IBrands[] = [
-    { id: 1, name: 'Nike', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg' },
-    { id: 2, name: 'Adidas', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg' },
-    { id: 3, name: 'Puma', logo: 'https://logos-world.net/wp-content/uploads/2020/04/Puma-Logo.png' },
-    { id: 4, name: 'Reebok', logo: 'https://logos-world.net/wp-content/uploads/2020/04/Reebok-Logo.png' }
-  ];
+  readonly dialog = inject(MatDialog);
+  brands: IBrands[] = [];
+
+  constructor(
+    private brandService: BrandService,
+    private route: Router,
+  ) {
+    this.getAllBrands();
+  }
+
+  getAllBrands() {
+    this.brandService.getAllBrands().subscribe({
+      next: (res: any) => {
+        const rawBrands = res?.data ?? res;
+        this.brands = rawBrands.map((brand: any) => ({
+          ...brand,
+          logo: `${environment.apiUrl}${brand.logo}` // gắn đầy đủ URL ảnh
+        }));
+        console.log('Brands:', this.brands);
+      },
+      error: (e) => {
+        console.error('Error fetching Brands:', e);
+      }
+    })
+  }
+
+  openDialog(id: number, name: string): void {
+    const dialogRef = this.dialog.open(DeleteComponent, {
+      data: { name: name, id: id },
+
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result) {
+        this.getAllBrands();
+      }
+
+    });
+  }
+
+  openEditDialog(id: number, name: string) {
+    // Điều hướng tới trang sửa, ví dụ: /edit/5
+    this.route.navigate(['/edit', id]);
+  }
+
+  addCategory() {
+    // Điều hướng tới trang thêm mới
+    this.route.navigate(['/add']);
+  }
 }

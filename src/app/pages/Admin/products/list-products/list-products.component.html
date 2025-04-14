@@ -1,42 +1,44 @@
 <mat-card class="cardWithShadow theme-card">
     <mat-card-header>
-        <mat-card-title class="m-b-0"><h3>Danh Sách Sản Phẩm</h3></mat-card-title>
+        <mat-card-title class="m-b-0">
+            <h3>Danh Sách Sản Phẩm</h3>
+        </mat-card-title>
     </mat-card-header>
     <mat-card-content class="b-t-1">
-        <div class="table-product">
-            <table>
-                <thead>
+        <div class="table-brand">
+            <table class="brand-table">
+                <thead class="text-center">
                     <tr>
                         <th>#</th>
                         <th>Tên Sản Phẩm</th>
-                        <th>Giá</th>
-                        <th>Danh Mục</th>
-                        <th>Kho</th>
                         <th>Hình Ảnh</th>
-                        <th>Thao Tác</th>
+                        <th class="text-center">Thương Hiệu</th>
+                        <th class="text-center">Danh Mục</th>
+                        <th class="text-center">Kho</th>
+                        <th class="text-center">Thao Tác</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="text-center">
                     <tr *ngFor="let product of products; let i = index">
                         <td>{{ i + 1 }}</td>
                         <td>{{ product.name }}</td>
-                        <td>{{ product.price | number }} VNĐ</td>
-                        <td>{{ product.categoryName }}</td>
-                        <td>{{ product.stock }}</td>
                         <td>
-                            <img [src]="product.image" alt="{{ product.name }}" width="50" height="50">
+                            <img [src]="product.image" alt="{{ product.name }}" class="brand-logo">
                         </td>
-                        <td>
-                            <button mat-icon-button color="primary" (click)="viewProduct(product.id)">
+                        <td class="text-center">{{ product.brand?.name }}</td>
+                        <td class="text-center">{{ product.category?.name }}</td>
+                        <td class="text-center">{{ product.stock }}</td>
+                        <td class="text-center">
+                            <button mat-icon-button class="btn-details" matTooltip="Xem chi tiết">
                                 <mat-icon>visibility_outlined</mat-icon>
                             </button>
-                            <button mat-icon-button color="accent" (click)="editProduct(product.id)">
-                                <mat-icon>edit_note</mat-icon>
+                            <button mat-icon-button class="btn-edit" matTooltip="Chỉnh sửa">
+                                <mat-icon>edit_square</mat-icon>
                             </button>
-                            <button mat-icon-button color="warn" (click)="deleteProduct(product.id)">
+                            <button mat-icon-button class="btn-delete" matTooltip="Xoá thương hiệu">
                                 <mat-icon>delete_forever</mat-icon>
                             </button>
-                        </td>                        
+                        </td>
                     </tr>
                 </tbody>
             </table>

@@ -1,0 +1,26 @@
+<mat-card class="cardWithShadow theme-card">
+    <mat-card-header>
+        <mat-card-title class="m-b-0">
+            <h3>Cập Nhật Danh Mục Sản Phẩm</h3>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="b-t-1">
+        <form class="category-form" [formGroup]="categoryForm" (ngSubmit)="editCategory()">
+
+            <div class="mb-3">
+                <label class="form-label">Tên danh mục</label>
+                <input type="text" class="form-control" formControlName="name"
+                  [value]="category.name"/>
+                <span
+                  *ngIf="categoryForm.get('name')?.invalid && (categoryForm.get('name')?.touched || categoryForm.get('name')?.dirty)"
+                  class="text-danger">
+                  Vui lòng nhập tên danh mục
+                </span>
+              </div>
+
+            <button mat-raised-button color="primary" type="submit"  class="submit-btn" [disabled]="categoryForm.invalid" > 
+                Cập Nhật Danh Mục
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>

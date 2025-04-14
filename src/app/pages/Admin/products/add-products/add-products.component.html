@@ -1,84 +1,95 @@
 <mat-card class="cardWithShadow theme-card">
     <mat-card-header>
-        <mat-card-title class="m-b-0">
-            <h3>Thêm Sản Phẩm</h3>
-        </mat-card-title>
+      <mat-card-title>
+        <h3>Thêm Sản Phẩm</h3>
+      </mat-card-title>
     </mat-card-header>
     <mat-card-content class="b-t-1">
-        <form [formGroup]="productForm" (ngSubmit)="addProduct()" class="product-form">
-
-            <!-- Tên sản phẩm -->   
-            <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Tên Sản Phẩm</mat-label>
-                <input matInput formControlName="name" required>
-                <mat-error *ngIf="productForm.get('name')?.hasError('required') && productForm.get('name')?.touched">
-                    Bắt buộc nhập
-                </mat-error>
-            </mat-form-field>
-
-            <!-- Giá sản phẩm -->
-            <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Giá Sản Phẩm</mat-label>
-                <input matInput formControlName="price" type="number" required>
-                <mat-error *ngIf="productForm.get('price')?.hasError('required') && productForm.get('price')?.touched">
-                    Bắt buộc nhập
-                </mat-error>
-                <mat-error *ngIf="productForm.get('price')?.hasError('min')">
-                    Giá phải từ 1.000 VNĐ trở lên
-                </mat-error>
-            </mat-form-field>
-
-            <!-- Mô tả sản phẩm -->
-            <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Mô Tả Sản Phẩm</mat-label>
-                <textarea matInput formControlName="description" rows="3" required></textarea>
-                <mat-error *ngIf="productForm.get('description')?.hasError('required') && productForm.get('description')?.touched">
-                    Bắt buộc nhập
-                </mat-error>
-            </mat-form-field>
-
-            <!-- Ảnh sản phẩm -->
-            <mat-form-field appearance="outline" class="full-width">
-                <mat-label>URL Ảnh Sản Phẩm</mat-label>
-                <input matInput formControlName="image" type="url" required>
-                <mat-error *ngIf="productForm.get('image')?.hasError('required') && productForm.get('image')?.touched">
-                    Bắt buộc nhập
-                </mat-error>
-                <mat-error *ngIf="productForm.get('image')?.hasError('pattern')">
-                    URL ảnh không hợp lệ (phải có đuôi .png, .jpg, .jpeg, .gif, .svg)
-                </mat-error>
-            </mat-form-field>
-
-            <!-- Danh mục sản phẩm -->
-            <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Danh Mục</mat-label>
-                <mat-select formControlName="categoryName" required>
-                    <mat-option *ngFor="let category of categories" [value]="category.name">
-                        {{ category.name }}
-                    </mat-option>                    
-                </mat-select>
-                <mat-error *ngIf="productForm.get('categoryName')?.hasError('required')">
-                    Bắt buộc chọn danh mục
-                </mat-error>
-            </mat-form-field>
-
-            <!-- Số lượng tồn kho -->
-            <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Số Lượng Trong Kho</mat-label>
-                <input matInput formControlName="stock" type="number" required>
-                <mat-error *ngIf="productForm.get('stock')?.hasError('required') && productForm.get('stock')?.touched">
-                    Bắt buộc nhập
-                </mat-error>
-                <mat-error *ngIf="productForm.get('stock')?.hasError('min')">
-                    Số lượng tối thiểu là 1
-                </mat-error>
-            </mat-form-field>
-
-            <!-- Nút thêm sản phẩm -->
-            <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid">
-                Thêm Sản Phẩm
-            </button>
-
-        </form>
+      <form [formGroup]="productForm" (ngSubmit)="addProduct()" class="product-form" enctype="multipart/form-data">
+  
+        <!-- Tên sản phẩm -->
+        <div class="mb-3">
+          <label class="form-label">Tên Sản Phẩm</label>
+          <input type="text" class="form-control" formControlName="name" placeholder="Nhập tên sản phẩm" />
+          <div *ngIf="name?.invalid && (name?.touched || name?.dirty)" class="text-danger mt-1">
+            Tên sản phẩm là bắt buộc
+          </div>
+        </div>
+  
+        <!-- Mô tả -->
+        <div class="mb-3">
+          <label class="form-label">Mô Tả</label>
+          <textarea class="form-control" formControlName="description" rows="3" placeholder="Nhập mô tả"></textarea>
+          <div *ngIf="description?.invalid && (description?.touched || description?.dirty)" class="text-danger mt-1">
+            Mô tả là bắt buộc
+          </div>
+        </div>
+  
+        <!-- Giá -->
+        <div class="mb-3">
+          <label class="form-label">Giá</label>
+          <input type="number" class="form-control" formControlName="price" placeholder="VD: 100000">
+        </div>
+  
+        <!-- Giá khuyến mãi -->
+        <div class="mb-3">
+          <label class="form-label">Giá Khuyến Mãi</label>
+          <input type="number" class="form-control" formControlName="sale_price" placeholder="VD: 90000">
+        </div>
+  
+        <!-- Hình ảnh -->
+        <div class="mb-3">
+          <label class="form-label">Hình ảnh</label>
+          <input type="file" class="form-control" (change)="onFileChange($event)">
+          <img *ngIf="previewUrl" [src]="previewUrl" alt="Preview" class="mt-2" width="100">
+        </div>
+  
+        <!-- Tồn kho -->
+        <div class="mb-3">
+          <label class="form-label">Tồn Kho</label>
+          <input type="number" class="form-control" formControlName="stock" placeholder="VD: 10">
+        </div>
+  
+        <!-- Danh mục -->
+        <div class="mb-3">
+          <label class="form-label">Danh Mục</label>
+          <select class="form-control" formControlName="category_id">
+            <option [value]="null">-- Chọn danh mục --</option>
+            <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+          </select>
+        </div>
+  
+        <!-- Thương hiệu -->
+        <div class="mb-3">
+          <label class="form-label">Thương Hiệu</label>
+          <select class="form-control" formControlName="brand_id">
+            <option [value]="null">-- Chọn thương hiệu --</option>
+            <option *ngFor="let brand of brands" [value]="brand.id">{{ brand.name }}</option>
+          </select>
+        </div>
+  
+        <!-- Hiển thị -->
+        <div class="mb-3">
+          <label class="form-label">Hiển Thị</label>
+          <select class="form-control" formControlName="visibility">
+            <option value="visible">Hiển thị</option>
+            <option value="hidden">Ẩn</option>
+          </select>
+        </div>
+  
+        <!-- Đặc biệt -->
+        <div class="mb-3">
+          <label class="form-label">Nổi Bật</label>
+          <select class="form-control" formControlName="featured">
+            <option value="normal">Bình thường</option>
+            <option value="featured">Nổi bật</option>
+          </select>
+        </div>
+  
+        <button class="btn btn-primary mt-3" type="submit" [disabled]="productForm.invalid">
+          Thêm Sản Phẩm
+        </button>
+      </form>
     </mat-card-content>
-</mat-card>
+  </mat-card>
+  

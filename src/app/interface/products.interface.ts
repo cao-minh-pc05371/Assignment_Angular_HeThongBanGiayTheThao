@@ -1,9 +1,20 @@
 export interface IProduct {
-    id: number | string;
+    id?: number;
     name: string;
-    price: number;
     description: string;
-    image: string;
-    categoryName: string;
-    stock: number ;
-}
+    image?: string;
+    price?: number;
+    sale_price?: number;
+    visibility?: 'visible' | 'hidden';
+    featured?: 'normal' | 'featured';
+    stock?: number;
+    category_id?: number;
+    brand_id?: number;
+    category?: {
+      name: string;
+    };
+    brand?: {
+      name: string;
+    };
+  }
+  
