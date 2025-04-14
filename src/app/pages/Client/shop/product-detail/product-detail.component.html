@@ -1,0 +1,58 @@
+<div class="row container">
+  <div class="col-md-6">
+    <mat-card class="" *ngIf="product">
+      <img mat-card-image [src]="product.image" [alt]="product.name">
+    </mat-card>
+  </div>
+  <!-- Thông tin chi tiết -->
+  <div class="col-md-6">
+    <mat-card class="">
+      <mat-card-header class="product-card-header">
+        <div><h2>{{ product.name }}</h2>
+        <p class="product-code">Mã sản phẩm: 123456</p></div>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="price-container">
+          <h3>Giá:<p class="product-price">{{ product.price | currency:'VND' }}</p>
+          </h3>
+        </div>
+        <div class="">
+          <h3>Chọn kích cỡ:</h3>
+          <mat-radio-group aria-label="Chọn size giày">
+            <mat-radio-button value="36">36</mat-radio-button>
+            <mat-radio-button value="37">37</mat-radio-button>
+            <mat-radio-button value="38">38</mat-radio-button>
+            <mat-radio-button value="39">39</mat-radio-button>
+            <mat-radio-button value="40">40</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="">
+          <h3>Màu sắc:</h3>
+          <mat-button-toggle-group class="color-shoes" name="shoes" appearance="legacy">
+            <mat-button-toggle class="shoes-toggle black"></mat-button-toggle>
+            <mat-button-toggle class="shoes-toggle blue"></mat-button-toggle>
+            <mat-button-toggle class="shoes-toggle green"></mat-button-toggle>
+            <mat-button-toggle class="shoes-toggle red"></mat-button-toggle>
+            <mat-button-toggle class="shoes-toggle yellow"></mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+
+
+
+        <p>
+          Giày thể thao Nike Air Max 270 mang lại sự thoải mái tối ưu với thiết kế hiện đại, đệm khí êm ái, phù hợp cho
+          cả tập luyện và dạo phố.
+        </p>
+      </mat-card-content>
+
+      <mat-card-actions class="button-card">
+        <button mat-raised-button class="button-add-to-cart">
+          Thêm vào giỏ hàng
+        </button>
+        <button mat-raised-button class="buy-now">
+          Mua ngay
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
