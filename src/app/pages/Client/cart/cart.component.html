@@ -1,0 +1,54 @@
+
+
+<mat-card class="cart-card col-md-6">
+    <div class="">
+        <div class="title">
+            <div class="row">
+                <div class="col">
+                    <h2><b>Shopping Cart</b></h2>
+                </div>
+                <div class="col text-right text-muted">3 Món</div>
+            </div>
+        </div>
+
+        <!-- Item List -->
+        <div class="cart-items">
+            <mat-divider></mat-divider>
+            <div class="cart-item mat-elevation-z1" *ngFor="let product of products">
+                <img mat-card-image [src]="product.image" class="item-img" alt="{{product.name}}">
+
+                <div class="item-info">
+                    <div class="item-name">{{product.name}}</div>
+                </div>
+                <div class="item-quantity">
+                    <button mat-mini-fab color="gray" class="qty-btn"(click)="decreaseQuantity(product)">-</button>
+                    <span class="qty-number">{{product.quantity}}</span>
+                    <button mat-mini-fab color="gray" class="qty-btn" (click)="increaseQuantity(product)">+</button>
+                </div>
+
+                <div class="item-price">{{ product.price | currency:'VND' }}</div>
+                <button mat-icon-button color="warn" aria-label="Xoá">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+            <mat-divider></mat-divider>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-summary">
+                <h3>
+                  Tổng cộng: 
+                  <span style="font-weight: normal;">
+                    {{ getTotalPrice() | number:'1.0-0' }} VND
+                  </span>
+                </h3>
+              </div>
+              
+            <button mat-raised-button color="primary" class="checkout-btn">Thanh toán</button>
+        </div>
+        <div class="back-to-shop">
+            <a mat-button routerLink="/">
+                <mat-icon>arrow_back</mat-icon>
+                Back to shop
+            </a>
+        </div>
+    </div>
