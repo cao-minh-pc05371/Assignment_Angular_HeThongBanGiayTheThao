@@ -32,7 +32,7 @@
                             <button mat-icon-button class="btn-details" matTooltip="Xem chi tiết">
                                 <mat-icon>visibility_outlined</mat-icon>
                             </button>
-                            <button mat-icon-button class="btn-edit" matTooltip="Chỉnh sửa">
+                            <button mat-icon-button class="btn-edit" (click)="openEditDialog(product.id!, product.name)" matTooltip="Chỉnh sửa">
                                 <mat-icon>edit_square</mat-icon>
                             </button>
                             <button mat-icon-button class="btn-delete" matTooltip="Xoá thương hiệu">

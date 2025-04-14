@@ -26,7 +26,7 @@ export class ProductService extends ApiService {
     return this.get<{ status: number, data: IProduct }>(API_ENDPOINT.product.base + '/' + id).pipe(map(response => response.data));
   }
 
-  addProduct(data: FormData): Observable<any> {
+  addProduct(data: IProduct): Observable<IProduct> {
     return this.post(`${API_ENDPOINT.product.base}${API_ENDPOINT.product.add}`, data);
   }
 

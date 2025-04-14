@@ -9,6 +9,7 @@ import { CategoryService } from 'src/app/services/apis/category.service';
 import { BrandService } from 'src/app/services/apis/brands.service';
 import { ICategories } from 'src/app/interface/categories.interface';
 import { IBrands } from 'src/app/interface/brands.interface';
+import { CloudinaryService } from 'src/app/services/common/cloudinary.service';
 
 @Component({
   selector: 'app-add-products',
@@ -27,13 +28,15 @@ export class AddProductsComponent implements OnInit {
   brands: IBrands[] = [];
   selectedImage!: File;
   previewUrl: string | ArrayBuffer | null = null;
+  loading = false;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private productService: ProductService,
     private categoryService: CategoryService,
-    private brandService: BrandService
+    private brandService: BrandService,
+    private cloudinaryService: CloudinaryService
   ) {}
 
   ngOnInit(): void {
@@ -42,11 +45,12 @@ export class AddProductsComponent implements OnInit {
       description: ['', Validators.required],
       price: [null, [Validators.required, Validators.min(1)]],
       sale_price: [0],
-      stock: [null, [Validators.required, Validators.min(1)]],
+      stock: [0],
       category_id: [null, Validators.required],
       brand_id: [null, Validators.required],
       visibility: ['visible', Validators.required],
       featured: ['normal', Validators.required],
+      image: ['', Validators.required]
     });
 
     this.loadCategories();
@@ -55,12 +59,16 @@ export class AddProductsComponent implements OnInit {
 
   get name() { return this.productForm.get('name'); }
   get description() { return this.productForm.get('description'); }
+  get image() { return this.productForm.get('image'); }
 
   onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
     if (file) {
       this.selectedImage = file;
+      this.productForm.patchValue({ image: file });
+      this.productForm.get('image')?.updateValueAndValidity();
+
       const reader = new FileReader();
       reader.onload = () => {
         this.previewUrl = reader.result;
@@ -70,31 +78,41 @@ export class AddProductsComponent implements OnInit {
   }
 
   addProduct(): void {
-    if (this.productForm.invalid) return;
+    if (this.productForm.invalid || !this.selectedImage) return;
+    this.loading = true;
 
-    const formData = new FormData();
-    const formValue = this.productForm.value;
+    this.cloudinaryService.uploadImage(this.selectedImage).subscribe({
+      next: (imageUrl: string) => {
+        const formValue = this.productForm.value;
 
-    formData.append('name', formValue.name);
-    formData.append('description', formValue.description);
-    formData.append('price', formValue.price?.toString() ?? '0');
-    formData.append('sale_price', formValue.sale_price?.toString() ?? '0');
-    formData.append('stock', formValue.stock?.toString() ?? '0');
-    formData.append('category_id', formValue.category_id?.toString() ?? '');
-    formData.append('brand_id', formValue.brand_id?.toString() ?? '');
-    formData.append('visibility', formValue.visibility);
-    formData.append('featured', formValue.featured);
-    if (this.selectedImage) {
-      formData.append('image', this.selectedImage);
-    }
+        const payload = {
+          name: formValue.name,
+          description: formValue.description,
+          price: formValue.price,
+          sale_price: formValue.sale_price,
+          stock: formValue.stock,
+          category_id: formValue.category_id,
+          brand_id: formValue.brand_id,
+          visibility: formValue.visibility,
+          featured: formValue.featured,
+          image: imageUrl
+        };
 
-    this.productService.addProduct(formData).subscribe({
-      next: () => {
-        alert('Thêm sản phẩm thành công!');
-        this.router.navigate(['/admin/products']);
+        this.productService.addProduct(payload).subscribe({
+          next: () => {
+            this.router.navigate(['/admin/products/List-products']);
+          },
+          error: err => {
+            console.error('❌ Thêm sản phẩm thất bại:', err);
+            alert('Đã xảy ra lỗi khi thêm sản phẩm!');
+          },
+          complete: () => this.loading = false
+        });
       },
-      error: (err) => {
-        console.error('Thêm sản phẩm thất bại:', err);
+      error: err => {
+        console.error('❌ Upload ảnh thất bại:', err);
+        alert('Lỗi khi upload ảnh');
+        this.loading = false;
       }
     });
   }

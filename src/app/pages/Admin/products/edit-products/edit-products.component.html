@@ -1,0 +1,90 @@
+<mat-card class="cardWithShadow theme-card">
+    <mat-card-header>
+        <mat-card-title>
+            <h3>Cập Nhật Sản Phẩm</h3>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="b-t-1">
+        <form [formGroup]="productForm" (ngSubmit)="editProduct()" class="product-form">
+
+            <!-- Tên sản phẩm -->
+            <div class="mb-3">
+                <label class="form-label">Tên Sản Phẩm</label>
+                <input type="text" class="form-control" formControlName="name" placeholder="Nhập tên sản phẩm" />
+                <div *ngIf="name?.invalid && (name?.touched || name?.dirty)" class="text-danger mt-1">
+                    Tên sản phẩm là bắt buộc
+                </div>
+            </div>
+
+            <!-- Mô tả -->
+            <div class="mb-3">
+                <label class="form-label">Mô Tả</label>
+                <textarea class="form-control" formControlName="description" rows="3"
+                    placeholder="Nhập mô tả"></textarea>
+                <div *ngIf="description?.invalid && (description?.touched || description?.dirty)"
+                    class="text-danger mt-1">
+                    Mô tả là bắt buộc
+                </div>
+            </div>
+
+            <!-- Giá -->
+            <div class="mb-3">
+                <label class="form-label">Giá</label>
+                <input type="number" class="form-control" formControlName="price" placeholder="VD: 100000">
+            </div>
+
+            <!-- Giá khuyến mãi -->
+            <div class="mb-3">
+                <label class="form-label">Giá Khuyến Mãi</label>
+                <input type="number" class="form-control" formControlName="sale_price" placeholder="VD: 90000">
+            </div>
+
+            <!-- Hình ảnh -->
+            <div class="mb-3">
+                <label class="form-label">Hình ảnh</label>
+                <input type="file" class="form-control" (change)="onFileChange($event)">
+                <img *ngIf="previewUrl" [src]="previewUrl" alt="Preview" class="mt-2" width="100">
+            </div>
+
+            <!-- Danh mục -->
+            <div class="mb-3">
+                <label class="form-label">Danh Mục</label>
+                <select class="form-control" formControlName="category_id">
+                    <option [value]="null">-- Chọn danh mục --</option>
+                    <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+                </select>
+            </div>
+
+            <!-- Thương hiệu -->
+            <div class="mb-3">
+                <label class="form-label">Thương Hiệu</label>
+                <select class="form-control" formControlName="brand_id">
+                    <option [value]="null">-- Chọn thương hiệu --</option>
+                    <option *ngFor="let brand of brands" [value]="brand.id">{{ brand.name }}</option>
+                </select>
+            </div>
+
+            <!-- Hiển thị -->
+            <div class="mb-3">
+                <label class="form-label">Hiển Thị</label>
+                <select class="form-control" formControlName="visibility">
+                    <option value="visible">Hiển thị</option>
+                    <option value="hidden">Ẩn</option>
+                </select>
+            </div>
+
+            <!-- Đặc biệt -->
+            <div class="mb-3">
+                <label class="form-label">Nổi Bật</label>
+                <select class="form-control" formControlName="featured">
+                    <option value="normal">Bình thường</option>
+                    <option value="featured">Nổi bật</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary mt-3" type="submit" [disabled]="productForm.invalid">
+                Cập Nhật Sản Phẩm
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>
