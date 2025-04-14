@@ -1,57 +1,119 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
-import { MatSelectModule } from '@angular/material/select';
-import { MatOptionModule } from '@angular/material/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { ProductService } from 'src/app/services/apis/product.service';
+import { CategoryService } from 'src/app/services/apis/category.service';
+import { BrandService } from 'src/app/services/apis/brands.service';
+import { ICategories } from 'src/app/interface/categories.interface';
+import { IBrands } from 'src/app/interface/brands.interface';
 
 @Component({
   selector: 'app-add-products',
   standalone: true,
   imports: [
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatOptionModule,
+    CommonModule,
     ReactiveFormsModule,
-    CommonModule
+    MatCardModule
   ],
   templateUrl: './add-products.component.html',
   styleUrls: ['./add-products.component.scss']
 })
-export class AddProductsComponent {
-  productForm: FormGroup;
-  categories = [
-    { name: "Chạy bộ" },
-    { name: "Bóng đá" },
-    { name: "Bóng rổ" },
-    { name: "Tennis" }
-  ];
+export class AddProductsComponent implements OnInit {
+  productForm!: FormGroup;
+  categories: ICategories[] = [];
+  brands: IBrands[] = [];
+  selectedImage!: File;
+  previewUrl: string | ArrayBuffer | null = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private productService: ProductService,
+    private categoryService: CategoryService,
+    private brandService: BrandService
+  ) {}
+
+  ngOnInit(): void {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
-      price: [0, [Validators.required, Validators.min(1000)]],
       description: ['', Validators.required],
-      image: ['', [Validators.required, Validators.pattern('(https?://.*.(?:png|jpg|jpeg|gif|svg))')]],
-      categoryName: ['', Validators.required],
-      stock: [1, [Validators.required, Validators.min(1)]]
+      price: [null, [Validators.required, Validators.min(1)]],
+      sale_price: [0],
+      stock: [null, [Validators.required, Validators.min(1)]],
+      category_id: [null, Validators.required],
+      brand_id: [null, Validators.required],
+      visibility: ['visible', Validators.required],
+      featured: ['normal', Validators.required],
+    });
+
+    this.loadCategories();
+    this.loadBrands();
+  }
+
+  get name() { return this.productForm.get('name'); }
+  get description() { return this.productForm.get('description'); }
+
+  onFileChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    if (file) {
+      this.selectedImage = file;
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.previewUrl = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  addProduct(): void {
+    if (this.productForm.invalid) return;
+
+    const formData = new FormData();
+    const formValue = this.productForm.value;
+
+    formData.append('name', formValue.name);
+    formData.append('description', formValue.description);
+    formData.append('price', formValue.price?.toString() ?? '0');
+    formData.append('sale_price', formValue.sale_price?.toString() ?? '0');
+    formData.append('stock', formValue.stock?.toString() ?? '0');
+    formData.append('category_id', formValue.category_id?.toString() ?? '');
+    formData.append('brand_id', formValue.brand_id?.toString() ?? '');
+    formData.append('visibility', formValue.visibility);
+    formData.append('featured', formValue.featured);
+    if (this.selectedImage) {
+      formData.append('image', this.selectedImage);
+    }
+
+    this.productService.addProduct(formData).subscribe({
+      next: () => {
+        alert('Thêm sản phẩm thành công!');
+        this.router.navigate(['/admin/products']);
+      },
+      error: (err) => {
+        console.error('Thêm sản phẩm thất bại:', err);
+      }
     });
   }
 
-  addProduct() {
-    if (this.productForm.valid) {
-      console.log('Sản phẩm mới:', this.productForm.value);
-      alert('Sản phẩm đã được thêm thành công!');
-      this.productForm.reset(); // Reset form sau khi thêm thành công
-    } else {
-      alert('Vui lòng điền đầy đủ thông tin sản phẩm!');
-    }
+  loadCategories(): void {
+    this.categoryService.getCategories().subscribe({
+      next: (res: any) => {
+        this.categories = res?.data ?? res;
+      },
+      error: (err) => console.error('Lỗi khi lấy danh mục:', err)
+    });
+  }
+
+  loadBrands(): void {
+    this.brandService.getAllBrands().subscribe({
+      next: (res: any) => {
+        this.brands = res?.data ?? res;
+      },
+      error: (err) => console.error('Lỗi khi lấy thương hiệu:', err)
+    });
   }
 }

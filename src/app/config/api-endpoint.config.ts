@@ -18,5 +18,20 @@ export const API_ENDPOINT = {
     profile: '/profile',
     updatePassword: '/update-password',
     resetPassword: '/reset-password'   
+  },
+  brand:{
+    base: API_BASE_URL + '/brand',
+    list: '/list',
+    add: '/add'
+  },
+  category: {
+    base: API_BASE_URL + '/category',
+    list: '/list',
+    add: '/add'
+  },
+  product: {
+    base: API_BASE_URL + '/product',
+    list: '/list',
+    add: '/add'
   }
 };

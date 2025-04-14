@@ -58,6 +58,20 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'size_variation',
+        loadChildren: () =>
+          import('./pages/Admin/variant/size_variation/size_variation.routes').then(
+            (m) => m.SizeVariantionRoutes
+          ),
+      },
+      {
+        path: 'color_variation',
+        loadChildren: () =>
+          import('./pages/Admin/variant/color_variation/color_variation.routes').then(
+            (m) => m.ColorVariantionRoutes
+          ),
+      },
+      {
         path: 'extra',
         loadChildren: () =>
           import('./pages/Admin/extra/extra.routes').then((m) => m.ExtraRoutes),

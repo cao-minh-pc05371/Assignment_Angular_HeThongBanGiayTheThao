@@ -64,6 +64,43 @@ export const navItems: NavItem[] = [
     ],
   },
   {
+    navCap: 'Quản lý Biến Thể',
+  },
+  {
+    displayName: 'Size',
+    iconName: 'ruler',
+    route: '/admin/size_variation',
+    children: [
+      {
+        displayName: 'Danh sách',
+        iconName: 'list',
+        route: '/admin/size_variation/list-size-variant',
+      },
+      {
+        displayName: 'Thêm mới',
+        iconName: 'plus',
+        route: '/admin/size_variation/add-size-variant',
+      },
+    ],
+  },
+  {
+    displayName: 'Màu sắc',
+    iconName: 'palette',
+    route: '/admin/color_variation',
+    children: [
+      {
+        displayName: 'Danh sách',
+        iconName: 'list',
+        route: '/admin/color_variation/list-color-variant',
+      },
+      {
+        displayName: 'Thêm mới',
+        iconName: 'plus',
+        route: '/admin/color_variation/add-color-variant',
+      },
+    ],
+  },
+  {
     navCap: 'Quản lý Thanh toán',
   },
   {

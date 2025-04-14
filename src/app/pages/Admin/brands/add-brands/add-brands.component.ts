@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
+import { Router } from '@angular/router';
+import { BrandService } from 'src/app/services/apis/brands.service';
+import { IAlertMessage } from 'src/app/interface/alert-message.interface';
 
 @Component({
   selector: 'app-add-brands',
@@ -14,8 +17,13 @@ import { MatCardModule } from '@angular/material/card';
 export class AddBrandsComponent {
   brandForm: FormGroup;
   previewUrl: string | ArrayBuffer | null = null;
+  alertMessages: IAlertMessage[] = [];
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private brandService: BrandService
+  ) {
     this.brandForm = this.fb.group({
       name: ['', Validators.required],
       logo: [null, Validators.required]
@@ -41,7 +49,7 @@ export class AddBrandsComponent {
     }
 
     if (!allowedTypes.includes(file.type)) {
-      this.brandForm.patchValue({ logo: null });
+      this.brandForm.patchValue({ logo: file });
       this.logo?.setErrors({ invalidType: true });
       this.previewUrl = null;
       return;
@@ -54,7 +62,6 @@ export class AddBrandsComponent {
       return;
     }
 
-    // File hợp lệ
     this.brandForm.patchValue({ logo: file });
     this.logo?.setErrors(null);
 
@@ -68,18 +75,28 @@ export class AddBrandsComponent {
   addBrand() {
     if (this.brandForm.valid) {
       const formData = new FormData();
-      formData.append('name', this.brandForm.get('name')?.value);
+      formData.append('name', this.brandForm.get('name')?.value.trim());
       formData.append('logo', this.brandForm.get('logo')?.value);
 
-      // Log FormData
-      console.log('Dữ liệu form:');
-      for (const pair of (formData as any).entries()) {
-        console.log(`${pair[0]}:`, pair[1]);
-      }      
-
-      alert('Thêm thương hiệu thành công!');
-      this.brandForm.reset();
-      this.previewUrl = null;
+      this.brandService.addBrand(formData).subscribe({
+        next: () => {
+          this.alertMessages = [
+            { message: '🎉 Thêm thương hiệu thành công!', status: 'success' }
+          ];
+          this.brandForm.reset();
+          this.previewUrl = null;
+          setTimeout(() => {
+            this.router.navigate(['/admin/brands/List-brands']);
+          }, 3000);
+        },
+        error: (err) => {
+          console.error('Thêm thất bại:', err);
+          this.alertMessages = [
+            { message: '❌ Thêm thương hiệu thất bại', status: 'danger' }
+          ];
+        }
+      });
+      
     }
   }
 }
