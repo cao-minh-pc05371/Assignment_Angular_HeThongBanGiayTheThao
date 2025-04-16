@@ -69,7 +69,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Size',
     iconName: 'ruler',
-    route: '/admin/size_variation',
+    route: '/admin/variation/size',
     children: [
       {
         displayName: 'Danh sách',
@@ -86,7 +86,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Màu sắc',
     iconName: 'palette',
-    route: '/admin/color_variation',
+    route: '/admin/variation/color',
     children: [
       {
         displayName: 'Danh sách',
@@ -104,25 +104,25 @@ export const navItems: NavItem[] = [
     navCap: 'Quản lý Thanh toán',
   },
   {
-    "displayName": "Thanh toán",
-    "iconName": "credit-card",
-    "route": "/admin/payment"
+    displayName: 'Thanh toán',
+    iconName: 'credit-card',
+    route: '/admin/payment',
   },
   {
     navCap: 'Quản lý Đơn hàng',
   },
   {
-    "displayName": "Đơn hàng",
-    "iconName": "shopping-cart",
-    "route": "/admin/orders"
+    displayName: 'Đơn hàng',
+    iconName: 'shopping-cart',
+    route: '/admin/orders',
   },
   {
     navCap: 'Quản lý Tài Khoản',
   },
   {
-    "displayName": "Danh sách",
-    "iconName": "list",
-    "route": "/admin/account",
+    displayName: 'Danh sách',
+    iconName: 'list',
+    route: '/admin/account',
     children: [
       {
         displayName: 'Danh sách Người Dùng',

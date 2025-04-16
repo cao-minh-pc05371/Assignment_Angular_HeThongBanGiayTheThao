@@ -1,4 +1,4 @@
-import { environment } from "../../environments/environment";
+import { environment } from '../../environments/environment';
 
 export const API_BASE_URL = environment.apiUrl;
 
@@ -9,7 +9,7 @@ export const API_ENDPOINT = {
     getById: '',
     add: '/add',
     edit: '',
-    delete: ''
+    delete: '',
   },
   auth: {
     base: API_BASE_URL + '/user',
@@ -17,31 +17,38 @@ export const API_ENDPOINT = {
     register: '/register',
     profile: '/profile',
     updatePassword: '/update-password',
-    resetPassword: '/reset-password'   
+    resetPassword: '/reset-password',
   },
-  brand:{
+  brand: {
     base: API_BASE_URL + '/brand',
     list: '/list',
-    add: '/add'
+    add: '/add',
   },
   category: {
     base: API_BASE_URL + '/category',
     list: '/list',
-    add: '/add'
+    add: '/add',
   },
   product: {
     base: API_BASE_URL + '/product',
     list: '/list',
-    add: '/add'
+    add: '/add',
   },
   size: {
     base: API_BASE_URL + '/size',
     list: '/list',
-    add: '/add'
+    add: '/add',
   },
   color: {
     base: API_BASE_URL + '/color',
     list: '/list',
-    add: '/add'
-  }
+    add: '/add',
+  },
+  cart: {
+    base: API_BASE_URL + '/cart',
+    getByUser: '/user',
+    add: '/add',
+    update: '',
+    delete: '',
+  },
 };

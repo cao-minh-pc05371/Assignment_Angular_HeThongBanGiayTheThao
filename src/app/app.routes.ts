@@ -20,6 +20,20 @@ export const routes: Routes = [
           import('./pages/Client/cart/cart.routes').then((m) => m.CartRoutes),
       },
       {
+        path: 'checkout',
+        loadChildren: () =>
+          import('./pages/Client/checkout/checkout.routes').then(
+            (m) => m.CheckoutRoutes
+          ),
+      },
+      {
+        path: 'order-success',
+        loadChildren: () =>
+          import('./pages/Client/order-success/order-success.routes').then(
+            (m) => m.OrderSuccessRoutes
+          ),
+      },
+      {
         path: 'shop',
         loadChildren: () =>
           import('./pages/Client/shop/shop.routes').then((m) => m.ShopRoutes),
@@ -27,9 +41,10 @@ export const routes: Routes = [
       {
         path: 'shop/:id',
         loadChildren: () =>
-          import('./pages/Client/shop/product-detail/product-detail.routes').then((m) => m.ProductDetailRoutes),
-        },
-
+          import(
+            './pages/Client/shop/product-detail/product-detail.routes'
+          ).then((m) => m.ProductDetailRoutes),
+      },
     ],
   },
   {
@@ -71,16 +86,16 @@ export const routes: Routes = [
       {
         path: 'size_variation',
         loadChildren: () =>
-          import('./pages/Admin/variant/size_variation/size_variation.routes').then(
-            (m) => m.SizeVariantionRoutes
-          ),
+          import(
+            './pages/Admin/variant/size_variation/size_variation.routes'
+          ).then((m) => m.SizeVariantionRoutes),
       },
       {
         path: 'color_variation',
         loadChildren: () =>
-          import('./pages/Admin/variant/color_variation/color_variation.routes').then(
-            (m) => m.ColorVariantionRoutes
-          ),
+          import(
+            './pages/Admin/variant/color_variation/color_variation.routes'
+          ).then((m) => m.ColorVariantionRoutes),
       },
       {
         path: 'extra',
@@ -90,17 +105,23 @@ export const routes: Routes = [
       {
         path: 'payment',
         loadChildren: () =>
-          import('./pages/Admin/payment/payment.routes').then((m) => m.PaymentRoutes),
+          import('./pages/Admin/payment/payment.routes').then(
+            (m) => m.PaymentRoutes
+          ),
       },
       {
         path: 'orders',
         loadChildren: () =>
-          import('./pages/Admin/orders/orders.routes').then((m) => m.OrdersRoutes),
+          import('./pages/Admin/orders/orders.routes').then(
+            (m) => m.OrdersRoutes
+          ),
       },
       {
         path: 'account',
         loadChildren: () =>
-          import('./pages/Admin/account/account.routes').then((m) => m.AcountRoutes),
+          import('./pages/Admin/account/account.routes').then(
+            (m) => m.AcountRoutes
+          ),
       },
     ],
   },

@@ -1,0 +1,271 @@
+.checkout-container {
+  font-family: "Arial", sans-serif;
+  background-color: #f5f5f5;
+  padding: 30px 0;
+  min-height: 100vh;
+}
+
+.checkout-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.checkout-header {
+  text-align: center;
+  margin-bottom: 30px;
+
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  p {
+    font-size: 16px;
+    color: #666;
+  }
+}
+
+.checkout-main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+
+  @media (max-width: 992px) {
+    flex-direction: column-reverse;
+  }
+}
+
+.checkout-column {
+  flex: 1;
+  min-width: 300px;
+
+  &.order-summary {
+    flex-basis: 40%;
+  }
+
+  &.checkout-form {
+    flex-basis: 55%;
+  }
+}
+
+// Card styling
+mat-card {
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+mat-card-header {
+  background-color: #f9f9f9;
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+mat-card-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 !important;
+}
+
+mat-card-content {
+  padding: 20px;
+}
+
+// Form styling
+.full-width {
+  width: 100%;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+
+  mat-form-field {
+    flex: 1;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 30px 0 15px;
+  color: #333;
+  border-left: 4px solid #3f51b5;
+  padding-left: 10px;
+}
+
+// Order items
+.order-items {
+  margin-bottom: 20px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+
+  &:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+}
+
+.item-image {
+  width: 80px;
+  height: 80px;
+  margin-right: 15px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #eee;
+  }
+}
+
+.item-details {
+  flex: 1;
+
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 5px;
+  }
+
+  p {
+    font-size: 14px;
+    color: #666;
+    margin: 2px 0;
+  }
+}
+
+.item-price {
+  font-weight: 600;
+  font-size: 16px;
+  color: #e91e63;
+}
+
+// Order totals
+.order-totals {
+  margin-top: 20px;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 15px;
+
+  &.grand-total {
+    font-size: 18px;
+    font-weight: 700;
+    border-top: 2px solid #ddd;
+    margin-top: 10px;
+    padding-top: 15px;
+    color: #e91e63;
+  }
+}
+
+// Payment methods
+.payment-methods {
+  margin-top: 15px;
+}
+
+.payment-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.payment-radio-button {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+
+  &.mat-mdc-radio-checked {
+    border-color: #3f51b5;
+    background-color: rgba(63, 81, 181, 0.05);
+  }
+}
+
+.payment-method-content {
+  display: flex;
+  align-items: center;
+
+  mat-icon {
+    margin-right: 10px;
+    color: #3f51b5;
+  }
+}
+
+// Checkout actions
+.checkout-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+
+  button {
+    min-width: 160px;
+    font-weight: 500;
+
+    mat-icon {
+      margin-right: 5px;
+    }
+  }
+}
+
+// Loading spinner
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+
+  p {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #666;
+  }
+}
+
+// Custom scrollbar for order items
+.order-items::-webkit-scrollbar {
+  width: 8px;
+}
+
+.order-items::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.order-items::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.order-items::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
