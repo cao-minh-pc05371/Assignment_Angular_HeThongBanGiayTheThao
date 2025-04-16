@@ -1,5 +1,3 @@
-
-
 <mat-card class="cart-card col-md-6">
     <div class="">
         <div class="title">
@@ -7,48 +5,71 @@
                 <div class="col">
                     <h2><b>Shopping Cart</b></h2>
                 </div>
-                <div class="col text-right text-muted">3 Món</div>
+                <div class="col text-right text-muted">{{ getTotalItems() }} món</div>
             </div>
         </div>
 
+        <!-- Loading spinner -->
+        <div *ngIf="isLoading" class="loading-container">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
+        <!-- Empty cart message -->
+        <div *ngIf="!isLoading && cartItems.length === 0" class="empty-cart">
+            <mat-icon class="empty-cart-icon">shopping_cart</mat-icon>
+            <p>Giỏ hàng của bạn đang trống</p>
+            <button mat-raised-button color="primary" routerLink="/shop">Tiếp tục mua sắm</button>
+        </div>
+
         <!-- Item List -->
-        <div class="cart-items">
+        <div *ngIf="!isLoading && cartItems.length > 0" class="cart-items">
             <mat-divider></mat-divider>
-            <div class="cart-item mat-elevation-z1" *ngFor="let product of products">
-                <img mat-card-image [src]="product.image" class="item-img" alt="{{product.name}}">
+            <div class="cart-item mat-elevation-z1" *ngFor="let item of cartItems">
+                <img mat-card-image [src]="item.product_variant?.product?.image || 'assets/images/no-image.png'"
+                    class="item-img" alt="{{item.product_variant?.product?.name}}">
 
                 <div class="item-info">
-                    <div class="item-name">{{product.name}}</div>
+                    <div class="item-name">{{item.product_variant?.product?.name}}</div>
+                    <div class="item-details">
+                        <span class="size">Size: {{item.product_variant?.size?.name}}</span>
+                        <span class="color" [style.background-color]="item.product_variant?.color?.color_code"></span>
+                        <span class="color-name">{{item.product_variant?.color?.color_name}}</span>
+                    </div>
                 </div>
                 <div class="item-quantity">
-                    <button mat-mini-fab color="gray" class="qty-btn"(click)="decreaseQuantity(product)">-</button>
-                    <span class="qty-number">{{product.quantity}}</span>
-                    <button mat-mini-fab color="gray" class="qty-btn" (click)="increaseQuantity(product)">+</button>
+                    <button mat-mini-fab color="gray" class="qty-btn" (click)="decreaseQuantity(item)">-</button>
+                    <span class="qty-number">{{item.quantity}}</span>
+                    <button mat-mini-fab color="gray" class="qty-btn" (click)="increaseQuantity(item)">+</button>
                 </div>
 
-                <div class="item-price">{{ product.price | currency:'VND' }}</div>
-                <button mat-icon-button color="warn" aria-label="Xoá">
+                <div class="item-price">{{ item.product_variant?.product?.price | currency:'VND' }}</div>
+                <button mat-icon-button color="warn" aria-label="Xoá" (click)="removeItem(item.id)">
                     <mat-icon>close</mat-icon>
                 </button>
             </div>
             <mat-divider></mat-divider>
         </div>
-        <div class="cart-footer">
+
+        <div *ngIf="!isLoading && cartItems.length > 0" class="cart-footer">
             <div class="cart-summary">
                 <h3>
-                  Tổng cộng: 
-                  <span style="font-weight: normal;">
-                    {{ getTotalPrice() | number:'1.0-0' }} VND
-                  </span>
+                    Tổng cộng:
+                    <span style="font-weight: normal;">
+                        {{ getTotalPrice() | number:'1.0-0' }} VND
+                    </span>
                 </h3>
-              </div>
-              
-            <button mat-raised-button color="primary" class="checkout-btn">Thanh toán</button>
+            </div>
+
+            <button mat-raised-button color="primary" class="checkout-btn" (click)="proceedToCheckout()">Thanh
+                toán</button>
         </div>
         <div class="back-to-shop">
-            <a mat-button routerLink="/">
+            <a mat-button routerLink="/shop">
                 <mat-icon>arrow_back</mat-icon>
                 Back to shop
             </a>
         </div>
     </div>
+</mat-card>
