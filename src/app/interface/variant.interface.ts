@@ -4,7 +4,9 @@ export interface IVariant {
     size_id: number;
     color_id: number;
     stock: number;
-    
+    product?:{
+        name: string
+    },
     size?: {
       id: number;
       size_label: string;

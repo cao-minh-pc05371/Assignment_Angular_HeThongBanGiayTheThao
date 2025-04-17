@@ -10,18 +10,16 @@
                 <img [src]="product.image" [alt]="product.name" />
             </div>
             <div class="product-info">
-                <p class="product-description">Mô Tả: {{ product.description }}</p>
-
                 <div class="product-pricing">
                     <ng-container *ngIf="product.sale_price && product.sale_price > 0; else noSale">
-                        <span class="original-price">Giá gốc : {{ product.price | number:'1.0-0' }} đ</span>
                         <span class="sale-price">Giá giảm còn: {{ product.sale_price | number:'1.0-0' }} đ</span>
+                        <span class="original-price">Giá gốc : {{ product.price | number:'1.0-0' }} đ</span>
                     </ng-container>
                     <ng-template #noSale>
                         <span class="price">Giá: {{ product.price | number:'1.0-0' }} đ</span>
                     </ng-template>
                 </div>
-
+                <p class="product-description">Mô Tả: {{ product.description }}</p>
                 <p class="stock">Tồn kho: {{ product.stock }}</p>
                 <div class="visibility"
                     [ngClass]="product.visibility === 'visible' ? 'status-visible' : 'status-hidden'">

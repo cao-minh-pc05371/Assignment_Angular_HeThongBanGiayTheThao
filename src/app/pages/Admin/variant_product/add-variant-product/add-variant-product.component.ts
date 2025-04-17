@@ -5,9 +5,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { IColor } from 'src/app/interface/color.interface';
 import { ISize } from 'src/app/interface/size.interface';
 import { IVariant } from 'src/app/interface/variant.interface';
+import { IProduct } from 'src/app/interface/products.interface';
 import { ColorService } from 'src/app/services/apis/color.service';
 import { SizeService } from 'src/app/services/apis/size.service';
 import { VariantService } from 'src/app/services/apis/variant.service';
+import { ProductService } from 'src/app/services/apis/product.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
@@ -24,6 +26,7 @@ export class AddVariantProductComponent implements OnInit {
   sizes: ISize[] = [];
   colors: IColor[] = [];
   productId!: number;
+  product: IProduct | null = null;
   isSubmitting = false;
 
   constructor(
@@ -33,7 +36,8 @@ export class AddVariantProductComponent implements OnInit {
     private snackBar: MatSnackBar,
     private colorService: ColorService,
     private sizeService: SizeService,
-    private variantService: VariantService
+    private variantService: VariantService,
+    private productService: ProductService
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +52,7 @@ export class AddVariantProductComponent implements OnInit {
     this.initForm();
     this.fetchSizes();
     this.fetchColors();
+    this.fetchProduct();
   }
 
   initForm(): void {
@@ -73,6 +78,17 @@ export class AddVariantProductComponent implements OnInit {
         this.colors = res?.data ?? res;
       },
       error: (err) => console.error('Lỗi khi lấy danh mục:', err)
+    });
+  }
+
+  fetchProduct(): void {
+    this.productService.getProductById(this.productId).subscribe({
+      next: (res) => {
+        this.product = res;
+      },
+      error: (err) => {
+        console.error('Lỗi khi lấy sản phẩm:', err);
+      }
     });
   }
 
