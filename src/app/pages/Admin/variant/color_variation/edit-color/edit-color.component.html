@@ -1,1 +1,28 @@
-<p>edit-color works!</p>
+<mat-card class="cardWithShadow theme-card">
+    <mat-card-header>
+        <mat-card-title class="m-b-0">
+            <h3>Chỉnh Sửa Màu Sắc</h3>
+        </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="b-t-1">
+        <form [formGroup]="formData" (ngSubmit)="updateColor()">
+            <div class="mb-3">
+                <label class="form-label">Tên Màu</label>
+                <input type="text" class="form-control" formControlName="color_name" placeholder="Nhập tên màu" />
+                <span *ngIf="color_name?.invalid && (color_name?.touched || color_name?.dirty)" class="text-danger">
+                    Tên màu không được để trống
+                </span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Mã Màu (HEX)</label>
+                <input type="color" class="form-control form-control-color" formControlName="color_code" />
+            </div>
+
+            <button mat-raised-button color="primary" type="submit" [disabled]="formData.invalid">
+                Cập nhật Màu
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>

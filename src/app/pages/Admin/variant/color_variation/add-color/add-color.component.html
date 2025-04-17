@@ -1,1 +1,31 @@
-<p>add-color works!</p>
+<mat-card class="cardWithShadow theme-card">
+    <mat-card-header>
+        <mat-card-title class="m-b-0">
+            <h3>Thêm Màu Sắc</h3>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="b-t-1">
+        <form [formGroup]="formData" (ngSubmit)="addColor()" class="color-form">
+            <div class="mb-3">
+                <label class="form-label">Tên Màu</label>
+                <input type="text" class="form-control" formControlName="color_name" placeholder="Nhập tên màu" />
+                <span *ngIf="color_name?.invalid && (color_name?.dirty || color_name?.touched)" class="text-danger">
+                    Tên màu không được để trống
+                </span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Mã Màu</label>
+                <input type="color" class="form-control form-control-color" formControlName="color_code"
+                    value="#000000" />
+                <span *ngIf="color_code?.invalid && (color_code?.dirty || color_code?.touched)" class="text-danger">
+                    Mã màu không hợp lệ
+                </span>
+            </div>
+
+            <button mat-raised-button color="primary" type="submit" [disabled]="formData.invalid" class="submit-btn">
+                Thêm Màu
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>

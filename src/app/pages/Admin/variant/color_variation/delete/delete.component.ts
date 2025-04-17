@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { CategoryService } from 'src/app/services/apis/category.service';
+import { ColorService } from 'src/app/services/apis/color.service';
 
 export interface DialogData {
   id: number;
@@ -37,7 +37,7 @@ export class DeleteComponent {
   readonly data = inject<DialogData>(MAT_DIALOG_DATA);
 
   constructor(
-    private CategoryService: CategoryService ,
+    private colorService: ColorService ,
   ) { }
 
   onNoClick(): void {
@@ -47,7 +47,7 @@ export class DeleteComponent {
   delete() {
     console.log('Delete clicked id: ' , this.data.id);
     
-    this.CategoryService.deleteCategory(this.data.id).subscribe({
+    this.colorService.deleteColor(this.data.id).subscribe({
       next: (res: any) => {
         console.log('Delete response:', res);
         this.dialogRef.close(true);

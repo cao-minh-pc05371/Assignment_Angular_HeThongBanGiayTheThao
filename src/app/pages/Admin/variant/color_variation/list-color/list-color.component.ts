@@ -4,35 +4,36 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
-import { ISize } from 'src/app/interface/size.interface';
-import { SizeService } from 'src/app/services/apis/size.service';
+import { IColor } from 'src/app/interface/color.interface';
+import { ColorService } from 'src/app/services/apis/color.service';
 import { DeleteComponent } from '../delete/delete.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-list-color',
-  imports: [MatCardModule, MatIconModule, CommonModule],
+  imports: [MatCardModule, MatIconModule, CommonModule, MatTooltipModule],
   templateUrl: './list-color.component.html',
   styleUrl: './list-color.component.scss'
 })
 export class ListColorComponent {
   readonly dialog = inject(MatDialog);
 
-  size: ISize[] = [];
+  color: IColor[] = [];
   constructor(
-    private sizeService: SizeService,
+    private colorService: ColorService,
     private route: Router,
   ) { 
-    this.getAllSize();
+    this.getAllColor();
   }
 
-  getAllSize() {
-    this.sizeService.getAllSize().subscribe({
+  getAllColor() {
+    this.colorService.getAllColor().subscribe({
       next: (res: any) => {
-        this.size = res?.data ?? res;
-        console.log('Size:', this.size);
+        this.color = res?.data ?? res;
+        console.log('Color:', this.color);
       },
       error: (err) => {
-        console.error('Error fetching size:', err);
+        console.error('Error fetching color:', err);
       }
     })
   }
@@ -46,14 +47,14 @@ export class ListColorComponent {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
      if (result) {
-        this.getAllSize();
+        this.getAllColor();
       }
      
     });
   }
 
   openEditDialog(id: number, name: string) {
-    this.route.navigate(['/admin/size/Edit-Size', id]);
+    this.route.navigate(['/admin/color_variation/edit-color-variant', id]);
   }
 }
 
