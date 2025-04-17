@@ -15,6 +15,7 @@ export const routes: Routes = [
           import('./pages/Client/home/home.routes').then((m) => m.HomeRoutes),
       },
       {
+<<<<<<< HEAD
         path: 'cart',
         loadChildren: () =>
           import('./pages/Client/cart/cart.routes').then((m) => m.CartRoutes),
@@ -30,6 +31,12 @@ export const routes: Routes = [
           import('./pages/Client/shop/product-detail/product-detail.routes').then((m) => m.ProductDetailRoutes),
         },
 
+=======
+        path: 'shop',
+        loadChildren: () =>
+          import('./pages/Client/shop/shop.routes').then((m) => m.ShopRoutes),
+      }
+>>>>>>> 8af811041b5e8d3d1db3cfdbc5d974050f5a80b7
     ],
   },
   {
