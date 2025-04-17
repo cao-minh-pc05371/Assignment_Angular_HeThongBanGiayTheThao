@@ -98,6 +98,13 @@ export const routes: Routes = [
           ).then((m) => m.ColorVariantionRoutes),
       },
       {
+        path: 'variant-product',
+        loadChildren: () =>
+          import(
+            './pages/Admin/variant_product/variant_product.routes'
+          ).then((m) => m.VariantProductRoutes),
+      },
+      {
         path: 'extra',
         loadChildren: () =>
           import('./pages/Admin/extra/extra.routes').then((m) => m.ExtraRoutes),

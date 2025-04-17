@@ -41,8 +41,10 @@ export class ListProductsComponent {
   }
 
   openEditDialog(id: number, name: string) {
-    // Điều hướng tới trang sửa, ví dụ: /edit/5
     this.route.navigate(['/admin/products/Edit-products', id]);
+  }
+  openDeatilDialog(id: number, name: string) {
+    this.route.navigate(['/admin/products/Detail-products', id]);
   }
   
 }

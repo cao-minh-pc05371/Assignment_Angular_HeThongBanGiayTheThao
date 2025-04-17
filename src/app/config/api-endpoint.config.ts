@@ -44,6 +44,12 @@ export const API_ENDPOINT = {
     list: '/list',
     add: '/add',
   },
+  variant: {
+    base: API_BASE_URL + '/variant',
+    list: '/list',
+    listVariantByIdProduct:'/product',
+    add: '/add',
+  },
   cart: {
     base: API_BASE_URL + '/cart',
     getByUser: '/user',

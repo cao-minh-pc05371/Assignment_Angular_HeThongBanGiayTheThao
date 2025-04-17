@@ -1,0 +1,78 @@
+.variant-list-card {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+
+  mat-card-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+
+  .btn-add {
+    background-color: #00e71f;
+    margin: 0 4px;
+    padding: 6px;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    border: 1px solid #ccc;
+
+    &:hover {
+      background-color: rgba(220, 53, 69, 0.1);
+      transform: scale(0.9);
+    }
+  }
+
+  .variant-table {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+
+    .btn-edit {
+      color: #ff6600;
+      margin: 0 4px;
+      padding: 6px;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      background-color: transparent;
+      border: 1px solid #ccc;
+
+      &:hover {
+        background-color: rgba(255, 102, 0, 0.1);
+        transform: scale(1.1);
+      }
+    }
+
+    .btn-delete {
+      color: #dc3545;
+      margin: 0 4px;
+      padding: 6px;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      background-color: transparent;
+      border: 1px solid #ccc;
+
+      &:hover {
+        background-color: rgba(220, 53, 69, 0.1);
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .color-circle {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin-right: 8px;
+    border: 1px solid #ccc;
+    vertical-align: middle;
+  }
+
+  .text-danger {
+    color: #e53935;
+    margin-top: 12px;
+  }
+}

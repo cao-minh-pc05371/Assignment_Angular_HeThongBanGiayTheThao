@@ -1,0 +1,49 @@
+<mat-card class="product-detail-card" *ngIf="!isLoading && product">
+    <mat-card-header>
+        <mat-card-title>
+            <h3>{{ product.name }}</h3>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="product-detail-content b-t-1">
+        <div class="product-grid">
+            <div class="product-image">
+                <img [src]="product.image" [alt]="product.name" />
+            </div>
+            <div class="product-info">
+                <p class="product-description">Mô Tả: {{ product.description }}</p>
+
+                <div class="product-pricing">
+                    <ng-container *ngIf="product.sale_price && product.sale_price > 0; else noSale">
+                        <span class="original-price">Giá gốc : {{ product.price | number:'1.0-0' }} đ</span>
+                        <span class="sale-price">Giá giảm còn: {{ product.sale_price | number:'1.0-0' }} đ</span>
+                    </ng-container>
+                    <ng-template #noSale>
+                        <span class="price">Giá: {{ product.price | number:'1.0-0' }} đ</span>
+                    </ng-template>
+                </div>
+
+                <p class="stock">Tồn kho: {{ product.stock }}</p>
+                <div class="visibility"
+                    [ngClass]="product.visibility === 'visible' ? 'status-visible' : 'status-hidden'">
+                    <span>{{ product.visibility === 'visible' ? 'Hiển thị' : 'Ẩn' }}</span>
+                </div>
+
+                <div *ngIf="product.featured === 'featured'" class="featured-badge animate-flash">
+                    🌟 Sản phẩm nổi bật
+                </div>
+                <p class="category">Danh mục: {{ product.category?.name }}</p>
+                <p class="brand">Thương hiệu: {{ product.brand?.name }}</p>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+<div *ngIf="isLoading">
+    <p>Đang tải sản phẩm...</p>
+</div>
+
+<div *ngIf="errorMessage" class="text-danger">
+    {{ errorMessage }}
+</div>
+
+<app-list-variant-product *ngIf="product" [productId]="product.id"></app-list-variant-product>
