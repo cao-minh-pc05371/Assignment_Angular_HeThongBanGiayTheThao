@@ -3,10 +3,18 @@ import { CommonModule } from '@angular/common';
 import { MatCard, MatCardContent, MatCardTitle, MatCardHeader } from '@angular/material/card';
 import { IBrands } from 'src/app/interface/brands.interface';
 import { MatIcon } from '@angular/material/icon';
+<<<<<<< HEAD
+=======
+import { AlertShowcaseComponent } from "../../../../common/alert.component";
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
 import { BrandService } from 'src/app/services/apis/brands.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteComponent } from '../delete/delete.component';
+<<<<<<< HEAD
+=======
+import { environment } from 'src/environments/environment';
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
 
 @Component({
   selector: 'app-list-brands',
@@ -33,7 +41,11 @@ export class ListBrandsComponent {
         const rawBrands = res?.data ?? res;
         this.brands = rawBrands.map((brand: any) => ({
           ...brand,
+<<<<<<< HEAD
           logo: `${brand.logo}`
+=======
+          logo: `${environment.apiUrl}${brand.logo}` // gắn đầy đủ URL ảnh
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
         }));
         console.log('Brands:', this.brands);
       },
@@ -60,7 +72,11 @@ export class ListBrandsComponent {
 
   openEditDialog(id: number, name: string) {
     // Điều hướng tới trang sửa, ví dụ: /edit/5
+<<<<<<< HEAD
     this.route.navigate(['/admin/brands/Edit-brands', id]);
+=======
+    this.route.navigate(['/edit', id]);
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
   }
 
   addCategory() {

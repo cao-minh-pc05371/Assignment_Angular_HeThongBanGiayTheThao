@@ -37,8 +37,18 @@
             "styles": [
               "src/styles.scss",
               "src/assets/scss/style.scss",
+<<<<<<< HEAD
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
 
+=======
+<<<<<<< HEAD
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "@angular/material/prebuilt-themes/azure-blue.css"
+=======
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+
+>>>>>>> 8af811041b5e8d3d1db3cfdbc5d974050f5a80b7
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
@@ -101,11 +111,23 @@
             ],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": [
+              "@angular/material/prebuilt-themes/azure-blue.css",
+=======
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
+<<<<<<< HEAD
+=======
+>>>>>>> 8af811041b5e8d3d1db3cfdbc5d974050f5a80b7
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
               "src/styles.scss"
             ],
             "scripts": []

@@ -35,9 +35,45 @@
 
   .text-danger {
     font-size: 0.875rem;
+<<<<<<< HEAD
     color: #e74c3c;
     margin-top: 0.25rem;
     display: block;
+=======
+    color: #e3342f;
+    margin-top: 4px;
+  }
+
+  .logo-preview {
+    width: 100px;
+    height: auto;
+    border-radius: 6px;
+    margin-top: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  button[type="submit"] {
+    width: fit-content;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 6px;
+    background-color: #ff6600;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #e65c00;
+      box-shadow: 0 4px 10px rgba(255, 102, 0, 0.2);
+    }
+
+    &:disabled {
+      background-color: #ccc;
+      color: #666;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
   }
 }
 

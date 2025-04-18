@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -116,4 +117,16 @@ export class EditBrandsComponent implements OnInit {
       updateBrand(this.brandForm.value.logo);
     }
   }
+=======
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-edit-brands',
+  imports: [],
+  templateUrl: './edit-brands.component.html',
+  styleUrl: './edit-brands.component.scss'
+})
+export class EditBrandsComponent {
+
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
 }

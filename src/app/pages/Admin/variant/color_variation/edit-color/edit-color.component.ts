@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -69,3 +70,16 @@ export class EditColorComponent implements OnInit {
     });
   }
 }
+=======
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-edit-color',
+  imports: [],
+  templateUrl: './edit-color.component.html',
+  styleUrl: './edit-color.component.scss'
+})
+export class EditColorComponent {
+
+}
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a

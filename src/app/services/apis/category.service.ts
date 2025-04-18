@@ -6,6 +6,7 @@ import { Observable, map } from 'rxjs';
 import { ICategories } from 'src/app/interface/categories.interface';
 
 @Injectable({
+<<<<<<< HEAD
   providedIn: 'root'
 })
 export class CategoryService extends ApiService {
@@ -35,3 +36,37 @@ export class CategoryService extends ApiService {
   }
 
 }
+=======
+    providedIn: 'root'
+})
+export class CategoryService extends ApiService {
+
+    constructor
+        (
+            private _http: HttpClient,
+        ) {
+        super(_http);
+    }
+
+    getCategories(): Observable<ICategories[]> {
+        return this.get<ICategories[]>(API_ENDPOINT.category.base + API_ENDPOINT.category.list);
+    
+      }
+    
+      getCategoryById(id: number): Observable<ICategories> {
+        return this.get<{ status: number, data: ICategories }>(API_ENDPOINT.category.base + '/' + id).pipe(map(response => response.data));
+      }
+    
+      addCategory(data: ICategories): Observable<ICategories> {
+        return this.post<ICategories>(API_ENDPOINT.category.base + API_ENDPOINT.category.add, data);
+      }
+    
+      editCategory(id: number, data: ICategories): Observable<ICategories> {
+        return this.put<ICategories>(API_ENDPOINT.category.base + '/' + id, data);
+      }
+    
+      deleteCategory(id: number) {
+        return this.delete(API_ENDPOINT.category.base + '/' + id);
+      }
+}
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a

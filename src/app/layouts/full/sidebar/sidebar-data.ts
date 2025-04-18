@@ -69,7 +69,11 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Size',
     iconName: 'ruler',
+<<<<<<< HEAD
     route: '/admin/variation/size',
+=======
+    route: '/admin/size_variation',
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
     children: [
       {
         displayName: 'Danh sách',
@@ -86,7 +90,11 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Màu sắc',
     iconName: 'palette',
+<<<<<<< HEAD
     route: '/admin/variation/color',
+=======
+    route: '/admin/color_variation',
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
     children: [
       {
         displayName: 'Danh sách',

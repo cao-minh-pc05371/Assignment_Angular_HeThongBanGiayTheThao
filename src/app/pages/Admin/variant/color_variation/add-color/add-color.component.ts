@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -8,10 +9,18 @@ import { ColorService } from 'src/app/services/apis/color.service';
 @Component({
   selector: 'app-add-color',
   imports: [MatCardModule, CommonModule, ReactiveFormsModule],
+=======
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-add-color',
+  imports: [],
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
   templateUrl: './add-color.component.html',
   styleUrl: './add-color.component.scss'
 })
 export class AddColorComponent {
+<<<<<<< HEAD
   formData: FormGroup;
 
   constructor(
@@ -45,4 +54,7 @@ export class AddColorComponent {
       });
     }
   }
+=======
+
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
 }

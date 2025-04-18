@@ -6,6 +6,7 @@ import { Observable, map } from 'rxjs';
 import { IProduct } from 'src/app/interface/products.interface';
 
 @Injectable({
+<<<<<<< HEAD
   providedIn: 'root',
 })
 export class ProductService extends ApiService {
@@ -48,3 +49,37 @@ export class ProductService extends ApiService {
     return this.delete(`${API_ENDPOINT.product.base}/${id}`);
   }
 }
+=======
+  providedIn: 'root'
+})
+export class ProductService extends ApiService {
+
+  constructor
+    (
+      private _http: HttpClient,
+    ) {
+    super(_http);
+  }
+
+  getProducts(): Observable<IProduct[]> {
+    return this.get<IProduct[]>(API_ENDPOINT.product.base + API_ENDPOINT.product.list);
+
+  }
+
+  getProductById(id: number): Observable<IProduct> {
+    return this.get<{ status: number, data: IProduct }>(API_ENDPOINT.product.base + '/' + id).pipe(map(response => response.data));
+  }
+
+  addProduct(data: FormData): Observable<any> {
+    return this.post(`${API_ENDPOINT.product.base}${API_ENDPOINT.product.add}`, data);
+  }
+
+  editProduct(id: number, data: IProduct): Observable<IProduct> {
+    return this.put<IProduct>(API_ENDPOINT.product.base + '/' + id, data);
+  }
+
+  deleteProduct(id: number) {
+    return this.delete(API_ENDPOINT.product.base + '/' + id);
+  }
+}
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a

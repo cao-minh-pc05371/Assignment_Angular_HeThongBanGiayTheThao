@@ -11,7 +11,12 @@ import { CategoryService } from 'src/app/services/apis/category.service';
 
 @Component({
   selector: 'app-categories-edit',
+<<<<<<< HEAD
   imports: [
+=======
+  imports: 
+  [
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
@@ -20,7 +25,11 @@ import { CategoryService } from 'src/app/services/apis/category.service';
     CommonModule
   ],
   templateUrl: './categories-edit.component.html',
+<<<<<<< HEAD
   styleUrls: ['./categories-edit.component.scss']
+=======
+  styleUrl: './categories-edit.component.scss'
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
 })
 export class CategoriesEditComponent implements OnInit {
   categoryForm: FormGroup;
@@ -31,6 +40,7 @@ export class CategoriesEditComponent implements OnInit {
     private categoryService: CategoryService,
     private router: Router,
     private route: ActivatedRoute
+<<<<<<< HEAD
   ) {}
 
   ngOnInit() {
@@ -42,20 +52,39 @@ export class CategoriesEditComponent implements OnInit {
 
   // Khởi tạo form
   initForm() {
+=======
+  ) {
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
     this.categoryForm = new FormGroup({
       name: new FormControl('', [Validators.required])
     });
   }
 
+<<<<<<< HEAD
   // Lấy danh mục theo ID
+=======
+  ngOnInit() {
+    this.categoryId = +this.route.snapshot.paramMap.get('id')!;
+    this.getCategoryById(this.categoryId);
+  }
+
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
   getCategoryById(id: number) {
     this.categoryService.getCategoryById(id).subscribe({
       next: (category) => {
         this.category = category;
+<<<<<<< HEAD
         // Update form value
         this.categoryForm.patchValue({
           name: this.category.name
         });
+=======
+        this.categoryForm.patchValue({
+          name: this.category.name
+        });
+        console.log('category: ', this.category);
+        console.log('name: ', this.category.name);
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
       },
       error: (err) => {
         console.error('Lỗi khi lấy danh mục:', err);
@@ -63,6 +92,7 @@ export class CategoriesEditComponent implements OnInit {
     });
   }
 
+<<<<<<< HEAD
   // Cập nhật danh mục
   editCategory() {
     if (this.categoryForm.valid) {
@@ -70,6 +100,13 @@ export class CategoriesEditComponent implements OnInit {
       this.categoryService.updateCategory(this.categoryId, updatedCategory).subscribe({
         next: () => {
           // Điều hướng về trang danh sách sau khi cập nhật thành công
+=======
+  editCategory() {
+    if (this.categoryForm.valid) {
+      const updatedCategory: ICategories = this.categoryForm.value;
+      this.categoryService.editCategory(this.categoryId, updatedCategory).subscribe({
+        next: () => {
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
           this.router.navigate(['/admin/categories/List-Categories']);
         },
         error: (err) => {

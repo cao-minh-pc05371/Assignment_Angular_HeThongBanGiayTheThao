@@ -1,7 +1,11 @@
 <mat-card class="cardWithShadow theme-card">
     <mat-card-header>
         <mat-card-title class="m-b-0">
+<<<<<<< HEAD
             <h3>Danh Sách Màu Sắc</h3>
+=======
+            <h3>Danh Sách Danh Mục</h3>
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
         </mat-card-title>
     </mat-card-header>
     <mat-card-content class="b-t-1">
@@ -10,12 +14,17 @@
                 <thead>
                     <tr>
                         <th>#</th>
+<<<<<<< HEAD
                         <th>Tên Màu</th>
                         <th>Màu sắc</th>
+=======
+                        <th>Tên Danh Mục</th>
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
                         <th class="text-center">Thao Tác</th>
                     </tr>
                 </thead>
                 <tbody>
+<<<<<<< HEAD
                     <tr *ngFor="let colors of color; let i = index">
                         <td>{{ i + 1 }}</td>
                         <td>{{ colors.color_name }}</td>
@@ -30,6 +39,17 @@
                             </button>
                             <button mat-icon-button class="btn-delete"
                                 (click)="openDialog(colors.id, colors.color_name)" matTooltip="Xoá thương hiệu">
+=======
+                    <tr *ngFor="let sizes of size; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ sizes.size_label }}</td>
+                        <td class="text-center">
+                            <button mat-icon-button class="btn-edit" (click)="openEditDialog(sizes.id, sizes.size_label)" matTooltip="Chỉnh sửa">
+                                <mat-icon>edit_square</mat-icon>
+                            </button>
+                            <button mat-icon-button class="btn-delete" (click)="openDialog(sizes.id, sizes.size_label)"
+                                matTooltip="Xoá thương hiệu">
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
                                 <mat-icon>delete_forever</mat-icon>
                             </button>
                         </td>

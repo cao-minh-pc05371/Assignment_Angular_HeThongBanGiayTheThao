@@ -17,31 +17,53 @@ export const API_ENDPOINT = {
     register: '/register',
     profile: '/profile',
     updatePassword: '/update-password',
+<<<<<<< HEAD
     resetPassword: '/reset-password',
   },
   brand: {
     base: API_BASE_URL + '/brand',
     list: '/list',
     add: '/add',
+=======
+    resetPassword: '/reset-password'   
+  },
+  brand:{
+    base: API_BASE_URL + '/brand',
+    list: '/list',
+    add: '/add'
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
   },
   category: {
     base: API_BASE_URL + '/category',
     list: '/list',
+<<<<<<< HEAD
     add: '/add',
+=======
+    add: '/add'
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
   },
   product: {
     base: API_BASE_URL + '/product',
     list: '/list',
+<<<<<<< HEAD
     add: '/add',
+=======
+    add: '/add'
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
   },
   size: {
     base: API_BASE_URL + '/size',
     list: '/list',
+<<<<<<< HEAD
     add: '/add',
+=======
+    add: '/add'
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
   },
   color: {
     base: API_BASE_URL + '/color',
     list: '/list',
+<<<<<<< HEAD
     add: '/add',
   },
   variant: {
@@ -57,4 +79,8 @@ export const API_ENDPOINT = {
     update: '',
     delete: '',
   },
+=======
+    add: '/add'
+  }
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
 };

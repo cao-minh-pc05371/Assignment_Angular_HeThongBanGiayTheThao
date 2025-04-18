@@ -15,11 +15,16 @@ export const routes: Routes = [
           import('./pages/Client/home/home.routes').then((m) => m.HomeRoutes),
       },
       {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
         path: 'cart',
         loadChildren: () =>
           import('./pages/Client/cart/cart.routes').then((m) => m.CartRoutes),
       },
       {
+<<<<<<< HEAD
         path: 'checkout',
         loadChildren: () =>
           import('./pages/Client/checkout/checkout.routes').then(
@@ -45,6 +50,24 @@ export const routes: Routes = [
             './pages/Client/shop/product-detail/product-detail.routes'
           ).then((m) => m.ProductDetailRoutes),
       },
+=======
+        path: 'shop',
+        loadChildren: () =>
+          import('./pages/Client/shop/shop.routes').then((m) => m.ShopRoutes),
+      },
+      {
+        path: 'shop/:id',
+        loadChildren: () =>
+          import('./pages/Client/shop/product-detail/product-detail.routes').then((m) => m.ProductDetailRoutes),
+        },
+
+=======
+        path: 'shop',
+        loadChildren: () =>
+          import('./pages/Client/shop/shop.routes').then((m) => m.ShopRoutes),
+      }
+>>>>>>> 8af811041b5e8d3d1db3cfdbc5d974050f5a80b7
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
     ],
   },
   {
@@ -86,13 +109,20 @@ export const routes: Routes = [
       {
         path: 'size_variation',
         loadChildren: () =>
+<<<<<<< HEAD
           import(
             './pages/Admin/variant/size_variation/size_variation.routes'
           ).then((m) => m.SizeVariantionRoutes),
+=======
+          import('./pages/Admin/variant/size_variation/size_variation.routes').then(
+            (m) => m.SizeVariantionRoutes
+          ),
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
       },
       {
         path: 'color_variation',
         loadChildren: () =>
+<<<<<<< HEAD
           import(
             './pages/Admin/variant/color_variation/color_variation.routes'
           ).then((m) => m.ColorVariantionRoutes),
@@ -103,6 +133,11 @@ export const routes: Routes = [
           import(
             './pages/Admin/variant_product/variant_product.routes'
           ).then((m) => m.VariantProductRoutes),
+=======
+          import('./pages/Admin/variant/color_variation/color_variation.routes').then(
+            (m) => m.ColorVariantionRoutes
+          ),
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
       },
       {
         path: 'extra',
