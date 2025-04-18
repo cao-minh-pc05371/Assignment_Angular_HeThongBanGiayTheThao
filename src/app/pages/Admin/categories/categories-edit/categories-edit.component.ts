@@ -11,8 +11,7 @@ import { CategoryService } from 'src/app/services/apis/category.service';
 
 @Component({
   selector: 'app-categories-edit',
-  imports: 
-  [
+  imports: [
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
@@ -21,7 +20,7 @@ import { CategoryService } from 'src/app/services/apis/category.service';
     CommonModule
   ],
   templateUrl: './categories-edit.component.html',
-  styleUrl: './categories-edit.component.scss'
+  styleUrls: ['./categories-edit.component.scss']
 })
 export class CategoriesEditComponent implements OnInit {
   categoryForm: FormGroup;
@@ -32,26 +31,31 @@ export class CategoriesEditComponent implements OnInit {
     private categoryService: CategoryService,
     private router: Router,
     private route: ActivatedRoute
-  ) {
+  ) {}
+
+  ngOnInit() {
+    // Lấy categoryId từ route
+    this.categoryId = +this.route.snapshot.paramMap.get('id')!;
+    this.initForm();
+    this.getCategoryById(this.categoryId);
+  }
+
+  // Khởi tạo form
+  initForm() {
     this.categoryForm = new FormGroup({
       name: new FormControl('', [Validators.required])
     });
   }
 
-  ngOnInit() {
-    this.categoryId = +this.route.snapshot.paramMap.get('id')!;
-    this.getCategoryById(this.categoryId);
-  }
-
+  // Lấy danh mục theo ID
   getCategoryById(id: number) {
     this.categoryService.getCategoryById(id).subscribe({
       next: (category) => {
         this.category = category;
+        // Update form value
         this.categoryForm.patchValue({
           name: this.category.name
         });
-        console.log('category: ', this.category);
-        console.log('name: ', this.category.name);
       },
       error: (err) => {
         console.error('Lỗi khi lấy danh mục:', err);
@@ -59,11 +63,13 @@ export class CategoriesEditComponent implements OnInit {
     });
   }
 
+  // Cập nhật danh mục
   editCategory() {
     if (this.categoryForm.valid) {
       const updatedCategory: ICategories = this.categoryForm.value;
-      this.categoryService.editCategory(this.categoryId, updatedCategory).subscribe({
+      this.categoryService.updateCategory(this.categoryId, updatedCategory).subscribe({
         next: () => {
+          // Điều hướng về trang danh sách sau khi cập nhật thành công
           this.router.navigate(['/admin/categories/List-Categories']);
         },
         error: (err) => {

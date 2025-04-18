@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../common/api.service';
-import { Observable, map } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { API_ENDPOINT } from 'src/app/config/api-endpoint.config';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService extends ApiService {
-  constructor(private _http: HttpClient) {
+
+  constructor(
+    private _http: HttpClient,
+  ) {
     super(_http);
   }
 
-  // Lấy giỏ hàng của user hiện tại
   getCartItems(): Observable<any[]> {
     const user = this.decodeToken();
     if (!user || !user.id) {
@@ -23,7 +25,6 @@ export class CartService extends ApiService {
     );
   }
 
-  // Thêm sản phẩm vào giỏ hàng
   addToCart(variant_id: number, quantity: number): Observable<any> {
     const user = this.decodeToken();
     return this.post(`${API_ENDPOINT.cart.base}/add`, {
@@ -33,17 +34,15 @@ export class CartService extends ApiService {
     });
   }
 
-  // Cập nhật số lượng sản phẩm trong giỏ hàng
   updateCartItem(id: number, quantity: number): Observable<any> {
     return this.put(`${API_ENDPOINT.cart.base}/${id}`, { quantity });
   }
 
-  // Xóa sản phẩm khỏi giỏ hàng
   removeFromCart(id: number): Observable<any> {
     return this.delete(`${API_ENDPOINT.cart.base}/${id}`);
   }
 
-  // Decode token để lấy thông tin user
+  // Helper function to decode the token and get user information
   private decodeToken(): any {
     const token = this.getToken();
     if (!token) return null;

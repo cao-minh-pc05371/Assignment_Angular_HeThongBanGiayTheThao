@@ -19,11 +19,11 @@
                         <td>{{ i + 1 }}</td>
                         <td>{{ category.name }}</td>
                         <td class="text-center">
-                            <button mat-icon-button class="btn-edit" (click)="openEditDialog(category.id, category.name)" matTooltip="Chỉnh sửa">
+                            <button mat-icon-button class="btn-edit" (click)="openEditDialog(category.id)" matTooltip="Chỉnh sửa">
                                 <mat-icon>edit_square</mat-icon>
                             </button>
                             <button mat-icon-button class="btn-delete" (click)="openDialog(category.id, category.name)"
-                                matTooltip="Xoá thương hiệu">
+                                matTooltip="Xoá danh mục">
                                 <mat-icon>delete_forever</mat-icon>
                             </button>
                         </td>

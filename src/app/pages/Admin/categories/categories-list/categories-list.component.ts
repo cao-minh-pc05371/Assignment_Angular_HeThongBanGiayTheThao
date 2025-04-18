@@ -10,14 +10,15 @@ import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-categories-list',
+  standalone: true,
   imports: [MatCardModule, CommonModule, MatIcon],
   templateUrl: './categories-list.component.html',
-  styleUrl: './categories-list.component.scss'
+  styleUrls: ['./categories-list.component.scss']
 })
 export class CategoriesListComponent {
   readonly dialog = inject(MatDialog);
-
   categories: ICategories[] = [];
+
   constructor(
     private categoryService: CategoryService,
     private route: Router,
@@ -26,7 +27,7 @@ export class CategoriesListComponent {
   }
 
   getAllCategories() {
-    this.categoryService.getCategories().subscribe({
+    this.categoryService.getAllCategories().subscribe({
       next: (res: any) => {
         this.categories = res?.data ?? res;
         console.log('Categories:', this.categories);
@@ -34,26 +35,23 @@ export class CategoriesListComponent {
       error: (err) => {
         console.error('Error fetching categories:', err);
       }
-    })
+    });
   }
 
   openDialog(id: number, name: string): void {
     const dialogRef = this.dialog.open(DeleteComponent, {
-      data: {name: name, id: id},
-
+      data: { name: name, id: id },
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-     if (result) {
+      if (result) {
         this.getAllCategories();
       }
-     
     });
   }
 
-  openEditDialog(id: number, name: string) {
+  openEditDialog(id: number) {
     this.route.navigate(['/admin/categories/Edit-Categories', id]);
   }
 }
-

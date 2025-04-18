@@ -57,50 +57,41 @@ export class ShopComponent implements OnInit {
 
   loadCategories(): void {
     this.isLoading = true;
-    this.categoryService.getCategories().subscribe({
-      next: (data) => {
-        if (Array.isArray(data)) {
-          this.categories = data;
-        } else {
-          console.error('Dữ liệu danh mục không phải là mảng:', data);
-          this.categories = [];
-          this.showMessage(
-            'Không thể tải danh mục. Dữ liệu không đúng định dạng.'
-          );
+    this.categoryService.getAllCategories().subscribe({
+      next: (response: any) => {
+        console.log('Categories loaded:', response);
+        if (Array.isArray(response)) {
+          this.categories = response;
+        } else if (response.data) {
+          this.categories = response.data;
         }
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('Lỗi khi tải danh mục:', error);
-        this.isLoading = false;
+        console.error('Error loading categories:', error);
         this.hasError = true;
-        this.errorMessage = 'Không thể tải danh mục.';
-        this.showMessage('Không thể tải danh mục. Vui lòng thử lại sau.');
-      },
+        this.errorMessage = 'Không thể tải danh mục';
+        this.isLoading = false;
+      }
     });
   }
 
   loadProducts(categoryId?: number): void {
     this.isLoading = true;
-    this.productService.getProducts().subscribe({
+    this.productService.getAllProducts().subscribe({
       next: (data) => {
         if (Array.isArray(data)) {
-          if (categoryId) {
-            this.products = data.filter(
-              (product) => product.category_id === categoryId
-            );
-          } else {
-            this.products = data;
-          }
-          this.isLoading = false;
+          this.products = categoryId
+            ? data.filter((product) => product.category_id === categoryId)
+            : data;
         } else {
           console.error('Dữ liệu sản phẩm không phải là mảng:', data);
           this.products = [];
-          this.isLoading = false;
           this.showMessage(
             'Không thể tải sản phẩm. Dữ liệu không đúng định dạng.'
           );
         }
+        this.isLoading = false;
       },
       error: (error) => {
         console.error('Lỗi khi tải sản phẩm:', error);

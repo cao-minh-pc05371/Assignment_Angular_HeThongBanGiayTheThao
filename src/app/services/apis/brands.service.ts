@@ -17,8 +17,8 @@ export class BrandService extends ApiService {
         super(_http);
     }
 
-    getAllBrands(): Observable<IBrands[]> {
-        return this.get<IBrands[]>(`${API_ENDPOINT.brand.base}${API_ENDPOINT.brand.list}`);
+    getAllBrands(): Observable<{ status: number, message: string, data: IBrands[] }> {
+        return this.get<{ status: number, message: string, data: IBrands[] }>(`${API_ENDPOINT.brand.base}${API_ENDPOINT.brand.list}`);
     }
 
     getBrandById(id: number): Observable<IBrands> {

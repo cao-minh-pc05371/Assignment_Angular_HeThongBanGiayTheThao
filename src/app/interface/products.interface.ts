@@ -8,13 +8,14 @@ export interface IProduct {
     visibility?: 'visible' | 'hidden';
     featured?: 'normal' | 'featured';
     stock?: number;
-    category_id?: number;
-    brand_id?: number;
+    category_id: number;
+    brand_id: number;
     category?: {
+      id: number;
       name: string;
     };
     brand?: {
+      id: number;
       name: string;
     };
   }
-  

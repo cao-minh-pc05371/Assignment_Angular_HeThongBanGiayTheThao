@@ -48,8 +48,8 @@
         <div class="mb-3">
           <label class="form-label">Danh Mục</label>
           <select class="form-control" formControlName="category_id">
-            <option [value]="null">-- Chọn danh mục --</option>
-            <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+            <option [ngValue]="null">-- Chọn danh mục --</option>
+            <option *ngFor="let cat of categories" [ngValue]="cat.id">{{ cat.name }}</option>
           </select>
         </div>
   
@@ -57,8 +57,8 @@
         <div class="mb-3">
           <label class="form-label">Thương Hiệu</label>
           <select class="form-control" formControlName="brand_id">
-            <option [value]="null">-- Chọn thương hiệu --</option>
-            <option *ngFor="let brand of brands" [value]="brand.id">{{ brand.name }}</option>
+            <option [ngValue]="null">-- Chọn thương hiệu --</option>
+            <option *ngFor="let brand of brands" [ngValue]="brand.id">{{ brand.name }}</option>
           </select>
         </div>
   
@@ -86,4 +86,3 @@
       </form>
     </mat-card-content>
   </mat-card>
-  
