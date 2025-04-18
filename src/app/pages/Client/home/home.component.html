@@ -20,6 +20,10 @@
 </div>
 
 <div class="container mt-4">
+<<<<<<< HEAD
+=======
+
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
   <!-- THƯƠNG HIỆU -->
   <h3 class="fw-bold text-uppercase text-center py-3">Thương Hiệu</h3>
   <div class="row g-3">
@@ -55,6 +59,7 @@
     </div>
   </div>
 
+<<<<<<< HEAD
   <!-- SẢN PHẨM -->
   <h3 class="fw-bold text-uppercase text-center py-3">Sản Phẩm</h3>
   <div class="row g-3">
@@ -86,12 +91,21 @@
   <div
     class="col-6 col-sm-4 col-md-3 col-lg-2"
     *ngFor="let product of saleProducts"
+=======
+ <!-- SẢN PHẨM NỔI BẬT -->
+<h3 class="fw-bold text-uppercase text-center py-3">Sản Phẩm Nổi Bật</h3>
+<div class="row g-3">
+  <div
+    class="col-6 col-sm-4 col-md-3 col-lg-2"
+    *ngFor="let product of featuredProducts"
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
   >
     <div class="collection-box shadow-sm text-center p-2">
       <img
         [src]="product.image || 'https://via.placeholder.com/150'"
         [alt]="product.name"
         class="img-fluid rounded"
+<<<<<<< HEAD
         style="height: 150px; object-fit: cover;"
       />
       <p class="title mt-2">{{ product.name }}</p>
@@ -101,6 +115,49 @@
       </p>
       <p class="fw-bold text-danger">
         {{ formatCurrency(product.sale_price || product.price || 0) }}
+=======
+      />
+      <p class="title mt-2">{{ product.name }}</p>
+
+      <!-- Hiển thị giá giảm -->
+      <p class="fw-bold text-danger">
+        {{ formatCurrency(calculatePrice(product.price!, product.discount).discountedPrice) }}
+      </p>
+
+      <button
+        class="btn btn-sm btn-primary"
+        (click)="router.navigate(['/product', product.id])"
+      >
+        Xem chi tiết
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- SẢN PHẨM GIẢM GIÁ -->
+<h3 class="fw-bold text-uppercase text-center py-3">Sản Phẩm Giảm Giá</h3>
+<div class="row g-3">
+  <div
+    class="col-6 col-sm-4 col-md-3 col-lg-2"
+    *ngFor="let product of saleProducts"
+  >
+    <div class="collection-box shadow-sm text-center p-2">
+      <img
+        [src]="product.image || 'https://via.placeholder.com/150'"
+        [alt]="product.name"
+        class="img-fluid rounded"
+      />
+      <p class="title mt-2">{{ product.name }}</p>
+
+      <!-- Hiển thị giá gốc nếu có giảm giá -->
+      <p *ngIf="product.discount > 0" class="text-muted text-decoration-line-through">
+        {{ formatCurrency(calculatePrice(product.price!, product.discount).originalPrice) }}
+      </p>
+
+      <!-- Hiển thị giá sau khi giảm -->
+      <p class="fw-bold text-danger">
+        {{ formatCurrency(calculatePrice(product.price!, product.discount).discountedPrice) }}
+>>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
       </p>
 
       <button
