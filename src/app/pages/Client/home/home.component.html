@@ -1,17 +1,12 @@
+<!-- BANNER -->
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img
-        src="https://media.licdn.com/dms/image/C5112AQF5Zq8eziJ7Cw/article-cover_image-shrink_600_2000/0/1520150129347?e=2147483647&v=beta&t=o_6S9A6VB6IbwzfRZFNW8xW4dgwONkl9zdZvcmE3cxI"
-        class="d-block w-100" alt="...">
-
-    </div>
-    <div class="carousel-item">
-      <img src="https://lambanner.com/wp-content/uploads/2022/10/MNT-DESIGN-BANNER-GIAY-11.jpg" class="d-block w-100"
-        alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="https://i.ytimg.com/vi/88g98VcVIko/maxresdefault.jpg" class="d-block w-100" alt="...">
+    <div
+      class="carousel-item"
+      *ngFor="let banner of banners; let i = index"
+      [class.active]="i === 0"
+    >
+      <img [src]="banner.image" class="d-block w-100" [alt]="banner.alt" />
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -23,58 +18,106 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+
 <div class="container mt-4">
+
+  <!-- THƯƠNG HIỆU -->
+  <h3 class="fw-bold text-uppercase text-center py-3">Thương Hiệu</h3>
+  <div class="row g-3">
+    <div class="col-6 col-md-4 col-lg-3" *ngFor="let brand of listBrand">
+      <div class="news-box shadow-sm text-center p-2">
+        <img
+          [src]="brand.logo || 'https://via.placeholder.com/300x200'"
+          [alt]="brand.name"
+          class="img-fluid rounded mb-2"
+        />
+        <p class="title">{{ brand.name }}</p>
+        <a
+          [routerLink]="['/shop']"
+          [queryParams]="{ brand: brand.id }"
+          class="news-link d-inline-block mt-1"
+        >Xem thêm →</a>
+      </div>
+    </div>
+  </div>
+
   <!-- DANH MỤC -->
   <h3 class="fw-bold text-uppercase text-center py-3">Danh Mục Sản Phẩm</h3>
   <div class="row g-3">
-    <div
-      class="col-6 col-sm-4 col-md-3 col-lg-2"
-      *ngFor="let category of list">
-      <div class="category-box shadow-sm text-center">
-        <!-- <img
-          [src]="category.image || 'https://via.placeholder.com/150'"
-          alt="{{ category.name }}"
-          class="img-fluid rounded"> -->
+    <div class="col-6 col-sm-4 col-md-3 col-lg-2" *ngFor="let category of list">
+      <div class="category-box shadow-sm text-center p-2">
         <p class="title mt-2">{{ category.name }}</p>
-      </div>
-    </div>
-  </div>
-
-
-  <h3 class="fw-bold text-uppercase text-center py-3">Bộ Sưu Tập Mới</h3>
-  <div class="row g-3">
-    <div
-      class="col-6 col-sm-4 col-md-3 col-lg-2"
-      *ngFor="let product of listProduct">
-      <div class="collection-box shadow-sm text-center">
-        <img
-          [src]="product.image || 'https://via.placeholder.com/150'"
-          alt="{{ product.name }}"
-          class="img-fluid rounded">
-        <p class="title mt-2">{{ product.name }}</p>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- TIN TỨC -->
-  <h3 class="fw-bold text-uppercase text-center py-3">Thương Hiệu</h3>
-  <div class="row g-3">
-    <div
-      class="col-6 col-md-4 col-lg-3"
-      *ngFor="let brands of listBrand">
-      <div class="news-box shadow-sm text-center">
-        <img
-          [src]="brands.logo || 'https://via.placeholder.com/300x200'"
-          alt="{{ brands.name }}"
-          class="img-fluid rounded mb-2">
-        <p class="title">{{ brands.name }}</p>
         <a
-          [routerLink]="['/products']"
-          [queryParams]="{ brand: brands.id }"
-          class="news-link d-inline-block mt-1">Xem thêm →</a>
+          [routerLink]="['/shop']"
+          [queryParams]="{ category: category.id }"
+          class="btn btn-sm btn-outline-primary mt-2"
+        >Xem thêm</a>
       </div>
     </div>
   </div>
 
+ <!-- SẢN PHẨM NỔI BẬT -->
+<h3 class="fw-bold text-uppercase text-center py-3">Sản Phẩm Nổi Bật</h3>
+<div class="row g-3">
+  <div
+    class="col-6 col-sm-4 col-md-3 col-lg-2"
+    *ngFor="let product of featuredProducts"
+  >
+    <div class="collection-box shadow-sm text-center p-2">
+      <img
+        [src]="product.image || 'https://via.placeholder.com/150'"
+        [alt]="product.name"
+        class="img-fluid rounded"
+      />
+      <p class="title mt-2">{{ product.name }}</p>
+
+      <!-- Hiển thị giá giảm -->
+      <p class="fw-bold text-danger">
+        {{ formatCurrency(calculatePrice(product.price!, product.discount).discountedPrice) }}
+      </p>
+
+      <button
+        class="btn btn-sm btn-primary"
+        (click)="router.navigate(['/product', product.id])"
+      >
+        Xem chi tiết
+      </button>
+    </div>
+  </div>
 </div>
+
+<!-- SẢN PHẨM GIẢM GIÁ -->
+<h3 class="fw-bold text-uppercase text-center py-3">Sản Phẩm Giảm Giá</h3>
+<div class="row g-3">
+  <div
+    class="col-6 col-sm-4 col-md-3 col-lg-2"
+    *ngFor="let product of saleProducts"
+  >
+    <div class="collection-box shadow-sm text-center p-2">
+      <img
+        [src]="product.image || 'https://via.placeholder.com/150'"
+        [alt]="product.name"
+        class="img-fluid rounded"
+      />
+      <p class="title mt-2">{{ product.name }}</p>
+
+      <!-- Hiển thị giá gốc nếu có giảm giá -->
+      <p *ngIf="product.discount > 0" class="text-muted text-decoration-line-through">
+        {{ formatCurrency(calculatePrice(product.price!, product.discount).originalPrice) }}
+      </p>
+
+      <!-- Hiển thị giá sau khi giảm -->
+      <p class="fw-bold text-danger">
+        {{ formatCurrency(calculatePrice(product.price!, product.discount).discountedPrice) }}
+      </p>
+
+      <button
+        class="btn btn-sm btn-primary"
+        (click)="router.navigate(['/product', product.id])"
+      >
+        Xem chi tiết
+      </button>
+    </div>
+  </div>
+</div>
+
