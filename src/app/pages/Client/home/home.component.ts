@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit {
   listProduct: IProduct[] = [];
   listBrand: IBrands[] = [];
   featuredProducts: IProduct[] = [];
+  saleProducts: IProduct[];
 
   constructor(
     private categoryService: CategoryService,
