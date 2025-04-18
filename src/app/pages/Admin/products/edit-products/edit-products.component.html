@@ -48,20 +48,26 @@
 
             <!-- Danh mục -->
             <div class="mb-3">
-                <label class="form-label">Danh Mục</label>
+                <label class="form-label">Danh Mục <span class="text-danger">*</span></label>
                 <select class="form-control" formControlName="category_id">
-                    <option [value]="null">-- Chọn danh mục --</option>
-                    <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+                    <option [ngValue]="null">-- Chọn danh mục --</option>
+                    <option *ngFor="let cat of categories" [ngValue]="cat.id" >{{ cat.name }}</option>
                 </select>
+                <div *ngIf="category_id?.invalid && (category_id?.touched || category_id?.dirty)" class="text-danger mt-1">
+                    Vui lòng chọn danh mục
+                </div>
             </div>
 
             <!-- Thương hiệu -->
             <div class="mb-3">
-                <label class="form-label">Thương Hiệu</label>
+                <label class="form-label">Thương Hiệu <span class="text-danger">*</span></label>
                 <select class="form-control" formControlName="brand_id">
-                    <option [value]="null">-- Chọn thương hiệu --</option>
-                    <option *ngFor="let brand of brands" [value]="brand.id">{{ brand.name }}</option>
+                    <option [ngValue]="null">-- Chọn thương hiệu --</option>
+                    <option *ngFor="let brand of brands" [ngValue]="brand.id">{{ brand.name }}</option>
                 </select>
+                <div *ngIf="brand_id?.invalid && (brand_id?.touched || brand_id?.dirty)" class="text-danger mt-1">
+                    Vui lòng chọn thương hiệu
+                </div>
             </div>
 
             <!-- Hiển thị -->

@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { IProduct } from 'src/app/interface/products.interface';
 import { MatCardModule } from '@angular/material/card';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductService } from 'src/app/services/apis/product.service';
@@ -14,35 +14,43 @@ import { environment } from 'src/environments/environment';
   templateUrl: './list-products.component.html',
   styleUrls: ['./list-products.component.scss'],
 })
-export class ListProductsComponent {
+export class ListProductsComponent implements OnInit {
   readonly dialog = inject(MatDialog);
   products: IProduct[] = [];
+  loading = false;
+  hasError = false;
+  errorMessage = '';
+
   constructor(
     private productService: ProductService,
     private route: Router,
-  ) { 
+  ) {}
+
+  ngOnInit(): void {
     this.getAllProducts();
   }
 
+  // Lấy tất cả sản phẩm
   getAllProducts() {
-    this.productService.getProducts().subscribe({
-      next: (res: any) => {
-        const rawProducts = res?.data ?? res;
-        this.products = rawProducts.map((product: any) => ({
-                  ...product,
-                  image: `${product.image}`
-                }));
-        console.log('Categories:', this.products);
+    this.loading = true; // Bắt đầu loading
+    this.productService.getAllProducts().subscribe({
+      next: (res: IProduct[]) => {
+        this.products = res;
+        console.log('Sản phẩm:', this.products);
+        this.loading = false; // Xong loading
       },
       error: (err) => {
-        console.error('Error fetching categories:', err);
-      }
-    })
+        console.error('Lỗi khi lấy sản phẩm:', err);
+        this.hasError = true;
+        this.errorMessage = 'Không thể tải danh sách sản phẩm';
+        this.loading = false; // Dừng loading nếu có lỗi
+      },
+    });
   }
 
+  // Mở cửa sổ dialog chỉnh sửa sản phẩm
   openEditDialog(id: number, name: string) {
-    // Điều hướng tới trang sửa, ví dụ: /edit/5
+    // Điều hướng tới trang sửa sản phẩm
     this.route.navigate(['/admin/products/Edit-products', id]);
   }
-  
 }

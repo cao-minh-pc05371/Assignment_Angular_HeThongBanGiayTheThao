@@ -17,7 +17,7 @@ import { CloudinaryService } from 'src/app/services/common/cloudinary.service';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatCardModule
+    MatCardModule,
   ],
   templateUrl: './add-products.component.html',
   styleUrls: ['./add-products.component.scss']
@@ -117,21 +117,45 @@ export class AddProductsComponent implements OnInit {
     });
   }
 
+  // Lấy danh mục
   loadCategories(): void {
-    this.categoryService.getCategories().subscribe({
-      next: (res: any) => {
-        this.categories = res?.data ?? res;
+    this.categoryService.getAllCategories().subscribe({
+      next: (response: any) => {
+        console.log('Category Response:', response);
+        if (response.categories) {
+          this.categories = response.categories;
+        } else if (Array.isArray(response)) {
+          this.categories = response;
+        } else if (response.data) {
+          this.categories = response.data;
+        }
+        console.log('Processed Categories:', this.categories);
       },
-      error: (err) => console.error('Lỗi khi lấy danh mục:', err)
+      error: (err) => {
+        console.error('Error loading categories:', err);
+        this.categories = [];
+      }
     });
   }
 
+  // Lấy thương hiệu
   loadBrands(): void {
     this.brandService.getAllBrands().subscribe({
-      next: (res: any) => {
-        this.brands = res?.data ?? res;
+      next: (response: any) => {
+        console.log('Brand Response:', response);
+        if (response.brands) {
+          this.brands = response.brands;
+        } else if (Array.isArray(response)) {
+          this.brands = response;
+        } else if (response.data) {
+          this.brands = response.data;
+        }
+        console.log('Processed Brands:', this.brands);
       },
-      error: (err) => console.error('Lỗi khi lấy thương hiệu:', err)
+      error: (err) => {
+        console.error('Error loading brands:', err);
+        this.brands = [];
+      }
     });
   }
 }
