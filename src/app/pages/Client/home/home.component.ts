@@ -38,13 +38,11 @@ export class HomeComponent implements OnInit {
       description: 'Những sản phẩm được ưa chuộng nhất'
     }
   ];
-<<<<<<< HEAD
 
   list: ICategories[] = [];
   listProduct: IProduct[] = [];
   listBrand: IBrands[] = [];
   featuredProducts: IProduct[] = [];
-  saleProducts: IProduct[];
 
   constructor(
     private categoryService: CategoryService,
@@ -103,98 +101,10 @@ export class HomeComponent implements OnInit {
       currency: 'VND'
     }).format(value);
   }
-
   private filterSaleProducts(): void {
     this.saleProducts = this.listProduct
       .filter(product => product.sale_price && product.sale_price < product.price!)
       .slice(0, 12);
   }
-=======
->>>>>>> 93c2efa712e8f62f9ec5b8c6517e0ef559e4a36a
 
-  list: ICategories[] = [];
-  listProduct: IProduct[] = [];
-  listBrand: IBrands[] = [];
-  featuredProducts: IProduct[] = [];
-  saleProducts: IProduct[] = [];
-
-  constructor(
-    private categoryService: CategoryService,
-    private productService: ProductService,
-    private brandService: BrandService,
-    public router: Router
-  ) {}
-
-  ngOnInit(): void {
-    this.loadAllData();
-  }
-
-  loadAllData(): void {
-    this.getCategories();
-    this.getProducts();
-    this.getBrands();
-  }
-
-  getCategories(): void {
-    this.categoryService.getCategories().subscribe({
-      next: (res: any) => {
-        this.list = res?.data ?? res;
-      },
-      error: (err) => {
-        console.error('Error fetching categories:', err);
-      }
-    });
-  }
-
-  getProducts(): void {
-    this.productService.getProducts().subscribe({
-      next: (res: any) => {
-        this.listProduct = res?.data ?? res;
-        this.filterFeaturedProducts();
-        this.filterSaleProducts();
-      },
-      error: (err) => {
-        console.error('Error fetching products:', err);
-      }
-    });
-  }
-
-  getBrands(): void {
-    this.brandService.getAllBrands().subscribe({
-      next: (res: any) => {
-        this.listBrand = res?.data ?? res;
-      },
-      error: (err) => {
-        console.error('Error fetching brands:', err);
-      }
-    });
-  }
-
-  private filterFeaturedProducts(): void {
-    this.featuredProducts = this.listProduct
-      .filter(product => product.featured || product.rating >= 4)
-      .slice(0, 12);
-  }
-
-  private filterSaleProducts(): void {
-    this.saleProducts = this.listProduct
-      .filter(product => product.discount > 0)
-      .sort((a, b) => b.discount - a.discount)
-      .slice(0, 12);
-  }
-  calculatePrice(originalPrice: number, discount: number): { discountedPrice: number, originalPrice: number } {
-    const discountedPrice = discount > 0 ? originalPrice * (1 - discount / 100) : originalPrice;
-    return {
-      discountedPrice: discountedPrice,
-      originalPrice: originalPrice
-    };
-  }
-
-
-  formatCurrency(value: number): string {
-    return new Intl.NumberFormat('vi-VN', {
-      style: 'currency',
-      currency: 'VND'
-    }).format(value);
-  }
 }
