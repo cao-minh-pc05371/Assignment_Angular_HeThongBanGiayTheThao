@@ -1,58 +1,69 @@
-<div class="row container">
-  <div class="col-md-6">
-    <mat-card class="" *ngIf="product">
-      <img mat-card-image [src]="product.image" [alt]="product.name">
+<div class="row container product-detail-container" *ngIf="product && variants">
+  <div class="col-md-6 product-image-section mb-3 mb-md-0">
+    <mat-card class="product-image-card shadow-sm">
+      <img mat-card-image [src]="product.image" [alt]="product.name" class="product-image" />
     </mat-card>
   </div>
-  <!-- Thông tin chi tiết -->
-  <div class="col-md-6">
-    <mat-card class="">
-      <mat-card-header class="product-card-header">
-        <div>
-          <h2>{{ product.name }}</h2>
-          <p class="product-code">Mã sản phẩm: 123456</p>
-        </div>
+  <div class="col-md-6 product-info-section">
+    <mat-card class="product-info-card shadow-sm p-4">
+      <mat-card-header class="d-flex flex-column mb-6">
+        <h2 class="product-name text-danger mb-2">{{ product.name }}</h2>
+        <h6 class="product-id text-muted">Mã sản phẩm: {{ product.id }}</h6>
       </mat-card-header>
-      <mat-card-content>
-        <div class="price-container">
-          <h3>Giá:<p class="product-price">{{ product.price | currency:'VND' }}</p>
-          </h3>
+      <hr class="hr">
+      <mat-card-content class="product-content">
+        <!-- Price -->
+        <div class="d-flex align-items-center mb-3">
+          <h4 class="me-2 mb-0">Giá sản phẩm:</h4>
+          <span class="fw-bold text-success fs-4">{{ product.price | currency: 'VND':'symbol':'1.0-0' }}</span>
         </div>
-        <div class="">
-          <h3>Chọn kích cỡ:</h3>
-          <mat-radio-group aria-label="Chọn size giày">
-            <mat-radio-button value="36">36</mat-radio-button>
-            <mat-radio-button value="37">37</mat-radio-button>
-            <mat-radio-button value="38">38</mat-radio-button>
-            <mat-radio-button value="39">39</mat-radio-button>
-            <mat-radio-button value="40">40</mat-radio-button>
-          </mat-radio-group>
+        <!-- Size and Color -->
+        <div class="justify-content-between mb-3">
+          <h5 class="mb-2">Kích cỡ:</h5>
+          <div class="d-flex gap-2">
+            <div *ngFor="let variant of variants" class="form-check">
+              <input class="form-check-input" type="radio" name="size" [id]="variant.size?.size_label"
+                [value]="variant.size?.size_label" [(ngModel)]="selectedSize">
+              <label class="form-check-label" [for]="variant.size?.size_label">
+                {{ variant.size?.size_label }}
+              </label>
+            </div>
+          </div>
+          <!-- Màu -->
+          <h5 class="mb-2">Màu:</h5>
+          <div class="d-flex gap-2">
+            <div *ngFor="let variant of variants" class="form-check">
+              <input class="form-check-input" type="radio" name="color" [id]="variant.color?.color_name"
+                [value]="variant.color?.color_name" [(ngModel)]="selectedColor">
+              <label class="form-check-label" [for]="variant.color?.color_name">
+                {{ variant.color?.color_name }}
+              </label>
+            </div>
+          </div>
         </div>
-        <div class="">
-          <h3>Màu sắc:</h3>
-          <mat-button-toggle-group class="color-shoes" name="shoes" appearance="legacy">
-            <mat-button-toggle class="shoes-toggle black"></mat-button-toggle>
-            <mat-button-toggle class="shoes-toggle blue"></mat-button-toggle>
-            <mat-button-toggle class="shoes-toggle green"></mat-button-toggle>
-            <mat-button-toggle class="shoes-toggle red"></mat-button-toggle>
-            <mat-button-toggle class="shoes-toggle yellow"></mat-button-toggle>
-          </mat-button-toggle-group>
+        <!-- Quantity -->
+        <div class="form-group d-flex align-items-center">
+          <h5 class="me-2 mb-4">Số lượng:</h5>
+          <mat-form-field appearance="outline" class="quantity-input">
+            <input matInput type="number" [(ngModel)]="quantity" min="1" placeholder="Nhập số lượng" />
+          </mat-form-field>
         </div>
-
-
-
-        <p>
-          Giày thể thao Nike Air Max 270 mang lại sự thoải mái tối ưu với thiết kế hiện đại, đệm khí êm ái, phù hợp cho
-          cả tập luyện và dạo phố.
-        </p>
+        <hr>
+        <!-- Description -->
+        <div class="description-section mb-3">
+          <h4 class="">Mô tả sản phẩm</h4>
+          <p class="product-description text-muted">
+            {{ product.description }}
+          </p>
+        </div>
       </mat-card-content>
-
-      <mat-card-actions class="button-card">
-        <button mat-raised-button class="button-add-to-cart">
-          Thêm vào giỏ hàng
+      <!-- Buttons -->
+      <mat-card-actions class="d-flex justify-content-center gap-3">
+        <button mat-raised-button color="primary" class="add-to-cart-btn" (click)="handleAddToCart()">
+          <mat-icon>add_shopping_cart</mat-icon> Thêm vào giỏ hàng
         </button>
-        <button mat-raised-button class="buy-now">
-          Mua ngay
+        <button mat-raised-button color="accent" class="buy-now-btn">
+          <mat-icon>flash_on</mat-icon> Mua ngay
         </button>
       </mat-card-actions>
     </mat-card>

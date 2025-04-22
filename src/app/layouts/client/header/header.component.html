@@ -1,40 +1,56 @@
 <header class="header">
-    <div class="header__container">
-      <!-- Logo + Tên thương hiệu -->
-      <div class="header__logo">
-        <img src="../../../../assets/images/logos/logo.png" alt="MySneaker Logo" />
-        <h1>MySneaker</h1>
-      </div>
-  
-      <!-- Menu điều hướng -->
-      <nav class="header__nav">
-        <a routerLink="/" routerLinkActive="active-link">Trang chủ</a>
-        <a routerLink="/shop" routerLinkActive="active-link">Sản phẩm</a>
-        <a routerLink="/cart" routerLinkActive="active-link">Giỏ hàng</a>
-        <a routerLink="/contact" routerLinkActive="active-link">Liên hệ</a>
-      </nav>
-  
-      <!-- Tài khoản -->
-      <div class="header__auth" *ngIf="isLoggedIn(); else guestLinks">
-        <a routerLink="/account" class="header__link">
-          <i class="fas fa-user"></i> Tài khoản
-        </a>
-        <a (click)="logout()" class="header__link logout">
-          <i class="fas fa-sign-out-alt"></i> Đăng xuất
-        </a>
-      </div>
-  
-      <!-- Nếu chưa đăng nhập -->
-      <ng-template #guestLinks>
-        <div class="header__auth">
-          <a routerLink="/login" class="header__link">
-            <i class="fas fa-sign-in-alt"></i> Đăng nhập
-          </a>
-          <a routerLink="/register" class="header__link">
-            <i class="fas fa-user-plus"></i> Đăng ký
-          </a>
-        </div>
-      </ng-template>
+  <div class="header__container">
+    <!-- Logo + Tên thương hiệu -->
+    <div class="header__logo">
+      <img src="../../../../assets/images/logos/logo.png" alt="MySneaker Logo" />
+      <h1>MySneaker</h1>
     </div>
-  </header>
-  
+
+    <!-- Menu điều hướng -->
+    <nav class="header__nav">
+      <a routerLink="/" routerLinkActive="active-link">Trang chủ</a>
+      <a routerLink="/shop" routerLinkActive="active-link">Sản phẩm</a>
+      <a routerLink="/cart" routerLinkActive="active-link">Giỏ hàng</a>
+      <a routerLink="/contact" routerLinkActive="active-link">Liên hệ</a>
+    </nav>
+
+    <!-- Tài khoản -->
+    <div class="header__auth d-flex align-items-center gap-3" *ngIf="isLoggedIn(); else guestLinks">
+      <div class="dropdown">
+        <a class="btn btn-outline-light dropdown-toggle d-flex align-items-center gap-2" href="#" role="button"
+          id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fas fa-user-circle fs-5"></i> Tài khoản
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink" >
+          <li><a class="dropdown-item" [routerLink]="['/profile', userId]">Thông tin cá nhân</a></li>
+          <li><a class="dropdown-item" href="#">Đơn hàng của tôi</a></li>
+          <li><a class="dropdown-item" href="#">Cài đặt</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li>
+            <a class="dropdown-item text-danger" (click)="logout()" style="cursor: pointer;">
+              <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+
+    <!-- Example single danger button -->
+
+
+    <!-- Nếu chưa đăng nhập -->
+    <ng-template #guestLinks>
+      <div class="header__auth">
+        <a routerLink="/login" class="header__link">
+          <i class="fas fa-sign-in-alt"></i> Đăng nhập
+        </a>
+        <a routerLink="/register" class="header__link">
+          <i class="fas fa-user-plus"></i> Đăng ký
+        </a>
+      </div>
+    </ng-template>
+  </div>
+</header>
