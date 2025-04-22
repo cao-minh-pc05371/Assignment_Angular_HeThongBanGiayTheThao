@@ -1,0 +1,139 @@
+.order-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.loading-container, .error-container, .no-orders {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  text-align: center;
+
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+  }
+}
+
+.error-container {
+  mat-icon {
+    color: #d32f2f;
+  }
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 0 10px;
+}
+
+.order-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+.order-card {
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  &.pending {
+    border-left-color: #ff9800;
+  }
+
+  &.processing {
+    border-left-color: #2196f3;
+  }
+
+  &.shipped {
+    border-left-color: #673ab7;
+  }
+
+  &.delivered {
+    border-left-color: #4caf50;
+  }
+
+  &.cancelled {
+    border-left-color: #f44336;
+  }
+
+  &.returned {
+    border-left-color: #9e9e9e;
+  }
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75em;
+  font-weight: 500;
+
+  &.pending {
+    background-color: #fff3e0;
+    color: #e65100;
+  }
+
+  &.processing {
+    background-color: #e3f2fd;
+    color: #1565c0;
+  }
+
+  &.shipped {
+    background-color: #ede7f6;
+    color: #4527a0;
+  }
+
+  &.delivered {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+  }
+
+  &.cancelled {
+    background-color: #ffebee;
+    color: #c62828;
+  }
+
+  &.returned {
+    background-color: #f5f5f5;
+    color: #424242;
+  }
+}
+
+.order-details {
+  p {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+    font-size: 0.9em;
+
+    mat-icon {
+      margin-right: 8px;
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      color: #757575;
+    }
+  }
+}
+
+.no-orders {
+  mat-icon {
+    color: #bdbdbd;
+  }
+
+  button {
+    margin-top: 16px;
+  }
+}
