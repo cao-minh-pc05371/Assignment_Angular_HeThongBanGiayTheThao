@@ -57,6 +57,7 @@ export const routes: Routes = [
       },
       {
         path: 'shop/:id',
+        path: 'order',
         loadChildren: () =>
           import('./pages/Client/shop/product-detail/product-detail.routes').then((m) => m.ProductDetailRoutes),
         },
