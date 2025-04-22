@@ -3,6 +3,7 @@ import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
 import { ClientComponent } from './layouts/client/client.component';
 import { AuthAdminGuard } from './auth-admin.guard';
+import { ProfileComponent } from './pages/Client/profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -44,6 +45,11 @@ export const routes: Routes = [
           import(
             './pages/Client/shop/product-detail/product-detail.routes'
           ).then((m) => m.ProductDetailRoutes),
+      },
+      {
+        path: 'profile/:id',
+        loadChildren: () =>
+          import('./pages/Client/profile/profile.routes').then((m) => m.ProfileRoutes),
       },
     ],
   },

@@ -26,11 +26,19 @@ export class CartService extends ApiService {
   }
 
   addToCart(variant_id: number, quantity: number): Observable<any> {
-    const user = this.decodeToken();
-    return this.post(`${API_ENDPOINT.cart.base}/add`, {
-      user_id: user.id,
-      variant_id,
-      quantity,
+    const user = this.decodeToken(); // Giải mã token và lấy thông tin người dùng
+    if (!user) {
+      return new Observable(observer => {
+        observer.error('Token không hợp lệ hoặc hết hạn');
+      });
+    }
+
+    const token = this.getToken();   // Lấy token từ localStorage
+
+    return this._http.post<any>(`${API_ENDPOINT.cart.base}/add`, {user_id: user.id, variant_id, quantity }, {
+      headers: {
+        Authorization: `Bearer ${token}` // Gửi token trong header
+      }
     });
   }
 

@@ -9,6 +9,7 @@
             </div>
         </div>
 
+
         <!-- Loading spinner -->
         <div *ngIf="isLoading" class="loading-container">
             <div class="spinner-border text-primary" role="status">
@@ -33,7 +34,7 @@
                 <div class="item-info">
                     <div class="item-name">{{item.product_variant?.product?.name}}</div>
                     <div class="item-details">
-                        <span class="size">Size: {{item.product_variant?.size?.name}}</span>
+                        <span class="size">Size: {{ item.product_variant?.size?.size_label }}</span>
                         <span class="color" [style.background-color]="item.product_variant?.color?.color_code"></span>
                         <span class="color-name">{{item.product_variant?.color?.color_name}}</span>
                     </div>
@@ -66,10 +67,11 @@
                 toán</button>
         </div>
         <div class="back-to-shop">
-            <a mat-button routerLink="/shop">
-                <mat-icon>arrow_back</mat-icon>
-                Back to shop
-            </a>
-        </div>
+            <button mat-button (click)="goBack()">
+              <mat-icon>arrow_back</mat-icon>
+              Back to shop
+            </button>
+          </div>
+          
     </div>
 </mat-card>

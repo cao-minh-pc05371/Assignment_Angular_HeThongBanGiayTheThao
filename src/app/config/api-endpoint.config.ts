@@ -47,7 +47,7 @@ export const API_ENDPOINT = {
   variant: {
     base: API_BASE_URL + '/variant',
     list: '/list',
-    listVariantByIdProduct:'/product',
+    listVariantByIdProduct: '/product',
     add: '/add',
   },
   cart: {
@@ -75,5 +75,14 @@ export const API_ENDPOINT = {
     getByOrder: '/order',
     list: '/list',
     add: '/add'
+  },
+  productVariant: {
+    base: API_BASE_URL + '/variant',
+    list: '/list',
+    getById: '/:id',
+    getByProduct: '/product/:id',
+    add: '/add',
+    update: '/:id',
+    delete: '/:id',
   }
 };
