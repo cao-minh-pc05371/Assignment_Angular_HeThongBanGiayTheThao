@@ -51,4 +51,13 @@ export const API_ENDPOINT = {
     update: '',
     delete: '',
   },
+  productVariant: {
+    base: API_BASE_URL + '/variant', 
+    list: '/list',                   
+    getById: '/:id',                 
+    getByProduct: '/product/:id',    
+    add: '/add',                     
+    update: '/:id',                  
+    delete: '/:id',                  
+  }
 };

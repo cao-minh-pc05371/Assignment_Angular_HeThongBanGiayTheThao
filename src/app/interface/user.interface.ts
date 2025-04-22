@@ -1,3 +1,5 @@
+import { IAddress } from "./adressess.interface.";
+
 export interface IUser {
     id: number;
     name: string;
@@ -5,4 +7,5 @@ export interface IUser {
     phone: string;
     password: string;
     role: string;
+    addresses: IAddress[]; // Mảng địa chỉ của người dùng
 }

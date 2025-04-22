@@ -1,0 +1,37 @@
+<div *ngIf="user" class="d-flex justify-content-center align-items-center">
+  <div class="card shadow-lg rounded-4 p-4 border-0 bg-light w-100" style="max-width: 500px; margin-top: 20px;">
+
+    <!-- Tiêu đề -->
+    <h4 class="text-center fw-bold mb-4 text-uppercase text-primary">Thông tin tài khoản</h4>
+
+    <div class="text-center">
+      <!-- Tên người dùng -->
+      <h5 class="fw-bold mb-3 ">{{ user.name }}</h5>
+
+      <!-- Thông tin cá nhân -->
+      <p class="mb-2">
+        <i class="fas fa-envelope me-2 text-primary"></i><strong>Email:</strong> {{ user.email }}
+      </p>
+      <p class="mb-2">
+        <i class="fas fa-phone-alt me-2 text-success"></i><strong>Số điện thoại:</strong> {{ user.phone }}
+      </p>
+
+      <!-- Địa chỉ -->
+      <div *ngIf="user.addresses.length > 0; else noAddress">
+        <p class="mb-4" *ngFor="let addr of user.addresses"><i
+            class="fas fa-map-marker-alt me-2 text-danger "></i><strong>Địa chỉ: </strong>{{ addr.address }}
+        </p>
+      </div>
+      <ng-template #noAddress>
+        <p class="mb-4">
+          <i class="fas fa-map-marker-alt me-2 text-muted"></i><strong>Địa chỉ:</strong> Không có địa chỉ nào
+        </p>
+      </ng-template>
+
+      <!-- Nút chỉnh sửa -->
+      <button class="btn custom-outline-warning btn-lg px-4 rounded-pill shadow-sm">
+        <i class="fas fa-edit me-2"></i>Chỉnh sửa
+      </button>
+    </div>
+  </div>
+</div>

@@ -35,6 +35,7 @@ export interface ICartItem {
     size?: {
       id: number;
       name: string;
+      size_label: number
     };
     color?: {
       id: number;
