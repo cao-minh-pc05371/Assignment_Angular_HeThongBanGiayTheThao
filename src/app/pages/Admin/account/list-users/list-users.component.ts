@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { IUser } from 'src/app/interface/user.interface';
-import { UserService } from 'src/app/services/apis/user_auth.service';
+import { IAccount } from 'src/app/interface/accounts.interface';
 
 @Component({
   selector: 'app-list-users',
@@ -11,30 +10,31 @@ import { UserService } from 'src/app/services/apis/user_auth.service';
   templateUrl: './list-users.component.html',
   styleUrl: './list-users.component.scss'
 })
-export class ListUsersComponent implements OnInit {
-  accounts: IUser[] = [];
-  loading = false;
-  errorMessage = '';
-
-  constructor(private userService: UserService) { }
-
-  ngOnInit(): void {
-    this.loadCustomers();
-  }
-
-  loadCustomers(): void {
-    this.loading = true;
-    this.userService.getAllUsers().subscribe({
-      next: (res) => {
-        this.accounts = res.filter(user => user.role === 'customer');
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error('Lỗi khi tải danh sách người dùng:', err);
-        this.errorMessage = 'Không thể tải danh sách người dùng';
-        this.loading = false;
-      }
-    });
-  }
-  
+export class ListUsersComponent {
+  accounts: IAccount[] = [
+    {
+      id: 1,
+      username: 'user1',
+      name: 'User 1',
+      password: '123',
+      email: 'user@example.com',
+      role: 'user'
+    },
+    {
+      id: 2,
+      username: 'user2',
+      name: 'User 2',
+      password: '123',
+      email: 'user@example.com',
+      role: 'user'
+    },
+    {
+      id: 3,
+      username: 'user3',
+      name: 'User 3',
+      password: '123',
+      email: 'user@example.com',
+      role: 'user'
+    }
+  ]
 }

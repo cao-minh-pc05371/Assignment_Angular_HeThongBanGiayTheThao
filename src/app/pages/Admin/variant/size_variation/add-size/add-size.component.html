@@ -8,14 +8,10 @@
         <form [formGroup]="formData" (ngSubmit)="addSize()" class="size-form">
 
             <div class="mb-3">
-                <label class="form-label">Size</label>
-                <input type="text" class="form-control" formControlName="size_label"
-                    placeholder="Vui lòng điền Size" />
+                <label class="form-label">Size_label Size</label>
+                <input type="text" class="form-control" formControlName="size_label" placeholder="Enter size_label size" />
                 <span *ngIf="size_label?.invalid && (size_label?.dirty || size_label?.touched)" class="text-danger">
-                    Size không được để trống
-                </span>
-                <span *ngIf="errorMessage" class="text-danger d-block mt-1">
-                    {{ errorMessage }}
+                    Size_label size is required
                 </span>
             </div>
 

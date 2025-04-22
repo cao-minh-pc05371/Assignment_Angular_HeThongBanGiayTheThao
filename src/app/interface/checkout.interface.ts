@@ -1,11 +1,12 @@
 export interface ICheckout {
-  fullName: string;
-  email: string;
-  phone: string;
+  user_id: number;
   address: string;
-  city: string;
-  district: string;
-  ward: string;
-  paymentMethod: string;
-  notes?: string;
+  name: string;
+  phone: string;
+  note?: string;
+  items: {
+    variant_id: number;
+    quantity: number;
+    price: number;
+  }[];
 }

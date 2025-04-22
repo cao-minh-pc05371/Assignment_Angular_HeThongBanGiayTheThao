@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../common/api.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { API_ENDPOINT } from 'src/app/config/api-endpoint.config';
 import { Observable, map } from 'rxjs';
 import { IUser } from 'src/app/interface/user.interface';
@@ -19,10 +19,9 @@ export class UserService extends ApiService {
     super(_http);
   }
 
-  // Lấy danh sách tất cả người dùng  
+  // Lấy danh sách tất cả người dùng
   getAllUsers(): Observable<IUser[]> {
-    return this.get<{ data: IUser[] }>(`${API_ENDPOINT.user.base}${API_ENDPOINT.user.list}`)
-      .pipe(map(res => res.data));
+    return this.get<IUser[]>(`${API_ENDPOINT.user.base}${API_ENDPOINT.user.list}`);
   }
 
   // Lấy người dùng theo ID
@@ -62,11 +61,17 @@ export class AuthService extends ApiService {
     return this.post(`${API_ENDPOINT.auth.base}${API_ENDPOINT.auth.register}`, data);
   }
 
-  getProfile(): Observable<IUser> {
-    return this.get<{ user: IUser }>(`${API_ENDPOINT.auth.base}${API_ENDPOINT.auth.profile}`).pipe(
+  getProfile(id: number): Observable<IUser> {
+    const token = localStorage.getItem('token');
+    return this._http.get<{ user: IUser }>(`${API_ENDPOINT.auth.base}${API_ENDPOINT.auth.profile}/${id}`, {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    }).pipe(
       map(res => res.user)
     );
   }
+
 
   updatePassword(id: number, data: { oldPassword: string; newPassword: string }) {
     return this.put(`${API_ENDPOINT.auth.base}${API_ENDPOINT.auth.updatePassword}/${id}`, data);

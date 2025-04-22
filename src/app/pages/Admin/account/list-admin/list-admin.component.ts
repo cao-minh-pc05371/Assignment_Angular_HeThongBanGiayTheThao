@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { IUser } from 'src/app/interface/user.interface';
-import { UserService } from 'src/app/services/apis/user_auth.service';
+import { IAccount } from 'src/app/interface/accounts.interface';
 
 @Component({
   selector: 'app-list-admin',
@@ -11,30 +10,31 @@ import { UserService } from 'src/app/services/apis/user_auth.service';
   templateUrl: './list-admin.component.html',
   styleUrl: './list-admin.component.scss'
 })
-export class ListAdminComponent implements OnInit {
-  accounts: IUser[] = [];
-  loading = false;
-  errorMessage = '';
-
-  constructor(private userService: UserService) { }
-
-  ngOnInit(): void {
-    this.loadCustomers();
-  }
-
-  loadCustomers(): void {
-    this.loading = true;
-    this.userService.getAllUsers().subscribe({
-      next: (res) => {
-        this.accounts = res.filter(user => user.role === 'admin');
-        this.loading = false;
+export class ListAdminComponent {
+    accounts : IAccount[] = [
+      {
+        id: 1,
+        username: 'admin1',
+        name: 'Admin 1',
+        password: '123',
+        email: 'admin@example.com',
+        role: 'admin'
       },
-      error: (err) => {
-        console.error('Lỗi khi tải danh sách người dùng:', err);
-        this.errorMessage = 'Không thể tải danh sách người dùng';
-        this.loading = false;
+      {
+        id: 2,
+        username: 'admin2',
+        name: 'Admin 2',
+        password: '123',
+        email: 'admin@example.com',
+        role: 'admin'
+      },
+      {
+        id: 3,
+        username: 'admin3',
+        name: 'Admin 3',
+        password: '123',
+        email: 'admin@example.com',
+        role: 'admin'
       }
-    });
-  }
-
+    ]
 }

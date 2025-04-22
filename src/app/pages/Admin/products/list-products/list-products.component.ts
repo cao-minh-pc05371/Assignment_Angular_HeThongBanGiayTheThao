@@ -17,12 +17,14 @@ import { environment } from 'src/environments/environment';
 export class ListProductsComponent implements OnInit {
   readonly dialog = inject(MatDialog);
   products: IProduct[] = [];
+  loading = false;
+  hasError = false;
   errorMessage = '';
 
   constructor(
     private productService: ProductService,
     private route: Router,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getAllProducts();
@@ -30,24 +32,25 @@ export class ListProductsComponent implements OnInit {
 
   // Lấy tất cả sản phẩm
   getAllProducts() {
+    this.loading = true; // Bắt đầu loading
     this.productService.getAllProducts().subscribe({
       next: (res: IProduct[]) => {
         this.products = res;
         console.log('Sản phẩm:', this.products);
+        this.loading = false; // Xong loading
       },
       error: (err) => {
         console.error('Lỗi khi lấy sản phẩm:', err);
+        this.hasError = true;
         this.errorMessage = 'Không thể tải danh sách sản phẩm';
+        this.loading = false; // Dừng loading nếu có lỗi
       },
     });
   }
 
   // Mở cửa sổ dialog chỉnh sửa sản phẩm
   openEditDialog(id: number, name: string) {
+    // Điều hướng tới trang sửa sản phẩm
     this.route.navigate(['/admin/products/Edit-products', id]);
   }
-  openDeatilDialog(id: number, name: string) {
-    this.route.navigate(['/admin/products/Detail-products', id]);
-  }
-
 }

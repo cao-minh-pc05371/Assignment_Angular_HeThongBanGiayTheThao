@@ -27,8 +27,6 @@ export class AddSizeComponent {
     size_label: new FormControl('', [Validators.required])
   });
 
-  errorMessage: string = '';
-
   get size_label() {
     return this.formData.get('size_label');
   }
@@ -39,8 +37,6 @@ export class AddSizeComponent {
   ) { }
 
   addSize() {
-    this.errorMessage = '';
-
     if (this.formData.invalid) {
       return;
     }
@@ -56,9 +52,7 @@ export class AddSizeComponent {
       },
       error: (err) => {
         console.error('Thêm thất bại:', err);
-        this.errorMessage = err.error?.message || 'Đã xảy ra lỗi khi thêm size.';
       }
     });
   }
-
 }

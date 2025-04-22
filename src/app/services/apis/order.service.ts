@@ -1,75 +1,34 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '../common/api.service';
 import { HttpClient } from '@angular/common/http';
-import { API_ENDPOINT } from 'src/app/config/api-endpoint.config';
-import { Observable, map } from 'rxjs';
-import { IOrder } from 'src/app/interface/orders.interface';
-
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { ICheckout } from 'src/app/interface/checkout.interface';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class OrderService extends ApiService {
+export class OrderService {
+  private apiUrl = `${environment.apiUrl}/orders`;
 
-  constructor(
-    private _http: HttpClient,
-  ) {
-    super(_http);
+  constructor(private http: HttpClient) { }
+
+  // Tạo đơn hàng mới
+  createOrder(orderData: ICheckout): Observable<any> {
+    return this.http.post(`${this.apiUrl}`, orderData);
   }
 
-  getAllOrder(): Observable<IOrder[]> {
-    return this.get<IOrder[]>(`${API_ENDPOINT.order.base}${API_ENDPOINT.order.list}`);
+  // Lấy danh sách đơn hàng của người dùng
+  getUserOrders(userId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user/${userId}`);
   }
 
-  getOrderByID(id: number): Observable<IOrder> {
-    return this.get<{ data: IOrder }>(`${API_ENDPOINT.order.base}/${id}`).pipe(map(res => res.data));
+  // Lấy chi tiết đơn hàng
+  getOrderDetails(orderId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${orderId}`);
   }
 
-  getOrderItems(): Observable<any[]> {
-    const user = this.decodeToken();
-    if (!user || !user.id) {
-      return new Observable((subscriber) => subscriber.next([]));
-    }
-    return this.get<any>(`${API_ENDPOINT.order.base}/user/${user.id}`).pipe(
-      map((response) => response.data || [])
-    );
+  // Cập nhật trạng thái đơn hàng
+  updateOrderStatus(orderId: number, status: string): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/${orderId}/status`, { status });
   }
-
-  addToOrder(variant_id: number, quantity: number): Observable<any> {
-    const user = this.decodeToken();
-    return this.post(`${API_ENDPOINT.order.base}/add`, {
-      user_id: user.id,
-      variant_id,
-      quantity,
-    });
-  }
-
-  updateOrderItem(id: number, quantity: number): Observable<any> {
-    return this.put(`${API_ENDPOINT.order.base}/${id}`, { quantity });
-  }
-
-  markAsShipped(orderId: number): Observable<any> {
-    return this.patch(
-      `${API_ENDPOINT.order.base}/${orderId}${API_ENDPOINT.order.mark_shipped}`,
-      {}
-    );
-  }
-
-  removeFromOrder(id: number): Observable<any> {
-    return this.delete(`${API_ENDPOINT.order.base}/${id}`);
-  }
-
-  // Helper function to decode the token and get user information
-  private decodeToken(): any {
-    const token = this.getToken();
-    if (!token) return null;
-
-    try {
-      const base64Url = token.split('.')[1];
-      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      return JSON.parse(window.atob(base64));
-    } catch (error) {
-      return null;
-    }
-  }
-}
+} 

@@ -29,7 +29,7 @@
                         <td class="text-center">{{ product.category?.name }}</td>
                         <td class="text-center">{{ product.stock }}</td>
                         <td class="text-center">
-                            <button mat-icon-button class="btn-details" (click)="openDeatilDialog(product.id!, product.name)" matTooltip="Xem chi tiết">
+                            <button mat-icon-button class="btn-details" matTooltip="Xem chi tiết">
                                 <mat-icon>visibility_outlined</mat-icon>
                             </button>
                             <button mat-icon-button class="btn-edit" (click)="openEditDialog(product.id!, product.name)" matTooltip="Chỉnh sửa">

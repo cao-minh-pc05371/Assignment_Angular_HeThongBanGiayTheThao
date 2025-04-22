@@ -6,32 +6,32 @@
     </mat-card-header>
     <mat-card-content class="b-t-1">
         <div class="table-product">
-            <table class="table-product">
+            <table>
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Tên</th>
+                        <th>Username</th>
                         <th>Email</th>
-                        <th>Số Điện Thoại</th>
+                        <th>Tên</th>
                         <th>Thao Tác</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let account of accounts; let i = index">
                         <td>{{ i + 1 }}</td>
-                        <td>{{ account.name }}</td>
+                        <td>{{ account.username }}</td>
                         <td>{{ account.email }}</td>
                         <td>
-                            {{ account.phone }}
+                            {{ account.name }}
                         </td>
                         <td>
-                            <button mat-icon-button class="btn-details" matTooltip="Xem chi tiết">
+                            <button>
                                 <mat-icon>visibility_outlined</mat-icon>
                             </button>
-                            <button mat-icon-button class="btn-edit" matTooltip="Chỉnh sửa">
-                                <mat-icon>edit_square</mat-icon>
+                            <button>
+                                <mat-icon>edit</mat-icon>
                             </button>
-                            <button mat-icon-button class="btn-delete" matTooltip="Xoá">
+                            <button>
                                 <mat-icon>delete_forever</mat-icon>
                             </button>
                         </td>

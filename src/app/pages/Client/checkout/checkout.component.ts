@@ -5,10 +5,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatStepperModule } from '@angular/material/stepper';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {
@@ -21,6 +19,7 @@ import {
 import { Router } from '@angular/router';
 
 import { CartService } from 'src/app/services/apis/cart.service';
+import { OrderService } from 'src/app/services/apis/order.service';
 import { ICartItem } from 'src/app/interface/cart.interface';
 import { ICheckout } from 'src/app/interface/checkout.interface';
 
@@ -34,10 +33,8 @@ import { ICheckout } from 'src/app/interface/checkout.interface';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatRadioModule,
     MatIconModule,
     MatDividerModule,
-    MatStepperModule,
     ReactiveFormsModule,
     FormsModule,
     MatSnackBarModule,
@@ -52,40 +49,11 @@ export class CheckoutComponent implements OnInit {
   isProcessing = false;
   checkoutForm!: FormGroup;
 
-  // Các phương thức thanh toán
-  paymentMethods = [
-    {
-      value: 'cod',
-      label: 'Thanh toán khi nhận hàng (COD)',
-      icon: 'local_shipping',
-    },
-    {
-      value: 'bank_transfer',
-      label: 'Chuyển khoản ngân hàng',
-      icon: 'account_balance',
-    },
-    { value: 'momo', label: 'Ví điện tử MoMo', icon: 'account_balance_wallet' },
-    { value: 'vnpay', label: 'VNPay', icon: 'credit_card' },
-  ];
-
-  // Danh sách các tỉnh/thành phố (Đây là danh sách mẫu, bạn có thể thay thế bằng API thực tế)
-  cities = [
-    'Hà Nội',
-    'Hồ Chí Minh',
-    'Đà Nẵng',
-    'Hải Phòng',
-    'Cần Thơ',
-    'An Giang',
-    'Bà Rịa - Vũng Tàu',
-    'Bắc Giang',
-    'Bắc Kạn',
-    'Bạc Liêu',
-  ];
-
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private cartService: CartService,
+    private orderService: OrderService,
     private snackBar: MatSnackBar
   ) {}
 
@@ -96,15 +64,10 @@ export class CheckoutComponent implements OnInit {
 
   initForm(): void {
     this.checkoutForm = this.fb.group({
-      fullName: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
+      name: ['', [Validators.required, Validators.minLength(3)]],
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       address: ['', Validators.required],
-      city: ['', Validators.required],
-      district: ['', Validators.required],
-      ward: ['', Validators.required],
-      paymentMethod: ['cod', Validators.required],
-      notes: [''],
+      note: [''],
     });
   }
 
@@ -147,20 +110,31 @@ export class CheckoutComponent implements OnInit {
     }
 
     this.isProcessing = true;
-    const orderData = {
-      ...this.checkoutForm.value,
-      items: this.cartItems,
-      total: this.getTotalPrice(),
+    const orderData: ICheckout = {
+      user_id: this.cartItems[0].user_id, // Lấy từ user đang đăng nhập
+      name: this.checkoutForm.value.name,
+      phone: this.checkoutForm.value.phone,
+      address: this.checkoutForm.value.address,
+      note: this.checkoutForm.value.note,
+      items: this.cartItems.map(item => ({
+        variant_id: item.product_variant?.id || 0,
+        quantity: item.quantity,
+        price: item.product_variant?.product?.price || 0
+      }))
     };
 
-    // Đây là nơi bạn sẽ gọi API để tạo đơn hàng
-    // Giả lập đặt hàng thành công sau 2 giây
-    setTimeout(() => {
-      console.log('Đã đặt hàng với dữ liệu:', orderData);
-      this.isProcessing = false;
-      this.showMessage('Đặt hàng thành công!');
-      this.router.navigate(['/order-success']);
-    }, 2000);
+    this.orderService.createOrder(orderData).subscribe({
+      next: (response) => {
+        this.isProcessing = false;
+        this.showMessage('Đặt hàng thành công!');
+        this.router.navigate(['/']);
+      },
+      error: (error) => {
+        console.error('Lỗi khi đặt hàng:', error);
+        this.isProcessing = false;
+        this.showMessage('Có lỗi xảy ra khi đặt hàng. Vui lòng thử lại sau.');
+      }
+    });
   }
 
   showMessage(message: string): void {

@@ -1,7 +1,7 @@
 <mat-card class="cardWithShadow theme-card">
     <mat-card-header>
         <mat-card-title class="m-b-0">
-            <h3>Danh Sách Màu Sắc</h3>
+            <h3>Danh Sách Danh Mục</h3>
         </mat-card-title>
     </mat-card-header>
     <mat-card-content class="b-t-1">
@@ -10,28 +10,20 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Tên Màu</th>
-                        <th>Màu sắc</th>
-                        <th>Mã màu</th>
+                        <th>Tên Danh Mục</th>
                         <th class="text-center">Thao Tác</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let colors of color; let i = index">
+                    <tr *ngFor="let sizes of size; let i = index">
                         <td>{{ i + 1 }}</td>
-                        <td>{{ colors.color_name }}</td>
-                        <td>
-                            <div class="color-preview" [ngStyle]="{ 'background-color': colors.color_code }"
-                                matTooltip="{{ colors.color_code }}"></div>
-                        </td>
-                        <td>{{ colors.color_code }}</td>
+                        <td>{{ sizes.size_label }}</td>
                         <td class="text-center">
-                            <button mat-icon-button class="btn-edit"
-                                (click)="openEditDialog(colors.id, colors.color_name)" matTooltip="Chỉnh sửa">
+                            <button mat-icon-button class="btn-edit" (click)="openEditDialog(sizes.id, sizes.size_label)" matTooltip="Chỉnh sửa">
                                 <mat-icon>edit_square</mat-icon>
                             </button>
-                            <button mat-icon-button class="btn-delete"
-                                (click)="openDialog(colors.id, colors.color_name)" matTooltip="Xoá thương hiệu">
+                            <button mat-icon-button class="btn-delete" (click)="openDialog(sizes.id, sizes.size_label)"
+                                matTooltip="Xoá thương hiệu">
                                 <mat-icon>delete_forever</mat-icon>
                             </button>
                         </td>

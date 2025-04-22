@@ -44,12 +44,6 @@ export const API_ENDPOINT = {
     list: '/list',
     add: '/add',
   },
-  variant: {
-    base: API_BASE_URL + '/variant',
-    list: '/list',
-    listVariantByIdProduct:'/product',
-    add: '/add',
-  },
   cart: {
     base: API_BASE_URL + '/cart',
     getByUser: '/user',
@@ -57,23 +51,13 @@ export const API_ENDPOINT = {
     update: '',
     delete: '',
   },
-  order: {
-    base: API_BASE_URL + '/order',
-    getByUser: '/user',
-    mark_shipped: '/mark-shipped',
-    list: '/list',
-    add: '/add'
-  },
-  orderDetail: {
-    base: API_BASE_URL + '/order-detail',
-    getByOrder: '/order',
-    list: '/list',
-    add: '/add'
-  },
-  payment: {
-    base: API_BASE_URL + '/payment',
-    getByOrder: '/order',
-    list: '/list',
-    add: '/add'
+  productVariant: {
+    base: API_BASE_URL + '/variant', 
+    list: '/list',                   
+    getById: '/:id',                 
+    getByProduct: '/product/:id',    
+    add: '/add',                     
+    update: '/:id',                  
+    delete: '/:id',                  
   }
 };

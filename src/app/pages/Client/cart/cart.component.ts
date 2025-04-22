@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from 'src/app/services/apis/cart.service';
 import { ICartItem } from 'src/app/interface/cart.interface';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-cart',
   imports: [CommonModule, MatButtonModule, MatIconModule, MatSnackBarModule],
@@ -22,7 +22,9 @@ export class CartComponent implements OnInit {
   constructor(
     private router: Router,
     private cartService: CartService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private location: Location
+    
   ) {}
 
   ngOnInit(): void {
@@ -117,5 +119,8 @@ export class CartComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'bottom',
     });
+  }
+  goBack() {
+    this.location.back();
   }
 }
