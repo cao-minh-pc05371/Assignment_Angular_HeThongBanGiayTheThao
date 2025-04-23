@@ -18,7 +18,7 @@ import { IProduct } from 'src/app/interface/products.interface';
   templateUrl: './edit-products.component.html',
   styleUrls: ['./edit-products.component.scss']
 })
-export class EditProductsComponent implements OnInit {
+export class EditProductsComponent {
   productForm!: FormGroup;
   productId!: number;
   selectedImage!: File;

@@ -12,7 +12,7 @@ import { ColorService } from 'src/app/services/apis/color.service';
   templateUrl: './edit-color.component.html',
   styleUrl: './edit-color.component.scss'
 })
-export class EditColorComponent implements OnInit {
+export class EditColorComponent {
   formData!: FormGroup;
   colorId!: number;
 

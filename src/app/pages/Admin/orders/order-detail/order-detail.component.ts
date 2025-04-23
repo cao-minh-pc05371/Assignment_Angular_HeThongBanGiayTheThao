@@ -13,7 +13,7 @@ import { OrderDetailListComponent } from "../order-detail-list/order-detail-list
   templateUrl: './order-detail.component.html',
   styleUrl: './order-detail.component.scss'
 })
-export class OrderDetailComponent implements OnInit {
+export class OrderDetailComponent {
   orderId!: number;
   order!: IOrder;
   loading = false;

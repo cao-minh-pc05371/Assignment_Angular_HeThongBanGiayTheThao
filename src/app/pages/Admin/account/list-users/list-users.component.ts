@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/apis/user_auth.service';
   templateUrl: './list-users.component.html',
   styleUrl: './list-users.component.scss'
 })
-export class ListUsersComponent implements OnInit {
+export class ListUsersComponent {
   accounts: IUser[] = [];
   loading = false;
   errorMessage = '';

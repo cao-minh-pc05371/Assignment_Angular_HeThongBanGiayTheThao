@@ -22,7 +22,7 @@ import { CategoryService } from 'src/app/services/apis/category.service';
   templateUrl: './categories-edit.component.html',
   styleUrls: ['./categories-edit.component.scss']
 })
-export class CategoriesEditComponent implements OnInit {
+export class CategoriesEditComponent {
   categoryForm: FormGroup;
   categoryId: number = 0;
   category: ICategories = { id: 0, name: '' };

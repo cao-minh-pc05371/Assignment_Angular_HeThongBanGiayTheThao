@@ -22,7 +22,7 @@ import { CloudinaryService } from 'src/app/services/common/cloudinary.service';
   templateUrl: './add-products.component.html',
   styleUrls: ['./add-products.component.scss']
 })
-export class AddProductsComponent implements OnInit {
+export class AddProductsComponent {
   productForm!: FormGroup;
   categories: ICategories[] = [];
   brands: IBrands[] = [];

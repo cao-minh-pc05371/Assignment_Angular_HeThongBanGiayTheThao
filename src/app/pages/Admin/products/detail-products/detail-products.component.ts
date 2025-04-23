@@ -12,7 +12,7 @@ import { ListVariantProductComponent } from "../../variant_product/list-variant-
   templateUrl: './detail-products.component.html',
   styleUrl: './detail-products.component.scss'
 })
-export class DetailProductsComponent implements OnInit {
+export class DetailProductsComponent {
   product!: IProduct;
   isLoading = true;
   errorMessage = '';

@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
   templateUrl: './list-variant-product.component.html',
   styleUrls: ['./list-variant-product.component.scss']
 })
-export class ListVariantProductComponent implements OnInit {
+export class ListVariantProductComponent {
   @Input() productId!: number | undefined;
   variants: IVariant[] = [];
   isLoading = true;

@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/apis/user_auth.service';
   templateUrl: './list-admin.component.html',
   styleUrl: './list-admin.component.scss'
 })
-export class ListAdminComponent implements OnInit {
+export class ListAdminComponent {
   accounts: IUser[] = [];
   loading = false;
   errorMessage = '';

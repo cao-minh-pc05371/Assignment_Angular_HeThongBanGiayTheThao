@@ -21,7 +21,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './add-variant-product.component.html',
   styleUrls: ['./add-variant-product.component.scss']
 })
-export class AddVariantProductComponent implements OnInit {
+export class AddVariantProductComponent {
   form!: FormGroup;
   sizes: ISize[] = [];
   colors: IColor[] = [];

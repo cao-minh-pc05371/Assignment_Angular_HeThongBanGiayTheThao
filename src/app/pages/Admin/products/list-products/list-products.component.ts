@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './list-products.component.html',
   styleUrls: ['./list-products.component.scss'],
 })
-export class ListProductsComponent implements OnInit {
+export class ListProductsComponent {
   readonly dialog = inject(MatDialog);
   products: IProduct[] = [];
   errorMessage = '';
