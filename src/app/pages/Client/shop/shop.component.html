@@ -31,13 +31,30 @@
     <mat-sidenav-content class="shop-products">
         <h3>Sản Phẩm ({{ products ? products.length : 0 }})</h3>
 
+        <!-- Search bar -->
+        <div class="search-bar" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <mat-form-field appearance="outline" style="width: 300px;">
+                <mat-label>Tìm kiếm sản phẩm</mat-label>
+                <input matInput [(ngModel)]="searchQuery" (input)="onSearch()" placeholder="Nhập tên sản phẩm">
+            </mat-form-field>
+
+            <!-- Sorting bar -->
+            <mat-form-field appearance="outline" style="width: 200px;">
+                <mat-label>Sắp xếp giá</mat-label>
+                <mat-select (selectionChange)="sortByPrice($event.value)">
+                    <mat-option [value]="'asc'">Giá: Thấp đến Cao</mat-option>
+                    <mat-option [value]="'desc'">Giá: Cao đến Thấp</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
         <!-- No products message -->
-        <div *ngIf="!isLoading && (!products || products.length === 0)" class="no-products">
+        <div *ngIf="!isLoading && (!filteredProducts || filteredProducts.length === 0)" class="no-products">
             <p>Không có sản phẩm nào phù hợp với bộ lọc.</p>
         </div>
 
-        <div class="product-grid" *ngIf="products && products.length > 0">
-            <mat-card class="product-card" *ngFor="let product of products">
+        <div class="product-grid" *ngIf="filteredProducts && filteredProducts.length > 0">
+            <mat-card class="product-card" *ngFor="let product of paginatedProducts">
                 <mat-card-header>
                     <mat-card-title>{{ product.name }}</mat-card-title>
                     <mat-card-subtitle *ngIf="product.brand">{{ product.brand.name }}</mat-card-subtitle>
@@ -53,23 +70,24 @@
                     <p class="category" *ngIf="product.category">{{ product.category.name }}</p>
                 </mat-card-content>
                 <mat-card-actions>
-                    <button mat-raised-button color="primary" (click)="addToCart(product.id || 0)">
-                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                            width="20" height="20" x="0" y="0" viewBox="0 0 64 64"
-                            style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
-                            <g>
-                                <path
-                                    d="M25.308 61.679c-3.514 0-6.373-2.859-6.373-6.373s2.859-6.372 6.373-6.372 6.373 2.858 6.373 6.372-2.859 6.373-6.373 6.373zm0-8.745a2.375 2.375 0 0 0-2.373 2.372c0 1.309 1.064 2.373 2.373 2.373s2.373-1.064 2.373-2.373a2.375 2.375 0 0 0-2.373-2.372zM47.462 61.679c-3.514 0-6.372-2.859-6.372-6.373s2.858-6.372 6.372-6.372 6.373 2.858 6.373 6.372-2.86 6.373-6.373 6.373zm0-8.745a2.375 2.375 0 0 0-2.372 2.372 2.375 2.375 0 0 0 2.372 2.373 2.375 2.375 0 0 0 2.373-2.373 2.375 2.375 0 0 0-2.373-2.372zM52.128 43.994H20.709a6.482 6.482 0 0 1-6.35-5.061L7.838 10.456a1.264 1.264 0 0 0-.696-.86L1.733 7.089a2.5 2.5 0 0 1 2.102-4.536L9.244 5.06a6.293 6.293 0 0 1 3.468 4.28l6.521 28.479a1.506 1.506 0 0 0 1.476 1.176h31.419a1.51 1.51 0 0 0 1.476-1.171l5.07-21.813a1.488 1.488 0 0 0-.288-1.284 1.49 1.49 0 0 0-1.186-.572h-37a2.5 2.5 0 1 1 0-5h37c1.999 0 3.857.897 5.101 2.462s1.696 3.579 1.244 5.526l-5.071 21.814a6.489 6.489 0 0 1-6.346 5.037z"
-                                    fill="#ffffff" opacity="1" data-original="#000000" class=""></path>
-                            </g>
-                        </svg>
-                    </button>
                     <button mat-raised-button color="primary" (click)="buyNow(product.id || 0)">Mua ngay</button>
                 </mat-card-actions>
             </mat-card>
         </div>
+
+        <!-- Pagination controls -->
+        <div class="pagination-controls" *ngIf="totalPages > 1" style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+            <button mat-button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">
+                <mat-icon>chevron_left</mat-icon>
+            </button>
+            <button mat-button *ngFor="let page of pages" 
+                    [class.active]="currentPage === page" 
+                    (click)="goToPage(page)">
+                {{ page }}
+            </button>
+            <button mat-button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">
+                <mat-icon>chevron_right</mat-icon>
+            </button>
+        </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
-
-
-

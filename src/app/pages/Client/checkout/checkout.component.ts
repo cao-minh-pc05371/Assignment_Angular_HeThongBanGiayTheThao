@@ -23,6 +23,7 @@ import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/apis/cart.service';
 import { ICartItem } from 'src/app/interface/cart.interface';
 import { ICheckout } from 'src/app/interface/checkout.interface';
+import { IOrder } from 'src/app/interface/order.interface';
 
 @Component({
   selector: 'app-checkout',
@@ -44,7 +45,7 @@ import { ICheckout } from 'src/app/interface/checkout.interface';
     MatProgressSpinnerModule,
   ],
   templateUrl: './checkout.component.html',
-  styleUrl: './checkout.component.scss',
+  styleUrls: ['./checkout.component.scss'],
 })
 export class CheckoutComponent implements OnInit {
   cartItems: ICartItem[] = [];
@@ -161,6 +162,10 @@ export class CheckoutComponent implements OnInit {
       this.showMessage('Đặt hàng thành công!');
       this.router.navigate(['/order-success']);
     }, 2000);
+  }
+
+  onNavigateToCart() {
+    console.log('Navigating to /cart');
   }
 
   showMessage(message: string): void {
