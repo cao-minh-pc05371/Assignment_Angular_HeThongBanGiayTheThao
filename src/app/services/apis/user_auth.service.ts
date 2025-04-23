@@ -19,9 +19,10 @@ export class UserService extends ApiService {
     super(_http);
   }
 
-  // Lấy danh sách tất cả người dùng
+  // Lấy danh sách tất cả người dùng  
   getAllUsers(): Observable<IUser[]> {
-    return this.get<IUser[]>(`${API_ENDPOINT.user.base}${API_ENDPOINT.user.list}`);
+    return this.get<{ data: IUser[] }>(`${API_ENDPOINT.user.base}${API_ENDPOINT.user.list}`)
+      .pipe(map(res => res.data));
   }
 
   // Lấy người dùng theo ID

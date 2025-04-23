@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
 import { IOrder } from 'src/app/interface/orders.interface';
+import { OrderService } from 'src/app/services/apis/order.service';
 
 @Component({
   selector: 'app-orders',
@@ -10,63 +12,65 @@ import { IOrder } from 'src/app/interface/orders.interface';
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.scss'
 })
-export class OrdersComponent {
-  orders: IOrder[] = [
-    {
-      id: 1,
-      orderCode: 'OD001',
-      customerName: 'Nguyễn Văn A',
-      orderDate: '2025-03-23',
-      status: 'Chờ xác nhận',
-      totalAmount: 500000,
-      paymentMethod: 'Thanh toán online',
-      paymentStatus: 'Chưa thanh toán'
-    },
-    {
-      id: 2,
-      orderCode: 'OD002',
-      customerName: 'Trần Thị B',
-      orderDate: '2025-03-22',
-      status: 'Đang xử lý',
-      totalAmount: 1200000,
-      paymentMethod: 'Thanh toán khi nhận hàng',
-      paymentStatus: 'Chưa thanh toán'
-    },
-    {
-      id: 3,
-      orderCode: 'OD003',
-      customerName: 'Lê Hoàng C',
-      orderDate: '2025-03-21',
-      status: 'Đã giao hàng',
-      totalAmount: 250000,
-      paymentMethod: 'Thanh toán online',
-      paymentStatus: 'Đã thanh toán'
-    },
-    {
-      id: 4,
-      orderCode: 'OD004',
-      customerName: 'Phạm Hồng D',
-      orderDate: '2025-03-20',
-      status: 'Đã hủy',
-      totalAmount: 750000,
-      paymentMethod: 'Thanh toán online',
-      paymentStatus: 'Chưa thanh toán'
-    }
-  ];
+export class OrdersComponent implements OnInit {
+  orders: IOrder[] = [];
+  loading = false;
+  errorMessage = '';
+
+  constructor(
+    private orderService: OrderService,
+    private router: Router
+  ) { }
+
+  ngOnInit(): void {
+    this.getAllOrders();
+  }
+
+  getAllOrders() {
+    this.orderService.getAllOrder().subscribe({
+      next: (res: any) => {
+        this.orders = res?.data ?? res;
+        console.log('Orders:', this.orders);
+      },
+      error: (err) => {
+        console.error('Error fetching orders:', err);
+      }
+    });
+  }
 
   getOrderStatusClass(status: string): string {
     switch (status) {
-      case 'Chờ xác nhận':
-        return 'status-pending';
-      case 'Đang xử lý':
-        return 'status-processing';
-      case 'Đã giao hàng':
-        return 'status-completed';
-      case 'Đã hủy':
-        return 'status-cancelled';
+      case 'pending':
+        return 'badge bg-warning text-dark'; // Đang chờ xử lý
+      case 'shipped':
+        return 'badge bg-info text-white';   // Đã giao hàng
+      case 'delivered':
+        return 'badge bg-success text-white'; // Đã giao thành công
+      case 'canceled':
+        return 'badge bg-danger text-white';  // Đã hủy
       default:
-        return '';
+        return 'badge bg-secondary';          // Không xác định
     }
   }
 
+  getOrderStatusText(status: string): string {
+    switch (status) {
+      case 'pending':
+        return 'Đang xử lý';
+      case 'shipped':
+        return 'Đã gửi hàng';
+      case 'delivered':
+        return 'Đã giao';
+      case 'canceled':
+        return 'Đã hủy';
+      default:
+        return 'Không xác định';
+    }
+  }
+
+
+  viewOrderDetail(orderId: number): void {
+    this.router.navigate(['/admin/orders', orderId]);
+  }
 }
+

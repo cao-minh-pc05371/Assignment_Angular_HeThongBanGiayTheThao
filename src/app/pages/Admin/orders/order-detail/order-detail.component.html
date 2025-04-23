@@ -1,0 +1,37 @@
+<mat-card *ngIf="order" class="cardWithShadow theme-card position-relative">
+    <mat-card-header class="header-wrapper">
+        <mat-card-title>
+            <h3 class="mb-0">Chi Tiết Mã Đơn Hàng: {{ order.id }}</h3>
+            <span [ngClass]="getOrderStatusClass(order.status)" class="status-label">
+                {{ getOrderStatusText(order.status) }}
+            </span>
+        </mat-card-title>
+
+        <button *ngIf="order.status === 'pending'" mat-raised-button color="primary" class="update-btn"
+            (click)="openStatusUpdateDialog()">
+            Đã chuẩn bị hàng
+        </button>
+    </mat-card-header>
+
+    <mat-card-content class="b-t-1">
+        <div class="row">
+            <!-- Thông tin người đặt -->
+            <div class="col-md-6">
+                <h5 class="mb-3">Thông Tin Người Đặt</h5>
+                <p><strong>Họ tên:</strong> {{ order.user?.name || 'Không rõ' }}</p>
+                <p><strong>Email:</strong> {{ order.user?.email || 'Không rõ' }}</p>
+                <p><strong>Số điện thoại:</strong> {{ order.user?.phone || 'Không rõ' }}</p>
+            </div>
+
+            <!-- Địa chỉ giao hàng -->
+            <div class="col-md-6">
+                <h5 class="mb-3">Địa Chỉ Giao Hàng</h5>
+                <p><strong>Người nhận:</strong> {{ order.address?.recipient_name || 'Không rõ' }}</p>
+                <p><strong>Số điện thoại:</strong> {{ order.address?.phone || 'Không rõ' }}</p>
+                <p><strong>Địa chỉ:</strong> {{ order.address?.address || 'Không rõ' }}</p>
+                <p><strong>Ghi chú:</strong> {{ order.note || 'Không có ghi chú' }}</p>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
+<app-order-detail-list *ngIf="order" [orderId]="order.id!"></app-order-detail-list>

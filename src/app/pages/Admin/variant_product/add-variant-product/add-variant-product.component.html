@@ -1,9 +1,9 @@
 <mat-card class="add-variant-card">
     <mat-card-header>
-        <mat-card-title>Thêm biến thể cho: {{ product?.name }}</mat-card-title>
+        <mat-card-title><h3>Thêm biến thể cho: {{ product?.name }}</h3></mat-card-title>
     </mat-card-header>
 
-    <mat-card-content>
+    <mat-card-content class="b-t-1">
         <form [formGroup]="form" (ngSubmit)="submit()" class="mt-4">
             <div class="row g-3">
 
@@ -23,6 +23,7 @@
                     <select class="form-select" formControlName="color_id" id="color_id" required>
                         <option *ngFor="let color of colors" [value]="color.id">
                             {{ color.color_name }}
+                            {{ color.color_code}}
                         </option>
                     </select>
                 </div>
@@ -32,7 +33,11 @@
                     <label for="stock" class="form-label">Tồn kho</label>
                     <input type="number" class="form-control" id="stock" formControlName="stock" min="0" required />
                 </div>
+            </div>
 
+            <!-- Error Message From Backend -->
+            <div *ngIf="errorMessage" class="text-danger mt-3">
+                {{ errorMessage }}
             </div>
 
             <div class="mt-4">

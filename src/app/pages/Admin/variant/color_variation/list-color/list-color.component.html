@@ -12,6 +12,7 @@
                         <th>#</th>
                         <th>Tên Màu</th>
                         <th>Màu sắc</th>
+                        <th>Mã màu</th>
                         <th class="text-center">Thao Tác</th>
                     </tr>
                 </thead>
@@ -23,6 +24,7 @@
                             <div class="color-preview" [ngStyle]="{ 'background-color': colors.color_code }"
                                 matTooltip="{{ colors.color_code }}"></div>
                         </td>
+                        <td>{{ colors.color_code }}</td>
                         <td class="text-center">
                             <button mat-icon-button class="btn-edit"
                                 (click)="openEditDialog(colors.id, colors.color_name)" matTooltip="Chỉnh sửa">

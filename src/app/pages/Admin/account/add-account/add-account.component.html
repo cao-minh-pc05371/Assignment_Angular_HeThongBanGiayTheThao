@@ -4,79 +4,97 @@
             <h3>Thêm Tài Khoản</h3>
         </mat-card-title>
     </mat-card-header>
+
     <mat-card-content class="b-t-1">
-        <form [formGroup]="userForm" (ngSubmit)="addUser()" class="user-form">
-            <!-- Họ và tên -->
-            <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Họ và Tên</mat-label>
-                <input matInput formControlName="fullName" required>
-                <mat-error *ngIf="userForm.get('fullName')?.hasError('required') && userForm.get('fullName')?.touched">
-                    Bắt buộc nhập
-                </mat-error>
-            </mat-form-field>
+        <form [formGroup]="userForm" (ngSubmit)="addUser()" class="container">
+            <div class="row">
+                <!-- Họ và tên -->
+                <div class="col-md-6 mb-3">
+                    <label for="name" class="form-label">Họ và Tên</label>
+                    <input id="name" type="text" class="form-control" formControlName="name" required>
+                    <div *ngIf="userForm.get('name')?.hasError('required') && userForm.get('name')?.touched"
+                        class="text-danger">
+                        Bắt buộc nhập
+                    </div>
+                </div>
 
-            <!-- Tên đăng nhập -->
-            <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Tên Đăng Nhập</mat-label>
-                <input matInput formControlName="username" required>
-                <mat-error *ngIf="userForm.get('username')?.hasError('required') && userForm.get('username')?.touched">
-                    Bắt buộc nhập
-                </mat-error>
-            </mat-form-field>
+                <!-- Email -->
+                <div class="col-md-6 mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input id="email" type="email" class="form-control" formControlName="email" required>
+                    <div *ngIf="userForm.get('email')?.hasError('required') && userForm.get('email')?.touched"
+                        class="text-danger">
+                        Bắt buộc nhập
+                    </div>
+                    <div *ngIf="userForm.get('email')?.hasError('email')" class="text-danger">
+                        Email không hợp lệ
+                    </div>
+                </div>
 
-            <!-- Email -->
-            <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Email</mat-label>
-                <input matInput formControlName="email" type="email" required>
-                <mat-error *ngIf="userForm.get('email')?.hasError('required') && userForm.get('email')?.touched">
-                    Bắt buộc nhập
-                </mat-error>
-                <mat-error *ngIf="userForm.get('email')?.hasError('email')">
-                    Email không hợp lệ
-                </mat-error>
-            </mat-form-field>
+                <!-- Số điện thoại -->
+                <div class="col-md-6 mb-3">
+                    <label for="phone" class="form-label">Số điện thoại</label>
+                    <input id="phone" type="text" class="form-control" formControlName="phone" required>
+                    <div *ngIf="userForm.get('phone')?.hasError('required') && userForm.get('phone')?.touched"
+                        class="text-danger">
+                        Bắt buộc nhập
+                    </div>
+                </div>
 
-            <!-- Mật khẩu -->
-            <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Mật Khẩu</mat-label>
-                <input matInput formControlName="password" type="password" required>
-                <mat-error *ngIf="userForm.get('password')?.hasError('required') && userForm.get('password')?.touched">
-                    Bắt buộc nhập
-                </mat-error>
-                <mat-error *ngIf="userForm.get('password')?.hasError('minlength')">
-                    Mật khẩu phải có ít nhất 6 ký tự
-                </mat-error>
-            </mat-form-field>
+                <!-- Mật khẩu -->
+                <div class="col-md-6 mb-3">
+                    <label for="password" class="form-label">Mật Khẩu</label>
+                    <input id="password" type="password" class="form-control" formControlName="password" required>
+                    <div *ngIf="userForm.get('password')?.hasError('required') && userForm.get('password')?.touched"
+                        class="text-danger">
+                        Bắt buộc nhập
+                    </div>
+                    <div *ngIf="userForm.get('password')?.hasError('minlength')" class="text-danger">
+                        Mật khẩu phải có ít nhất 6 ký tự
+                    </div>
+                </div>
 
-            <!-- Xác nhận mật khẩu -->
-            <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Xác Nhận Mật Khẩu</mat-label>
-                <input matInput formControlName="confirmPassword" type="password" required>
-                <mat-error *ngIf="userForm.get('confirmPassword')?.hasError('required') && userForm.get('confirmPassword')?.touched">
-                    Bắt buộc nhập
-                </mat-error>
-                <mat-error *ngIf="userForm.hasError('passwordMismatch')">
-                    Mật khẩu không khớp
-                </mat-error>
-            </mat-form-field>
+                <!-- Xác nhận mật khẩu -->
+                <div class="col-md-6 mb-3">
+                    <label for="confirmPassword" class="form-label">Xác Nhận Mật Khẩu</label>
+                    <input id="confirmPassword" type="password" class="form-control" formControlName="confirmPassword"
+                        required>
+                    <div *ngIf="userForm.get('confirmPassword')?.hasError('required') && userForm.get('confirmPassword')?.touched"
+                        class="text-danger">
+                        Bắt buộc nhập
+                    </div>
+                    <div *ngIf="userForm.hasError('passwordMismatch')" class="text-danger">
+                        Mật khẩu không khớp
+                    </div>
+                </div>
 
-            <!-- Vai trò -->
-            <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Vai Trò</mat-label>
-                <mat-select formControlName="role" required>
-                    <mat-option value="admin">Quản trị viên</mat-option>
-                    <mat-option value="user">Người dùng</mat-option>
-                </mat-select>
-                <mat-error *ngIf="userForm.get('role')?.hasError('required')">
-                    Bắt buộc chọn vai trò
-                </mat-error>
-            </mat-form-field>
+                <!-- Vai trò -->
+                <div class="col-md-6 mb-3">
+                    <label for="role" class="form-label">Vai Trò</label>
+                    <select id="role" class="form-select" formControlName="role">
+                        <option value="admin">Quản trị viên</option>
+                        <option value="customer">Khách hàng</option>
+                    </select>
+                    <div *ngIf="submitted && userForm.get('role')?.hasError('required')" class="text-danger">
+                        Bắt buộc chọn vai trò
+                      </div>                      
+                </div>
 
-            <!-- Nút thêm tài khoản -->
-            <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">
-                Thêm Tài Khoản
-            </button>
+                <!-- Nút thêm tài khoản -->
+                <div class="col-12 text-end">
+                    <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">
+                        Thêm Tài Khoản
+                    </button>
+                </div>
 
+                <!-- Thông báo thành công -->
+                <div class="col-12 mt-3" *ngIf="successMessage">
+                    <div class="alert alert-success">{{ successMessage }}</div>
+                </div>
+                <div class="col-12 mt-3" *ngIf="errorMessage">
+                    <div class="alert alert-danger">{{ errorMessage }}</div>
+                </div>
+            </div>
         </form>
     </mat-card-content>
 </mat-card>

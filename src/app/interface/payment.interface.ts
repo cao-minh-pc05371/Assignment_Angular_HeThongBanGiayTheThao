@@ -1,11 +1,11 @@
 export interface IPayment {
-    id: number | string; 
-    orderId: number | string;  
-    codePayment: string;      
-    statusPayment: string;     
-    total_price: number;     
-    paymentMethod: string;   
-    paymentDate?: string;   
-    transactionId?: string;     
-    notes?: string;             
-}
+    id?: number;
+    order_id: number;
+    payment_date?: string;
+    amount: number;
+    payment_method: 'COD' | 'Momo';
+    status: 'pending' | 'completed' | 'failed';
+    createdAt?: string;
+    updatedAt?: string;
+  }
+  

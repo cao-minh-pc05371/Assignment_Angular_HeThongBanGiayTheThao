@@ -28,6 +28,7 @@ export class AddVariantProductComponent implements OnInit {
   productId!: number;
   product: IProduct | null = null;
   isSubmitting = false;
+  errorMessage: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -94,13 +95,14 @@ export class AddVariantProductComponent implements OnInit {
 
   submit(): void {
     if (this.form.invalid) return;
-
+  
+    this.errorMessage = '';
     this.isSubmitting = true;
     const payload: IVariant = {
       ...this.form.value,
       product_id: this.productId
     };
-
+  
     this.variantService.addVariant(payload).subscribe({
       next: () => {
         this.snackBar.open('Thêm biến thể thành công!', 'Đóng', { duration: 3000 });
@@ -108,7 +110,8 @@ export class AddVariantProductComponent implements OnInit {
       },
       error: (err) => {
         console.error('Lỗi khi thêm biến thể:', err);
-        this.snackBar.open('Thêm thất bại!', 'Đóng', { duration: 3000 });
+        this.errorMessage = err.error?.message || 'Thêm biến thể thất bại.';
+        this.snackBar.open(this.errorMessage, 'Đóng', { duration: 3000 });
         this.isSubmitting = false;
       }
     });
