@@ -9,6 +9,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { jwtDecode } from 'jwt-decode'; // Thêm dòng này
 import { IOrder } from 'src/app/interface/orders.interface';
 import { OrderService } from 'src/app/services/apis/order.servies';
+import { IOrderClient } from 'src/app/interface/order.interface.client';
 
 @Component({
   selector: 'app-order',
@@ -25,7 +26,7 @@ import { OrderService } from 'src/app/services/apis/order.servies';
   styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit {
-  orders: IOrder[] = [];
+  orders: IOrderClient[] = [];
   errorMessage: string = '';
   userId: string | null = null;
 
@@ -64,7 +65,7 @@ export class OrderComponent implements OnInit {
   }
   loadOrdersByUser(userId: string): void {
     this.orderService.getOrdersByUser(userId).subscribe({
-      next: (res: IOrder[]) => {
+      next: (res: IOrderClient[]) => {
         this.orders = res; // Đảm bảo dữ liệu được gán vào biến orders
         console.log('Dữ liệu nhận được:', this.orders); // Kiểm tra trong console
       },

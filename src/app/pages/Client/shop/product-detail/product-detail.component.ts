@@ -108,7 +108,8 @@ export class ProductDetailComponent implements OnInit {
       },
       (error) => {
         console.error("Lỗi khi thêm sản phẩm vào giỏ hàng:", error);
-        this.snackBar.open('Lỗi khi thêm vào giỏ hàng!', 'Đóng', { duration: 3000 });
+        this.snackBar.open('Phải đăng nhập!', 'Đóng', { duration: 3000 });
+        this.router.navigate(['/login']);
       }
     );
   }

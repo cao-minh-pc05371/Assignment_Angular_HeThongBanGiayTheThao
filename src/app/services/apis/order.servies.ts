@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { IOrderClient } from 'src/app/interface/order.interface.client';
 
@@ -19,7 +19,10 @@ export class OrderService {
   }
 
   getOrdersByUser(userId: string): Observable<IOrderClient[]> {
-    return this.http.get<IOrderClient[]>(`${this.apiUrl}/user/${userId}`).pipe(
+    const token = localStorage.getItem('token'); // hoặc từ AuthService
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.get<IOrderClient[]>(`${this.apiUrl}/order/user/${userId}`, { headers }).pipe(
       catchError((error) => {
         console.error('Lỗi khi lấy đơn hàng:', error);
         return throwError(() => new Error('Không thể tải dữ liệu'));

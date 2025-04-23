@@ -56,7 +56,7 @@ export class ShopComponent implements OnInit {
   searchQuery: string = '';
   filteredProducts: any[] = [];
   paginatedProducts: any[] = [];
-  pageSize: number = 10;
+  pageSize: number = 8;
   currentPage: number = 1;
   totalPages: number = 0;
   pages: number[] = [];

@@ -40,6 +40,13 @@ export const routes: Routes = [
           import('./pages/Client/shop/shop.routes').then((m) => m.ShopRoutes),
       },
       {
+        path: 'order',
+        loadChildren: () =>
+          import(
+            './pages/Client/order/order.routes'
+          ).then((m) => m.OrderRoutes),
+      },
+      {
         path: 'shop/:id',
         loadChildren: () =>
           import(
