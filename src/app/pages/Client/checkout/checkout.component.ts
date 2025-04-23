@@ -22,6 +22,7 @@ import { CartService } from 'src/app/services/apis/cart.service';
 import { OrderService } from 'src/app/services/apis/order.service';
 import { ICartItem } from 'src/app/interface/cart.interface';
 import { ICheckout } from 'src/app/interface/checkout.interface';
+import { IOrder } from 'src/app/interface/order.interface';
 
 @Component({
   selector: 'app-checkout',
@@ -41,7 +42,7 @@ import { ICheckout } from 'src/app/interface/checkout.interface';
     MatProgressSpinnerModule,
   ],
   templateUrl: './checkout.component.html',
-  styleUrl: './checkout.component.scss',
+  styleUrls: ['./checkout.component.scss'],
 })
 export class CheckoutComponent implements OnInit {
   cartItems: ICartItem[] = [];
@@ -124,17 +125,21 @@ export class CheckoutComponent implements OnInit {
     };
 
     this.orderService.createOrder(orderData).subscribe({
-      next: (response) => {
+      next: (response: { message: string; order: IOrder }) => {
         this.isProcessing = false;
         this.showMessage('Đặt hàng thành công!');
         this.router.navigate(['/']);
       },
-      error: (error) => {
+      error: (error: Error) => {
         console.error('Lỗi khi đặt hàng:', error);
         this.isProcessing = false;
         this.showMessage('Có lỗi xảy ra khi đặt hàng. Vui lòng thử lại sau.');
       }
     });
+  }
+
+  onNavigateToCart() {
+    console.log('Navigating to /cart');
   }
 
   showMessage(message: string): void {

@@ -15,6 +15,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { environment } from 'src/environments/environment';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
+import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-shop',
@@ -30,9 +36,14 @@ import { MatIconModule } from '@angular/material/icon';
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MatIconModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule
   ],
   templateUrl: './shop.component.html',
-  styleUrl: './shop.component.scss',
+  styleUrls: ['./shop.component.scss'],
 })
 export class ShopComponent implements OnInit {
   products: IProduct[] = [];
@@ -42,6 +53,13 @@ export class ShopComponent implements OnInit {
   apiBaseUrl = environment.apiUrl;
   hasError = false;
   errorMessage = '';
+  searchQuery: string = '';
+  filteredProducts: any[] = [];
+  paginatedProducts: any[] = [];
+  pageSize: number = 10;
+  currentPage: number = 1;
+  totalPages: number = 0;
+  pages: number[] = [];
 
   constructor(
     private router: Router,
@@ -53,6 +71,8 @@ export class ShopComponent implements OnInit {
   ngOnInit(): void {
     this.loadCategories();
     this.loadProducts();
+    this.filteredProducts = this.products;
+    this.updatePagination();
   }
 
   loadCategories(): void {
@@ -91,6 +111,8 @@ export class ShopComponent implements OnInit {
             'Không thể tải sản phẩm. Dữ liệu không đúng định dạng.'
           );
         }
+        this.filteredProducts = this.products;
+        this.updatePagination();
         this.isLoading = false;
       },
       error: (error) => {
@@ -133,5 +155,58 @@ export class ShopComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'bottom',
     });
+  }
+
+  onSearch(): void {
+    this.filteredProducts = this.products.filter(product =>
+      product.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+    this.currentPage = 1;
+    this.updatePagination();
+  }
+
+  onPageChange(event: PageEvent): void {
+    this.pageSize = event.pageSize;
+    this.currentPage = event.pageIndex + 1;
+    this.updatePagination();
+  }
+
+  updatePagination(): void {
+    if (this.filteredProducts) {
+      this.totalPages = Math.ceil(this.filteredProducts.length / this.pageSize);
+      this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+      this.paginateProducts();
+    }
+  }
+
+  paginateProducts(): void {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.paginatedProducts = this.filteredProducts.slice(startIndex, endIndex);
+  }
+
+  goToPage(page: number): void {
+    this.currentPage = page;
+    this.paginateProducts();
+  }
+
+  sortByPrice(order: string) {
+    if (order === 'asc') {
+      this.products.sort((a, b) => {
+        if (a.price && b.price) {
+          return a.price - b.price;
+        }
+        return 0;  // Nếu giá trị price không hợp lệ, giữ nguyên thứ tự
+      });
+    } else if (order === 'desc') {
+      this.products.sort((a, b) => {
+        if (a.price && b.price) {
+          return b.price - a.price;
+        }
+        return 0;  // Nếu giá trị price không hợp lệ, giữ nguyên thứ tự
+      });
+    }
+    this.filteredProducts = this.products;  // Cập nhật lại sản phẩm đã sắp xếp
+    this.updatePagination();  // Cập nhật phân trang
   }
 }

@@ -26,7 +26,6 @@ import { OrderDetailDialogComponent } from './order-detail-dialog/order-detail-d
     MatDialogModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    OrderDetailDialogComponent
   ],
   template: `
     <div class="orders-container">
